@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+require('dotenv').config();
+
+const { port } = require('../config');
+const app = require('../app');
+const db = require('../db/models');
+
+db.sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Database connected successfully.');
+    app.listen(port, () => console.log(`Server running on port ${port}...`));
+  })
+  .catch((err) => {
+    console.error('Database connection error:', err);
+  });
