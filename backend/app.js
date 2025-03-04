@@ -25,11 +25,7 @@ app.use(
   })
 );
 
-//  Load routes before CSRF protection
-const routes = require('./routes');
-app.use(routes);
-
-//  Apply CSRF Middleware AFTER registering routes
+// ✅ Apply CSRF Middleware **Before** Using `req.csrfToken()`
 app.use(
   csurf({
     cookie: {
@@ -40,7 +36,17 @@ app.use(
   })
 );
 
-//  Global Error Handler (Prevents server crashes)
+// ✅ Allow CSRF Token Restore Route to be accessible
+app.get('/api/csrf/restore', (req, res) => {
+  res.cookie("XSRF-TOKEN", req.csrfToken()); // Now this works ✅
+  res.status(200).json({ "XSRF-Token": req.csrfToken() });
+});
+
+// ✅ Now Load Routes
+const routes = require('./routes');
+app.use(routes);
+
+// ✅ Global Error Handler
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
@@ -49,6 +55,6 @@ app.use((err, req, res, next) => {
     stack: isProduction ? null : err.stack // Hide stack trace in production
   });
 });
-
-// Export the app
+ 
+// exports the app
 module.exports = app;
