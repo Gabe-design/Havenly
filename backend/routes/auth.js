@@ -8,7 +8,7 @@ const { jwtConfig } = require('../config');
 const router = express.Router();
 const { secret, expiresIn } = jwtConfig;
 
-// ✅ User Signup Route
+//  User Signup Route
 router.post(
   '/signup',
   [
@@ -44,7 +44,7 @@ router.post(
   }
 );
 
-// ✅ User Login Route
+//  User Login Route
 router.post(
   '/login',
   [
@@ -79,13 +79,13 @@ router.post(
   }
 );
 
-// ✅ User Logout Route
+//  User Logout Route
 router.post('/logout', (req, res) => {
   res.clearCookie('token');
   return res.json({ message: 'Logged out successfully' });
 });
 
-// ✅ Get Current Logged-in User
+// Get Current Logged-in User
 router.get('/me', async (req, res) => {
   const token = req.cookies.token;
   

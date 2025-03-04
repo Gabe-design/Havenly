@@ -25,11 +25,11 @@ app.use(
   })
 );
 
-// ✅ Load routes before CSRF protection
+//  Load routes before CSRF protection
 const routes = require('./routes');
 app.use(routes);
 
-// ✅ Apply CSRF Middleware AFTER registering routes
+//  Apply CSRF Middleware AFTER registering routes
 app.use(
   csurf({
     cookie: {
@@ -40,7 +40,7 @@ app.use(
   })
 );
 
-// ✅ Global Error Handler (Prevents server crashes)
+//  Global Error Handler (Prevents server crashes)
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
