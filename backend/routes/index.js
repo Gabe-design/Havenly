@@ -4,7 +4,8 @@ const router = express.Router();
 //  Correctly define CSRF route
 router.get("/api/csrf/restore", (req, res) => {
   res.cookie("XSRF-TOKEN", req.csrfToken());
-  res.status(200).json({ "XSRF-Token": req.csrfToken() });
+  res.status(200).json({ 
+    "XSRF-Token": req.csrfToken() });
 });
 
 //  Import authentication routes
