@@ -10,7 +10,9 @@ router.get("/api/csrf/restore", (req, res) => {
 
 //  Import authentication routes
 const authRouter = require('./auth');
+const apiRouter = require('./api');
 router.use('/auth', authRouter);
+router.use('/api', apiRouter); // connects api router
 
 //  Test route
 router.get('/test', (req, res) => {

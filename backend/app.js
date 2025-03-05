@@ -15,19 +15,17 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
-// Enable CORS only in development
 if (!isProduction) {
   app.use(cors());
 }
 
-// Security headers
 app.use(
   helmet.crossOriginResourcePolicy({
     policy: 'cross-origin'
   })
 );
 
-// Apply CSRF Middleware BEFORE routes
+// ✅ Apply CSRF Middleware **Before** Using `req.csrfToken()`
 app.use(
   csurf({
     cookie: {
@@ -38,18 +36,17 @@ app.use(
   })
 );
 
-// Allow CSRF Token Restore Route to be accessible
+// ✅ Allow CSRF Token Restore Route to be accessible
 app.get('/api/csrf/restore', (req, res) => {
-  res.cookie('XSRF-TOKEN', req.csrfToken()); 
+  res.cookie("XSRF-TOKEN", req.csrfToken()); // Now this works ✅
   res.status(200).json({ "XSRF-Token": req.csrfToken() });
 });
 
-//  Load Routes after CSRF Middleware
+// ✅ Now Load Routes
 const routes = require('./routes');
 app.use(routes);
 
-
-// Global Error Handler
+// ✅ Global Error Handler
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
@@ -58,6 +55,5 @@ app.use((err, req, res, next) => {
     stack: isProduction ? null : err.stack // Hide stack trace in production
   });
 });
-
-// Export the app
+ 
 module.exports = app;
