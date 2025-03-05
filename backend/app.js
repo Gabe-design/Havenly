@@ -5,6 +5,8 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const { ValidationError } = require('sequelize');
+
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
@@ -25,7 +27,7 @@ app.use(
   })
 );
 
-// ✅ Apply CSRF Middleware **Before** Using `req.csrfToken()`
+// Apply CSRF Middleware **Before** Using `req.csrfToken()`
 app.use(
   csurf({
     cookie: {
@@ -36,22 +38,48 @@ app.use(
   })
 );
 
-// ✅ Allow CSRF Token Restore Route to be accessible
+// Allow CSRF Token Restore Route to be accessible
 app.get('/api/csrf/restore', (req, res) => {
   res.cookie("XSRF-TOKEN", req.csrfToken()); // Now this works ✅
   res.status(200).json({ "XSRF-Token": req.csrfToken() });
 });
 
-// ✅ Now Load Routes
+// Now Load Routes
 const routes = require('./routes');
 app.use(routes);
 
-// ✅ Global Error Handler
-app.use((err, req, res, next) => {
+//catch unhandled requests and forward to error handler.
+app.use((_req, _res, next) => {
+  const err = new Error("The requested resource couldn't be found.");
+  err.title = "Resource Not Found";
+  err.errors = { message: "The requested resource couldn't be found." };
+  err.status = 404;
+  next(err);
+});
+
+// Process sequelize errors
+app.use((err, _req, _res, next) => {
+  if ( err instanceof ValidationError) {
+    let errors = {};
+    for ( let error of err.errors) {
+      errors[error.path] = error.message;
+
+    };
+    err.title = 'Validation error';
+    err.errors = errors;
+  };
+  next(err)
+
+});
+
+// Error formatter
+app.use((err, _req, res, next) => {
   res.status(err.status || 500);
+  console.error(err);
   res.json({
-    message: err.message || 'Internal Server Error',
-    status: err.status || 500,
+    title: err.title || 'Server Error',
+    message: err.message,
+    errors: err.errors || null, 
     stack: isProduction ? null : err.stack // Hide stack trace in production
   });
 });
