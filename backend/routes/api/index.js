@@ -1,4 +1,5 @@
 // api routes
+const { requireAuth } = require('../../utils/auth');
 const router = require('express').Router();
 
 // test route to verify api router is working
