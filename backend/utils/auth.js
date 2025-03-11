@@ -1,11 +1,11 @@
-// backend/utils/auth.js
+
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
-// Sends a JWT Cookie
+// Sends a JWT cookie
 const setTokenCookie = (res, user) => {
   const safeUser = {
     id: user.id,
@@ -27,7 +27,7 @@ const setTokenCookie = (res, user) => {
   return token;
 };
 
-// Restore User Middleware
+// Restore user middleware
 const restoreUser = (req, res, next) => {
   const { token } = req.cookies;
   req.user = null;
@@ -50,7 +50,7 @@ const restoreUser = (req, res, next) => {
   });
 };
 
-// Require Authentication Middleware
+// Require authentication middleware
 const requireAuth = (req, _res, next) => {
   if (req.user) return next();
 
