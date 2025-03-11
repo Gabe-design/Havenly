@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-// Apply CSRF Middleware **Before** Using `req.csrfToken()`
+// Applying CSRF middleware before Using `req.csrfToken()`
 app.use(
   csurf({
     cookie: {
@@ -38,13 +38,13 @@ app.use(
   })
 );
 
-// Allow CSRF Token Restore Route to be accessible
+// Allow CSRF token restore route to be accessible
 app.get('/api/csrf/restore', (req, res) => {
-  res.cookie("XSRF-TOKEN", req.csrfToken()); // Now this works ✅
+  res.cookie("XSRF-TOKEN", req.csrfToken()); 
   res.status(200).json({ "XSRF-Token": req.csrfToken() });
 });
 
-// Now Load Routes
+// Load routes
 const routes = require('./routes');
 app.use(routes);
 

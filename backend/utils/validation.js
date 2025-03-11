@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 
-// moiddleware for formatting validation errors
+// Moiddleware for formatting validation errors
 const handleValidationErrors = (req, res, next) => {
   const validationErrors = validationResult(req);
 
