@@ -1,27 +1,39 @@
-// api routes
-const { requireAuth } = require('../../utils/auth');
 const router = require('express').Router();
 
-// test route to verify api router is working
-router.post('/test', function(req, res) {
-    res.json({ requestBody: req.body });
+const sessionRouter = require('./session.js');
+const usersRouter = require('./users.js');
+const { requireAuth } = require('../../utils/auth');
+
+router.get('/', requireAuth, (req, res) => {
+  res.json({ message: 'success' });
 });
 
-// Test setting a token cookie
-router.get('/set-token-cookie', async (_req, res) => {
-    const user = await User.findOne({ where: { username: 'Demo-lition' } });
-    setTokenCookie(res, user);
-    return res.json({ user });
-  });
-  
-  // Test restoring a user
-  router.get('/restore-user', (req, res) => {
-    return res.json(req.user);
-  });
-  
-  // Test requiring authentication
-  router.get('/require-auth', requireAuth, (req, res) => {
-    return res.json(req.user);
-  });
+router.use('/session', sessionRouter);
+router.use('/users', usersRouter);
+
+router.post('/test', function (req, res) {
+  res.json({ requestBody: req.body });
+});
+
+// Uncommented code for setting token cookie
+// const { setTokenCookie } = require('../../utils/auth.js');
+// const { User } = require('../../db/models');
+// router.get('/set-token-cookie', async (_req, res) => {
+//     const user = await User.findOne({
+//         where: { username: 'Demo-lition' }
+//     });
+//     setTokenCookie(res, user);
+//     return res.json({ user });
+// });
+
+// const { restoreUser } = require('../../utils/auth');
+// router.get('/restore-user', restoreUser, (req, res) => {
+//   return res.json(req.user);
+// });
+
+// const { requireAuth } = require('../../utils/auth');
+// router.get('/require-auth', requireAuth, (req, res) => {
+//  return res.json(req.user);
+// });
 
 module.exports = router;
