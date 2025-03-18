@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get spots owned by the current user
-router.h=get("/current", requireAuth, async (req, res) => {
+router.get("/current", requireAuth, async (req, res) => {
     const spots = await Spot.findAll({ where: { ownerId: req.user.id } });
     res.json({ spots });
 });
@@ -59,7 +59,24 @@ router.delete("/:id", requireAuth, async (req, res) => {
     res.json({ message: "Spot deleted successfully" });
 });
 
+// avg rating and preview image
+router.get("/", async (req, res) => {
+    const spots = await Spot.findAll({
+        attributes: [
+            "id", 
+            "ownerId",
+            "name", 
+            "city",
+            "state",
+            "country",
+            "price",
+            "avgRating",
+            "prviewImage"
+        ]
+    });
 
+    res.json({ spots });
+});
 
 // export router
 module.exports = router;

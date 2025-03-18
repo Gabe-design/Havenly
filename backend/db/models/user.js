@@ -15,14 +15,14 @@ module.exports = (sequelize) => {
     }
 
     validatePassword(password) {
-      return bcrypt.compareSync(password, this.hashedPassword.toString());
+      return bcrypt.compareSync(password, this.hashedPassword);
     }
 
     static getCurrentUserById(id) {
       return User.scope('currentUser').findByPk(id);
     }
 
-    static async login(credential, password) {
+    static async login({ credential, password }) {
       const { Op } = require('sequelize');
       const user = await User.scope('loginUser').findOne({
         where: {
@@ -36,6 +36,8 @@ module.exports = (sequelize) => {
       if (user && user.validatePassword(password)) {
         return await User.scope('currentUser').findByPk(user.id);
       }
+
+      return null;
     }
 
     static async signup({ username, email, password }) {
@@ -93,7 +95,7 @@ module.exports = (sequelize) => {
           attributes: { exclude: ['hashedPassword'] }
         },
         loginUser: {
-          attributes: {}
+          attributes: ['id', 'username', 'email', 'hashedPassword']
         }
       }
     }
