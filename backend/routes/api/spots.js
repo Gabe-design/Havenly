@@ -35,16 +35,45 @@ router.get('/:id', async (req, res, next) => {
 
 // Create a new spot
 router.post("/", requireAuth, async (req, res) => {
-    const { name, description, price } = req.body;
-    const newSpot = await Spot.create({ name, description, price, ownerId: req.user.id });
-    res.status(201).json({ spot: newSpot });
+    try {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+        if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        const newSpot = await Spot.create({
+            ownerId: req.user.id,
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        });
+
+        res.status(201).json(newSpot);
+    } catch (err) {
+        console.error(" Error Creating Spot:", err);
+        res.status(400).json({ title: "Validation error", message: err.message, errors: err.errors });
+    }
 });
 
 // Add an image to a spot
 router.post("/:id/images", requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.id);
+    if (!spot) return res.status(404).json({ message: "Spot not found" });
+
+    if (spot.ownerId !== req.user.id) {
+        return res.status(403).json({ message: "Forbidden: You do not own this spot" });
+    }
+
     const { url } = req.body;
     const image = await SpotImage.create({ spotId: req.params.id, url });
-    res.status(201).json({ image })
+    res.status(201).json(image);
 });
 
 // Edit a spot
