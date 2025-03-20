@@ -7,7 +7,7 @@ const { sequelize } = require('../models');
 // spots migration
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Spot', {
+    await queryInterface.createTable('Spots', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -80,6 +80,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Spot');
+    await queryInterface.dropTable('Spots');
   }
 };
