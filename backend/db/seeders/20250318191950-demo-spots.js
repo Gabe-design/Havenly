@@ -9,10 +9,19 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     options.tableName = 'Spots';
 
+    const users = await queryInterface.sequelize.query(
+      `SELECT id, username FROM "${options.schema || 'public'}"."Users";`
+    );
+
+    const userMap = {};
+    for (const user of users[0]) {
+      userMap[user.username] = user.id;
+    }
+
     try {
       await queryInterface.bulkInsert(options, [
         {
-          ownerId: 1,
+          ownerId: userMap['Demo-lition'],
           address: '123 Main St',
           city: 'San Francisco',
           state: 'CA',
@@ -28,7 +37,7 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          ownerId: 2,
+          ownerId: userMap['FakeUser1'],
           address: '456 Beach Ave',
           city: 'Miami',
           state: 'FL',
@@ -44,7 +53,7 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          ownerId: 3,
+          ownerId: userMap['FakeUser2'],
           address: '789 Mountain Rd',
           city: 'Denver',
           state: 'CO',
