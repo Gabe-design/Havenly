@@ -2,6 +2,11 @@
 
 const { sequelize } = require('../models');
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -15,31 +20,33 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Spots", key: "id" },
-        onDelete: "CASCADE"
+        references: { model: 'Spots', key: 'id' },
+        onDelete: 'CASCADE'
       },
       url: {
-        type: Sequelize.STRING, 
+        type: Sequelize.STRING,
         allowNull: false
       },
       preview: {
         type: Sequelize.BOOLEAN,
-        allowNull: false, 
+        allowNull: false,
         defaultValue: false
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
+
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SpotImages');
+    options.tableName = 'SpotImages';
+    await queryInterface.dropTable(options);
   }
 };
