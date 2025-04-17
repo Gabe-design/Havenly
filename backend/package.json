@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "sequelize": "npx sequelize",
+    "sequelize": "npx sequelize-cli",
     "sequelize-cli": "npx sequelize-cli",
     "start": "NODE_ENV=development nodemon ./bin/www",
     "start:production": "NODE_ENV=production node ./bin/www",
