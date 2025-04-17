@@ -7,6 +7,11 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    
+    if (process.env.NODE_ENV === 'production') {
+      await queryInterface.sequelize.createSchema(process.env.SCHEMA, { ifNotExists: true });
+    }
+
     await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
