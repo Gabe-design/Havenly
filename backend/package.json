@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "sequelize": "sequelize",
-    "sequelize-cli": "sequelize-cli",
+    "sequelize": "npx sequelize",
+    "sequelize-cli": "npx sequelize-cli",
     "start": "NODE_ENV=development nodemon ./bin/www",
     "start:production": "NODE_ENV=production node ./bin/www",
     "build": "node psql-setup-script.js"
