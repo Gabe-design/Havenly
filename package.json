@@ -4,22 +4,14 @@
   "main": "index.js",
   "scripts": {
     "install": "npm --prefix backend install backend",
-    "start": "npm start --prefix backend",
-    "build": "npm run --prefix backend build",
+    "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
-    "sequelize-cli": "npm run --prefix backend sequelize-cli"
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "dotenv": "^16.4.7",
-    "per-env": "^1.0.2",
-    "sequelize": "^6.37.6",
-    "sqlite3": "^5.1.7"
-  },
-  "devDependencies": {
-    "sequelize-cli": "^6.6.2"
-  }
+  "description": ""
 }
