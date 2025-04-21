@@ -6,10 +6,10 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
+options.tableName = 'Users';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    options.tableName = 'Users';
 
     await queryInterface.bulkInsert(options, [
       {
