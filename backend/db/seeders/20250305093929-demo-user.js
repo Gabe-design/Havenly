@@ -6,7 +6,6 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-options.tableName = 'Users';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -33,7 +32,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ]);
+    ] );
   },
 
   async down(queryInterface, Sequelize) {
