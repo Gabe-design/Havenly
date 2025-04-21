@@ -10,6 +10,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    options.tableName = 'SpotImages';
+
     // Fetch all existing spots from the database
     const spots = await Spot.findAll();
 
