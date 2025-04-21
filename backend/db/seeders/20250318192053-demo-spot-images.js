@@ -2,6 +2,12 @@
 
 const { Spot } = require('../models'); // Import Spot model
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+options.tableName = 'SpotImages';
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     // Fetch all existing spots from the database
@@ -39,10 +45,10 @@ module.exports = {
 
     console.log("SpotImages to Insert:", spotImages); // Debugging: Print final insert data
 
-    return queryInterface.bulkInsert('SpotImages', spotImages);
+    return queryInterface.bulkInsert(options, spotImages);
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('SpotImages', null, {});
+    return queryInterface.bulkDelete(options, null, {});
   }
 };
