@@ -1,5 +1,9 @@
 'use strict';
 
+const { sequelize } = require('../models');
+
+/** @type {import('sequelize-cli').Migration} */
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
@@ -50,7 +54,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Bookings';
-    await queryInterface.dropTable(options);
+    await queryInterface.dropTable('Bookings', options);
   }
 };
