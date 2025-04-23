@@ -22,6 +22,8 @@ module.exports = (sequelize) => {
     }
 
     static async login({credential, password}) {
+      console.log("LOGIN DEBUG:", typeof credential, credential);
+
       const { Op } = require('sequelize');
       let user;
 
