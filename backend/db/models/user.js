@@ -14,6 +14,7 @@ module.exports = (sequelize) => {
     }
 
     validatePassword(password) {
+      console.log("bcrypt.compareSync typeof this.hashedPassword:", typeof this.hashedPassword);
       return bcrypt.compareSync(password, this.hashedPassword);
     }
 
