@@ -4,9 +4,8 @@ const Validator = require('validator');
 
 module.exports = (sequelize) => {
   class User extends Model {
-    // Helper method for defining associations
     static associate(models) {
-      // Define association here
+      // Define associations here
     }
 
     toSafeObject() {
@@ -22,16 +21,15 @@ module.exports = (sequelize) => {
       return User.scope('currentUser').findByPk(id);
     }
 
-    static async login( credential, password ) {
+    static async login({credential, password}) {
       const { Op } = require('sequelize');
-      const user = await User.scope('loginUser').findOne({
-        where: {
-          [Op.or]: {
-            username: credential,
-            email: credential
-          }
-        }
-      });
+      let user;
+
+      if (Validator.isEmail(credential)) {
+        user = await User.scope('loginUser').findOne({ where: { email: credential } });
+      } else {
+        user = await User.scope('loginUser').findOne({ where: { username: credential } });
+      }
 
       if (user && user.validatePassword(password)) {
         return await User.scope('currentUser').findByPk(user.id);
@@ -95,8 +93,7 @@ module.exports = (sequelize) => {
           attributes: { exclude: ['hashedPassword'] }
         },
         loginUser: {
-          attributes: ['id', 'username', 'email', 'hashedPassword']
-        }
+          attributes: ['id', 'username', 'email', 'hashedPassword'] }
       }
     }
   );
