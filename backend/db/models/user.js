@@ -21,9 +21,9 @@ module.exports = (sequelize) => {
       return User.scope('currentUser').findByPk(id);
     }
 
-    static async login({credential, password}) {
-      console.log("LOGIN DEBUG:", typeof credential, credential);
-
+    static async login( credential, password ) {
+      console.log("LOGIN DEBUG:", credential, password);
+      
       const { Op } = require('sequelize');
       let user;
 

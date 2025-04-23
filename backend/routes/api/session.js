@@ -24,7 +24,7 @@ router.post(
   async (req, res, next) => {
     const { credential, password } = req.body;
 
-    const user = await User.login({ credential, password });
+    const user = await User.login( credential, password );
 
     if (!user) {
 
