@@ -21,13 +21,46 @@ const validateSpot = [
   handleValidationErrors
 ];
 
-// Get all spots (with avgRating and previewImage)
+/*
+Add query filters:
+1. Read query params: minLat, maxLat, minLng, maxLng, minPrice, maxPrice, page, size
+2. Build a "where" object dynamically
+3. Pass "where" into Spot.findAll({ where, limit, offset, include })
+4. Set sensible defaults for page and size (e.g., page=1, size=20)
+5. Validate page and size, must be positive numbers
+6. Return formatted spots same as before 
+*/
+
+// Get all spots with query filters
 router.get("/", async (req, res) => {
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+  const where = {};
+
+  // Validation and defaults
+  page = parseInt(page) || 1;
+  size = parseInt(size) || 20;
+
+  if (page < 1) page = 1;
+  if (size < 1) size = 20;
+  if (size > 20) size = 20;
+
+  // Filters
+  if (minLat) where.lat = { [Op.gte]: parseFloat(minLat) };
+  if (maxLat) where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
+  if (minLng) where.lng = { [Op.gte]: parseFloat(minLng) };
+  if (maxLng) where.lng = { ...where.lng, [Op.lte]: parseFloat(maxLng) };
+  if (minPrice) where.price = { [Op.gte]: parseFloat(minPrice) };
+  if (maxPrice) where.price = { ...where.price, [Op.lte]: parseFloat(maxPrice) };
+
   const spots = await Spot.findAll({
+    where,
     include: [
       { model: Review },
       { model: SpotImage }
-    ]
+    ],
+    limit: size,
+    offset: size * (page - 1)
   });
 
   const formatted = spots.map(spot => {
@@ -57,8 +90,9 @@ router.get("/", async (req, res) => {
     };
   });
 
-  res.json({ Spots: formatted });
+  res.json({ Spots: formatted, page, size });
 });
+
 
 // Get spots owned by the current user
 router.get("/current", requireAuth, async (req, res) => {
