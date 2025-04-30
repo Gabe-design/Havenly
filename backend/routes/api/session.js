@@ -65,7 +65,7 @@ router.get(
 
 module.exports = router;
 
-/*
+/* Complete db reset
 npx sequelize-cli db:seed:undo:all
 npx sequelize-cli db:migrate:undo:all
 
