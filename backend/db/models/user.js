@@ -23,9 +23,9 @@ module.exports = (sequelize) => {
     }
 
     static async login( credential, password ) {
-      console.log("LOGIN DEBUG:", credential, password);
+      console.log("LOGIN DEBUG:", credential, password); // debuggin line 
       
-      const { Op } = require('sequelize');
+      const { Op } = require('sequelize');  
       let user;
 
       if (Validator.isEmail(credential)) {
