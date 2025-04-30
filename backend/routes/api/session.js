@@ -3,6 +3,7 @@ const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -112,3 +113,21 @@ router.get(
 );
 
 module.exports = router;
+
+/*
+npx sequelize-cli db:seed:undo:all
+npx sequelize-cli db:migrate:undo:all
+
+
+rm db/dev.db
+
+"DROP SCHEMA IF EXISTS airbnb_schema CASCADE; CREATE SCHEMA airbnb_schema;"
+
+
+npm run build   # runs psql-setup-script.js to ensure schema exists
+
+npx sequelize-cli db:migrate
+
+
+npx sequelize-cli db:seed:all
+*/
