@@ -10,7 +10,7 @@
 let options = {};
 
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // Apply schema in production
+  options.schema = process.env.SCHEMA; // Add schema in production
 }
 // spots migration
 module.exports = {

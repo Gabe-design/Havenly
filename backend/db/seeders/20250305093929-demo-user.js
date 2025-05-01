@@ -1,10 +1,11 @@
+// backend/db/seeders/demo-user.js
 'use strict';
 
 const bcrypt = require("bcryptjs");
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
+  options.schema = process.env.SCHEMA;  // Add schema in production
 }
 
 module.exports = {
@@ -39,7 +40,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
+      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] } // Delete users by username
     });
   }
 };

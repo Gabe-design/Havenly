@@ -15,7 +15,7 @@
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // Use custom schema in production
+  options.schema = process.env.SCHEMA; // Add in production
 }
 
 module.exports = {

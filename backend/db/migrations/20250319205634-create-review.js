@@ -9,7 +9,7 @@
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // Apply schema if in production
+  options.schema = process.env.SCHEMA;  // Add schema in production
 }
 
 /** @type {import('sequelize-cli').Migration} */

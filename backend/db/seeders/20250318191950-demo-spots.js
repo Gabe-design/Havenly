@@ -1,8 +1,14 @@
+// backend/db/seeders/demo-spots.js
 'use strict';
+
+/*
+- Seeder for inserting demo spot listings into the Spots table
+- Adds three predefined listings with location, description, price, and image
+*/
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
+  options.schema = process.env.SCHEMA; // Add schema in production
 }
 
 
@@ -62,13 +68,13 @@ module.exports = {
         }
       ]);
     } catch (error) {
-      console.error('SEED ERROR:', error);
+      console.error('SEED ERROR:', error); // log error for debugging
       throw error;
     }
   },
 
   async down(queryInterface, Sequelize) {
     options.tableName = 'Spots';
-    await queryInterface.bulkDelete(options, null, {});
+    await queryInterface.bulkDelete(options, null, {}); // deletes all seeded spots
   }
 };

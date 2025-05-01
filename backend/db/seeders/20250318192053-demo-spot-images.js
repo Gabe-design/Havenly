@@ -1,10 +1,11 @@
+// backend/db/seeders/demo-spot-images.js
 'use strict';
 
 const { Spot } = require('../models'); // Import Spot model
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
+  options.schema = process.env.SCHEMA;  // Add schema in production
 }
 
 

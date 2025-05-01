@@ -1,9 +1,10 @@
+//  backend/db/seeders/demo-reviews.js
 'use strict';
 
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
+  options.schema = process.env.SCHEMA; // Add schema in production
 }
 
 
@@ -50,6 +51,6 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
-    return queryInterface.bulkDelete(options, null, {});
+    return queryInterface.bulkDelete(options, null, {}); // Delete all seeded reviews
   }
 };
