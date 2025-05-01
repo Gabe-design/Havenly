@@ -2,13 +2,13 @@
 'use strict';
 
 /*
-- Seeder for inserting demo spot listings into the Spots table
-- Adds three predefined listings with location, description, price, and image
+- seeder for inserting demo spot listings into the Spots table
+- adds three predefined listings with location, description, price, and image
 */
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // Add schema in production
+  options.schema = process.env.SCHEMA; // add schema in production
 }
 
 

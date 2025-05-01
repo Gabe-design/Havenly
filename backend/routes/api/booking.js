@@ -1,4 +1,4 @@
-// routes/api/bookings.js
+// backend/routes/api/bookings.js
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
@@ -25,8 +25,8 @@ router.get('/current', requireAuth, async (req, res) => {
   const result = bookings.map(booking => {
     const spot = booking.Spot;
     const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null;
-
-    return {
+  
+    return { 
       id: booking.id,
       spotId: spot.id,
       Spot: {

@@ -1,7 +1,7 @@
 // backend/db/models/review.js
 'use strict';
-/**
-- Defines the Review model.
+/*
+- defines the Review model.
 - A review is associated with a user and a spot, and can have multiple images.
 */
 const {
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       Review.hasMany(models.ReviewImage, { 
         foreignKey: "reviewId", 
         onDelete: "CASCADE", 
-        hooks: true }); // Enable hooks to ensure cascading deletes
+        hooks: true }); // enable hooks to ensure cascading deletes
     }
   }
   Review.init({
@@ -31,13 +31,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     review: {
-      type: DataTypes.TEXT, // Text content of the review
+      type: DataTypes.TEXT, // text content of the review
       allowNull: false
     },
     stars: {
-      type: DataTypes.INTEGER, // Rating from 1 to 5
+      type: DataTypes.INTEGER, // rating from 1 to 5
       allowNull: false,
-      validate: { min: 1, max: 5 } // Ensure valid star rating
+      validate: { min: 1, max: 5 } // ensure valid star rating
     }
   }, {
     sequelize,

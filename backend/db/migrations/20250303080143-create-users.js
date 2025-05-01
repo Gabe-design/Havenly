@@ -4,7 +4,8 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-/* This migration script creates the 'Users' table with the following fields:
+/* 
+- This migration script creates the 'Users' table with the following fields:
 - id: primary key
 - username: unique string
 - email: unique string
@@ -15,7 +16,7 @@
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // Add in production
+  options.schema = process.env.SCHEMA; // add schema in production
 }
 
 module.exports = {
@@ -55,6 +56,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('User', options); // Drop Users table on rollback
+    return queryInterface.dropTable('User', options); // drop Users table on rollback
   }
 };

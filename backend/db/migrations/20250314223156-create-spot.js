@@ -3,14 +3,15 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-/* This migration script creates the 'Spots' table with various fields describing a rental spot.
-- Fields include ownerId (foreign key), location data, description, price, average rating, and preview image.
+/* 
+- this migration script creates the 'Spots' table with various fields describing a rental spot.
+- fields include ownerId (foreign key), location data, description, price, average rating, and preview image.
 */
 
 let options = {};
 
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // Add schema in production
+  options.schema = process.env.SCHEMA; // add schema in production
 }
 // spots migration
 module.exports = {
@@ -28,7 +29,7 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: { model: 'Users', key: 'id' }, // Foreign key to Users table
-          onDelete: 'CASCADE' // Delete spots if the owner is deleted
+          onDelete: 'CASCADE' // delete spots if the owner is deleted
         },
         address: {
           type: Sequelize.STRING,
@@ -67,12 +68,12 @@ module.exports = {
           allowNull: false
         },
         avgRating: {
-          type: Sequelize.DECIMAL(3, 2), // Average rating out of 5
+          type: Sequelize.DECIMAL(3, 2), // average rating out of 5
           allowNull: false,
           defaultValue: 0.0
         },
         previewImage: {
-          type: Sequelize.STRING, // Optional preview image URL
+          type: Sequelize.STRING, // optional preview image URL
           allowNull: true,
           defaultValue: null
         },
@@ -91,6 +92,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Spots', options); // Drop the Spots table
+    await queryInterface.dropTable('Spots', options); // drop the Spots table
   }
 };

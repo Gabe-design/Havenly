@@ -4,7 +4,7 @@
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // Add schema in production
+  options.schema = process.env.SCHEMA; // add schema in production
 }
 
 
@@ -51,6 +51,6 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
-    return queryInterface.bulkDelete(options, null, {}); // Delete all seeded reviews
+    return queryInterface.bulkDelete(options, null, {}); // delete all seeded reviews
   }
 };

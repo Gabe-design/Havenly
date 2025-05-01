@@ -1,6 +1,61 @@
 // backend/db/seeders/demo-spot-images.js
 'use strict';
 
+const { Spot, SpotImage, User } = require('../models'); // If you're using the Spot model
+const bcrypt = require("bcryptjs");
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+ 
+  await SpotImage.bulkCreate([
+    {
+      spotId: 1,
+      url: 'https://example.com/spot1-1.jpg',
+      preview: true
+    },
+    {
+      spotId: 1,
+      url: 'https://example.com/spot1-2.jpg',
+      preview: false
+    },
+    {
+      spotId: 2,
+      url: 'https://example.com/spot2-1.jpg',
+      preview: true
+    },
+    {
+      spotId: 2,
+      url: 'https://example.com/spot2-2.jpg',
+      preview: false
+    },
+    {
+      spotId: 3,
+      url: 'https://example.com/spot3-1.jpg',
+      preview: true
+    },
+    {
+      spotId: 3,
+      url: 'https://example.com/spot3-2.jpg',
+      preview: false
+    }
+  ], { validate: true });
+},
+
+  async down (queryInterface, Sequelize) {
+    options.tableName = 'SpotImages';
+    await queryInterface.bulkDelete(options, null, {});
+  }
+};
+
+
+/*'use strict';
+
 const { Spot } = require('../models'); // Import Spot model
 
 let options = {};
@@ -56,3 +111,4 @@ module.exports = {
     return queryInterface.bulkDelete(options, null, {});
   }
 };
+*/

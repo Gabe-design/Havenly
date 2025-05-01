@@ -3,13 +3,14 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-/*This migration creates the 'Bookings' table.
-- Each booking links a user to a spot with start and end dates.
+/*
+- this migration creates the 'Bookings' table.
+- each booking links a user to a spot with start and end dates.
 */
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // Add schema in production
+  options.schema = process.env.SCHEMA;  // add schema in production
 }
 
 
@@ -26,21 +27,21 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Spots', key: 'id' }, // FK to Spots table
-        onDelete: 'CASCADE' // Delete booking if the spot is deleted
+        references: { model: 'Spots', key: 'id' }, // foreign key to spots table
+        onDelete: 'CASCADE' // delete booking if the spot is deleted
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users', key: 'id' }, // FK to Users table
-        onDelete: 'CASCADE' // Delete booking if the user is deleted
+        references: { model: 'Users', key: 'id' }, // foreign key to users table
+        onDelete: 'CASCADE' // delete booking if the user is deleted
       },
       startDate: {
-        type: Sequelize.DATEONLY, // Start date of booking
+        type: Sequelize.DATEONLY, // start date of booking
         allowNull: false
       },
       endDate: {
-        type: Sequelize.DATEONLY, // End date of booking
+        type: Sequelize.DATEONLY, // end date of booking
         allowNull: false
       },
       createdAt: {

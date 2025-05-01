@@ -5,11 +5,11 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    /*
+    - helper method for defining associations.
+    - this method is not a part of Sequelize lifecycle.
+    - the `models/index` file will call this method automatically.
+    */
     static associate(models) {
       // define association here
       Booking.belongsTo(models.User, { foreignKey: 'userId' });
@@ -27,20 +27,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       startDate: {
-        type: DataTypes.DATEONLY, // Start date of booking
+        type: DataTypes.DATEONLY, // start date of booking
         allowNull: false,
         validate: {
-          isDate: true,// Ensures valid date
+          isDate: true,// ensures valid date
         },
       },
       endDate: {
-        type: DataTypes.DATEONLY, // End date of booking
+        type: DataTypes.DATEONLY, // end date of booking
         allowNull: false,
         validate: {
-          isDate: true, // Ensures valid date 
+          isDate: true, // ensures valid date 
           isAfterStart(value) {
             if (value <= this.startDate) {
-              throw new Error('endDate must be after startDate'); // Custom validation
+              throw new Error('endDate must be after startDate'); // custom validation
             }
           },
         },

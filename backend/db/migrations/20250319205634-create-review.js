@@ -3,13 +3,14 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-/* This migration creates the 'Reviews' table.
-- Each review is associated with a user and a spot and includes the review text and a star rating.
+/* 
+- this migration creates the 'Reviews' table.
+- each review is associated with a user and a spot and includes the review text and a star rating.
 */
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // Add schema in production
+  options.schema = process.env.SCHEMA;  // add schema in production
 }
 
 /** @type {import('sequelize-cli').Migration} */
@@ -25,21 +26,21 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Spots", key: "id" }, // FK to Spots table
-        onDelete: "CASCADE" // Delete reviews when the related spot is deleted
+        references: { model: "Spots", key: "id" }, // foreign key to users table
+        onDelete: "CASCADE" // delete reviews when the related spot is deleted
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Users", key: "id" }, // FK to Users table
-        onDelete: "CASCADE" // Delete reviews when the related user is deleted
+        references: { model: "Users", key: "id" }, // foreign key to users table
+        onDelete: "CASCADE" // delete reviews when the related user is deleted
       },
       review: {
-        type: Sequelize.TEXT, // Review text content
+        type: Sequelize.TEXT, // review text content
         allowNull: false
       },
       stars: {
-        type: Sequelize.INTEGER, // Star rating (1-5)
+        type: Sequelize.INTEGER, // star rating (1-5)
         allowNull: false,
         validate: {
           min: 1,
@@ -49,7 +50,7 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP") 
       },
       updatedAt: {
         allowNull: false,

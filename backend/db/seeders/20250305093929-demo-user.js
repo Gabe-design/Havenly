@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // Add schema in production
+  options.schema = process.env.SCHEMA;  // add schema in production
 }
 
 module.exports = {
@@ -40,7 +40,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] } // Delete users by username
+      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] } // delete users by username
     });
   }
 };
