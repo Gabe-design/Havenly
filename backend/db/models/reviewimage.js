@@ -1,3 +1,5 @@
+// backend/db/models/reviewimage.js
+// manni's code
 'use strict';
 
 const fs = require('fs');
@@ -15,32 +17,32 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ReviewImage extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    /*
+    - Helper method for defining associations.
+    - This method is not a part of Sequelize lifecycle.
+    - The `models/index` file will call this method automatically.
+    */
     static associate(models) {
       // define association here
       ReviewImage.belongsTo(
         models.Review,
         {
           foreignKey: 'reviewId',
-          onDelete: 'CASCADE'
+          onDelete: 'CASCADE' // Delete image when review is deleted
         });
     }
   }
   ReviewImage.init({
     reviewId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER, // Image URL
       allowNull: false
     },
     url: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, 
       allowNull: false,
       validate: {
-        notEmpty: true,
-        isUrl: true
+        notEmpty: true, // URL must not be empty
+        isUrl: true // Must be a valid URL
       }
     },
   }, {

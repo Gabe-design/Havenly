@@ -1,18 +1,25 @@
+// backend/db/models/spot.js
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   class Spot extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    /*
+    - Helper method for defining associations.
+    - This method is not a part of Sequelize lifecycle.
+    - The `models/index` file will call this method automatically.
+    */
     static associate(models) {
       // define association here
-      Spot.belongsTo( models.User, { foreignKey: "ownerId", as: "Owner" });
-      Spot.hasMany( models.SpotImage, { foreignKey: "spotId", onDelete: "CASCADE" });
-      Spot.hasMany(models.Review, { foreignKey: 'spotId', onDelete: 'CASCADE' });      
+      Spot.belongsTo( models.User, { 
+        foreignKey: "ownerId", 
+        as: "Owner" }); // Alias for owner
+      Spot.hasMany( models.SpotImage, { 
+        foreignKey: "spotId",
+        onDelete: "CASCADE" });
+      Spot.hasMany(models.Review, { 
+        foreignKey: 'spotId', 
+        onDelete: 'CASCADE' });      
     };
   }
   Spot.init({
@@ -26,8 +33,15 @@ module.exports = (sequelize) => {
     name: { type: DataTypes.STRING(50), allowNull: false },
     description: { type: DataTypes.TEXT, allowNull: false }, 
     price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-    avgRating: { type: DataTypes.DECIMAL(3, 2), allowNull: false, defaultValue: 0.0 },
-    previewImage: { type: DataTypes.STRING, allowNull: false, defaultValue: "https://example.com/default.jpg" }
+    avgRating: { 
+      type: DataTypes.DECIMAL(3, 2), 
+      allowNull: false, 
+      defaultValue: 0.0 }, // Default average rating
+    previewImage: { 
+      type: DataTypes.STRING, 
+      allowNull: false, 
+      defaultValue: "https://example.com/default.jpg" // Default image URL  
+    }
   }, {
     sequelize,
     modelName: 'Spot',

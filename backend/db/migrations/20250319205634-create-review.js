@@ -1,10 +1,15 @@
+//backend/db/migrations/review.js
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 
+/* This migration creates the 'Reviews' table.
+- Each review is associated with a user and a spot and includes the review text and a star rating.
+*/
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
+  options.schema = process.env.SCHEMA; // Apply schema if in production
 }
 
 /** @type {import('sequelize-cli').Migration} */
@@ -20,21 +25,21 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Spots", key: "id" },
-        onDelete: "CASCADE"
+        references: { model: "Spots", key: "id" }, // FK to Spots table
+        onDelete: "CASCADE" // Delete reviews when the related spot is deleted
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Users", key: "id" },
-        onDelete: "CASCADE"
+        references: { model: "Users", key: "id" }, // FK to Users table
+        onDelete: "CASCADE" // Delete reviews when the related user is deleted
       },
       review: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT, // Review text content
         allowNull: false
       },
       stars: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER, // Star rating (1-5)
         allowNull: false,
         validate: {
           min: 1,
@@ -54,6 +59,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reviews', options);
+    await queryInterface.dropTable('Reviews', options); // drop Reviews table
   }
 };

@@ -1,13 +1,16 @@
+// backend/db/models/user.js
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const Validator = require('validator');
+
+
 
 module.exports = (sequelize) => {
   class User extends Model {
     static associate(models) {
       // Define associations here
     }
-
+    
     toSafeObject() {
       const { id, username, email } = this;
       return { id, username, email };

@@ -1,3 +1,4 @@
+// backend/db/models/booking.js
 'use strict';
 const {
   Model
@@ -26,20 +27,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       startDate: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATEONLY, // Start date of booking
         allowNull: false,
         validate: {
-          isDate: true,
+          isDate: true,// Ensures valid date
         },
       },
       endDate: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATEONLY, // End date of booking
         allowNull: false,
         validate: {
-          isDate: true,
+          isDate: true, // Ensures valid date 
           isAfterStart(value) {
             if (value <= this.startDate) {
-              throw new Error('endDate must be after startDate');
+              throw new Error('endDate must be after startDate'); // Custom validation
             }
           },
         },

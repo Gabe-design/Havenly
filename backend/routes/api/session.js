@@ -8,6 +8,7 @@ const { Op } = require('sequelize');
 const router = express.Router();
 
 const validateLogin = [
+  // check if credentials are valid
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
@@ -31,7 +32,7 @@ router.post('/',
       const err = new Error('Login failed');
       err.status = 401;
       err.title = 'Login failed';
-      err.errors = ['The provided credentials were invalid.'];
+      err.errors = ['Invalid Credentials :('];
       return next(err);
     }
     // sets TokenCookie on login
@@ -45,8 +46,8 @@ router.post('/',
 
 // Log out
 router.delete('/', (_req, res) => {
-  res.clearCookie('token');
-  return res.json({ message: 'success' });
+  res.clearCookie('token'); // clear token
+  return res.json({ message: 'success' }); // returns success message
 });
 
 // Restore session user
@@ -54,12 +55,16 @@ router.get(
   '/',
   restoreUser,
   (req, res) => {
-    const { user } = req;
+    // restore user from sesssion
+    const { user } = req; 
+    // if user exists will return safe obkect
     if (user) {
+      // return object
       return res.json({
+        // safe object
         user: user.toSafeObject()
       });
-    } else return res.json({});
+    } else return res.json({}); // if ther is no user returns emoty object
   }
 );
 

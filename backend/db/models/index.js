@@ -1,4 +1,10 @@
+// backend/db/models/index.js
 'use strict';
+
+/*
+- This file initializes all Sequelize models and sets up associations.
+- It dynamically loads all model definitions and connects them to the Sequelize instance.
+*/
 
 const fs = require('fs');
 const path = require('path');
@@ -11,11 +17,11 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], config); // Use env var connection string
 } else {
-  sequelize = new Sequelize(config);
+  sequelize = new Sequelize(config); // Use object config
 }
-
+// Dynamically import all model files except index.js and test files
 fs
   .readdirSync(__dirname)
   .filter(file => {
@@ -28,16 +34,16 @@ fs
   })
   .forEach(file => {
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    db[model.name] = model; // Register model to db object
   });
-
+// Set up model associations if defined
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+db.sequelize = sequelize; // Sequelize instance
+db.Sequelize = Sequelize; // Sequelize class reference
 
 module.exports = db;

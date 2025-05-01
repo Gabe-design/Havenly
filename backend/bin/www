@@ -1,5 +1,4 @@
-#!/usr/bin/env node
-
+// file to start the server and connect to the db
 // Import environment variables
 require('dotenv').config();
 

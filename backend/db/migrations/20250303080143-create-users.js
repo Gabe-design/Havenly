@@ -1,10 +1,21 @@
+// backend/db/migrations/user.js
+
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 
+/* This migration script creates the 'Users' table with the following fields:
+- id: primary key
+- username: unique string
+- email: unique string
+- hashedPassword: binary string for storing hashed password
+- createdAt: timestamp when the user is created
+- updatedAt: timestamp when the user is last updated
+*/
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
+  options.schema = process.env.SCHEMA; // Use custom schema in production
 }
 
 module.exports = {
@@ -44,6 +55,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('User', options);
+    return queryInterface.dropTable('User', options); // Drop Users table on rollback
   }
 };
