@@ -88,7 +88,7 @@ module.exports = (sequelize, DataTypes) => {
      },
     lat: {
       // Latitude of the spot
-    type: DataTypes.FLOAT(10,7),
+    type: DataTypes.FLOAT,  // (10,7),
     allowNull: false,
     validate: {
       isFloat: true,
@@ -98,7 +98,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lng: {
       // Longitude of the spot 
-      type: DataTypes.FLOAT(10,7),
+      type: DataTypes.FLOAT, // (10,7),
       allowNull: false,
       validate: {
         isFloat: true,
