@@ -1,4 +1,5 @@
 // backend/routes/api/bookings.js
+
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
@@ -9,6 +10,7 @@ const { Op } = require('sequelize');
 router.get('/current', requireAuth, async (req, res) => {
   const userId = req.user.id;
 
+  // Fetch all bookings for the user and include associated spot data and preview image 
   const bookings = await Booking.findAll({
     where: { userId },
     include: {
@@ -17,11 +19,13 @@ router.get('/current', requireAuth, async (req, res) => {
         model: SpotImage,
         where: { preview: true },
         required: false,
+        // limit to 1 preview image per spot
         limit: 1
       }
     }
   });
 
+  // Format the booking data for response
   const result = bookings.map(booking => {
     const spot = booking.Spot;
     const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null;

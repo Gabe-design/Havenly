@@ -1,14 +1,28 @@
-// file to start the server and connect to the db
-// import environment variables
+// backend/bin/www.js
+
+// This files starts the web server and connect to the db using sequelize
+// First loads env variables, then checks db connectivity
+// Finally starts listening for the HTTP requests 
+
+// Load env variables from the .env file ( port number, db credentials )
 require('dotenv').config();
 
+// Import number from config file
 const { port } = require('../config');
+// Import the express app 
 const app = require('../app');
+// Import sequelize models ( for athenticating the db connection )
 const db = require('../db/models');
+
+// Try connecting the db using sequalize
+// Ensures the db is avaible before the app starts
+// If successful, start express server
+// If not, logs the error
 
 // check the database connection before starting the app
 db.sequelize
-  .authenticate()
+// attempts to connect to the db 
+  .authenticate() 
   .then(() => {
     console.log('Database connection success! Sequelize is ready to use...');
 
@@ -16,6 +30,8 @@ db.sequelize
     app.listen(port, () => console.log(`Listening on port ${port}...`));
   })
   .catch((err) => {
+    // Log error message if db fails to connect
     console.log('Database connection failure.');
+    // Prints the errror details
     console.error(err);
   });

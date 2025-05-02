@@ -1,46 +1,85 @@
 // backend/db/models/review.js
+
 'use strict';
-/*
-- defines the Review model.
-- A review is associated with a user and a spot, and can have multiple images.
-*/
-const {
-  Model
-} = require('sequelize');
+
+// This model file defines the Review model and its associations
+
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
+
+    // This method is called automatically by models/index.js
+
     static associate(models) {
-      // define association here
-      // belongs to a user and a spot
-      // has many review images
-      Review.belongsTo(models.User, { foreignKey: "userId" });
-      Review.belongsTo(models.Spot, { foreignKey: "spotId" });
-      Review.hasMany(models.ReviewImage, { 
-        foreignKey: "reviewId", 
-        onDelete: "CASCADE", 
-        hooks: true }); // enable hooks to ensure cascading deletes
+      // A review belongs to a specific spot 
+      Review.belongsTo(
+        models.Spot,
+        {
+          foreignKey: "spotId",
+          // Delete review if sopt is deleted
+          onDelete: 'CASCADE'
+        });
+        // A review belongs to a specific user
+      Review.belongsTo(
+        models.User,
+        {
+          foreignKey: "userId",
+          // Delete review if user is deleted
+          onDelete: 'CASCADE'
+        });
+        // A review can have multiple images
+      Review.hasMany(
+        models.ReviewImage,
+        {
+          foreignKey: 'reviewId',
+          // Delete image if review is deleted
+          onDelete: 'CASCADE'
+        });
     }
   }
+
+  // Initialize rview model and define its attributes and validations
   Review.init({
-    spotId: { 
+    spotId: {
+      // Id of the spot being reviewed
       type: DataTypes.INTEGER,
+      // Required field 
       allowNull: false
     },
     userId: {
+      // Id of the user who wrote the review
       type: DataTypes.INTEGER,
+      // Required field
       allowNull: false
     },
     review: {
-      type: DataTypes.TEXT, // text content of the review
-      allowNull: false
+      // Text content of the review
+      type: DataTypes.TEXT,
+      // Cannot be empty 
+      allowNull: false,
+      validate: {
+        // Must contain some text
+       notEmpty: true
+      }
     },
     stars: {
-      type: DataTypes.INTEGER, // rating from 1 to 5
+      // Star rating from 1-5
+      type: DataTypes.INTEGER,
+      // Required field
       allowNull: false,
-      validate: { min: 1, max: 5 } // ensure valid star rating
-    }
+      validate: {
+        // Min 1 star, Max 5 stars
+        min: 1,
+        max: 5,
+        // Must be an integer
+        isInt: true,
+      }
+    },
   }, {
+    // Sequelize instance
     sequelize,
+    // Model name
     modelName: 'Review',
   });
   return Review;

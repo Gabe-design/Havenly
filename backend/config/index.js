@@ -1,12 +1,17 @@
 // backend/config/index.js
-// contains db configs 
 
+// Contains db configs 
 module.exports = {
-  environment: process.env.NODE_ENV || 'development', // Current environment mode
-  port: process.env.PORT || 8000, // port the server will listen on
-  dbFile: process.env.DB_FILE || './db/dev.db', // path to the SQLite database file
+  // Current environment mode
+  environment: process.env.NODE_ENV || 'development', 
+  // Port the server will listen on
+  port: process.env.PORT || 8000, 
+  // Path to the SQLite database file
+  dbFile: process.env.DB_FILE || './db/dev.db', 
   jwtConfig: {
-    secret: process.env.JWT_SECRET, // secret key for signing JWTs
-    expiresIn: process.env.JWT_EXPIRES_IN // expiration time for JWT tokens
+    // Secret key for signing JWTs
+    secret: process.env.JWT_SECRET, 
+    // Expiration time for JWT tokens
+    expiresIn: process.env.JWT_EXPIRES_IN 
   }
 };

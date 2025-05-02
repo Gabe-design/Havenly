@@ -2,13 +2,15 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "_comment": "this will be for resting server",
+  "_commentBuild": "the line build will be used by render to start server",
   "scripts": {
-    "sequelize": "npx sequelize-cli",
-    "sequelize-cli": "npx sequelize-cli",
-    "start": "NODE_ENV=production node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www",
-    "build": "node psql-setup-script.js",
-    "postdeploy": "npx sequelize-cli db:seed:undo:all && npx sequelize-cli db:seed:all"
+    "sequelize": "sequelize",
+    "sequelize-cli": "sequelize-cli",
+    "start": "per-env",
+    "dev": "nodemon ./bin/www",
+    "prod": "node ./bin/www",
+    "build": "node psql-setup-script.js"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +20,7 @@
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "csurf": "^1.10.0",
+    "csurf": "^1.2.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
@@ -28,13 +30,14 @@
     "morgan": "^1.10.0",
     "per-env": "^1.0.2",
     "pg": "^8.13.3",
-    "sequelize": "^6.37.7",
-    "express-list-routes": "^1.2.4"
+    "sequelize": "^6.37.5",
+    "sequelize-cli": "^6.6.2"
   },
   "devDependencies": {
     "dotenv-cli": "^8.0.0",
     "nodemon": "^3.1.9",
-    "sequelize-cli": "^6.6.2",
     "sqlite3": "^5.1.7"
   }
 }
+
+

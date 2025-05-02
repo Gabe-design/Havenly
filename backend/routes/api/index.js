@@ -1,54 +1,37 @@
 // backend/routes/api/index.js
-const router = require('express').Router();
-// import the individual routes
-const sessionRouter = require('./session.js');
-const usersRouter = require('./users.js');
-const spotsRouter = require('./spots');
-const reviewsRouter = require('./reviews');
-const spotImagesRouter = require('./spot-images');
-const reviewImagesRouter = require('./review-images');
 
+// This is the central router file that connects all Api routes
+
+const router = require('express').Router();
+
+// Import each route
+const sessionRouter = require('./session.js');
+const spotsRouter = require('./spots.js');
+const usersRouter = require('./users.js');
+const reviewsRouter = require('./reviews.js');
+const reviewImagesRouter = require('./review-images.js')
+const spotImagesRouter = require('./spot-images.js')
+// Import authentication uttilities
 const { requireAuth, restoreUser } = require('../../utils/auth');
-// the middleware to restore user session
+
+// Test endpoint to varify authentication is working
+router.get('/test', requireAuth, (req, res) => {
+  res.json({ message: 'success' })
+})
+
+
+// Global middleware to restore user from session
+// Sets req.user if valid session exits
 router.use(restoreUser);
-// import the sub-routers 
-// and use them with the main routers
+
+// Route bindings
+// Use the imported routes with the main router
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
 router.use('/reviews', reviewsRouter);
-router.use('/spot-images', spotImagesRouter);
 router.use('/review-images', reviewImagesRouter);
-// to check if the user is authenticated
-router.get('/', requireAuth, (req, res) => {
-  res.json({ message: 'success' });
-});
-// to test the request body
-router.post('/test', function (req, res) {
-  res.json({ requestBody: req.body });
-});
+router.use('/spot-images', spotImagesRouter);
 
-module.exports = router;
-
-// Uncommented code for setting token cookie
-// const { setTokenCookie } = require('../../utils/auth.js');
-// const { User } = require('../../db/models');
-// router.get('/set-token-cookie', async (_req, res) => {
-//     const user = await User.findOne({
-//         where: { username: 'Demo-lition' }
-//     });
-//     setTokenCookie(res, user);
-//     return res.json({ user });
-// });
-
-// const { restoreUser } = require('../../utils/auth');
-// router.get('/restore-user', restoreUser, (req, res) => {
-//   return res.json(req.user);
-// });
-
-// const { requireAuth } = require('../../utils/auth');
-// router.get('/require-auth', requireAuth, (req, res) => {
-//  return res.json(req.user);
-// });
 
 module.exports = router;

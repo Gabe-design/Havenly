@@ -1,89 +1,126 @@
+// backend/routes/api/session.js
+
 const express = require('express');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+// Sequelize for matching username/email
+const { Op } = require('sequelize');
+// For password comparison
+const bcrypt = require('bcryptjs');
+// For request validation
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Op } = require('sequelize');
+// Auth helpers
+const { setTokenCookie, restoreUser } = require('../../utils/auth');
+// User model
+const { User } = require('../../db/models');
 
 const router = express.Router();
 
+// Middleware to validate login credentials in request body
 const validateLogin = [
-  // check if credentials are valid
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage('Please provide a valid email or username.'),
+    .withMessage("Email or username is required"),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a password.'),
+    .withMessage("Password is required"),
+    // Forwards errors to error-handling middleware
   handleValidationErrors
 ];
 
-// Log in
-router.post('/',
-  validateLogin, async (req, res, next) => {
-    // username and password credentails
-    const { credential, password } = req.body;
-    // find user by credentiasl
-    const user = await User.login(credential, password);
 
-    if (!user) {
-      // error for invalid crdentials
-      const err = new Error('Login failed');
-      err.status = 401;
-      err.title = 'Login failed';
-      err.errors = ['Invalid Credentials :('];
-      return next(err);
-    }
-    // sets TokenCookie on login
-    await setTokenCookie(res, user);
-    // returns safe infro to user
-    return res.json({ 
-      user
-    });
-  }
-);
+// Log in a User
+router.post(
+    '/', validateLogin, async (req, res, next) => {
+        // credentials username or password
+      const { credential, password } = req.body;
 
-// Log out
-router.delete('/', (_req, res) => {
-  res.clearCookie('token'); // clear token
-  return res.json({ message: 'success' }); // returns success message
-});
-
-// Restore session user
-router.get(
-  '/',
-  restoreUser,
-  (req, res) => {
-    // restore user from sesssion
-    const { user } = req; 
-    // if user exists will return safe obkect
-    if (user) {
-      // return object
-      return res.json({
-        // safe object
-        user: user.toSafeObject()
+      // Find user by either username or email
+      const user = await User.unscoped().findOne({
+        where: {
+          [Op.or]: {
+            username: credential,
+            email: credential
+          }
+        }
       });
-    } else return res.json({}); // if ther is no user returns emoty object
-  }
-);
+
+
+      // Validate user exists and password matches hash
+      if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
+        const err = new Error('Login failed');
+        err.status = 401;
+        err.title = 'Login failed';
+        err.errors = { credential:  "Invalid credentials" };
+        // Sends error to error handler
+        return next(err);
+      }
+
+      // Remove sensitive data from response
+      const safeUser = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+      };
+
+      // Set the JWT cookkie
+      await setTokenCookie(res, safeUser);
+      // Send the user info to client
+      return res.json({
+        user: safeUser
+      });
+    }
+  );
+
+  // Log out user
+    router.delete(
+    '/',
+    (_req, res) => {
+      // Remove token cookie
+      res.clearCookie('token');
+     return res.json({ message: 'success' });
+    }
+  );
+
+  // Restore session user from token
+  router.get(
+    '/',
+    (req, res) => {
+      // check for user req
+      const { user } = req;
+      if (user) {
+        // User found on cookie
+        const safeUser = {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          username: user.username,
+        };
+        return res.json({
+          user: safeUser
+        });
+        // No user logged in, sends null
+      } else return res.json({ user: null });
+    }
+  );
 
 module.exports = router;
 
-/* Complete db reset
+/* complete db reset
+
 npx sequelize-cli db:seed:undo:all
 npx sequelize-cli db:migrate:undo:all
 
-
 rm db/dev.db
 
-"DROP SCHEMA IF EXISTS airbnb_schema CASCADE; CREATE SCHEMA airbnb_schema;"
-
+DROP SCHEMA IF EXISTS airbnb_schema CASCADE; CREATE SCHEMA airbnb_schema;
 
 npm run build   # runs psql-setup-script.js to ensure schema exists
 
 npx sequelize-cli db:migrate
-
-
 npx sequelize-cli db:seed:all
+
 */

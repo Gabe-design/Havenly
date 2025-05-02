@@ -2,60 +2,96 @@
 
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
-
-/* 
-- This migration script creates the 'Users' table with the following fields:
-- id: primary key
-- username: unique string
-- email: unique string
-- hashedPassword: binary string for storing hashed password
-- createdAt: timestamp when the user is created
-- updatedAt: timestamp when the user is last updated
-*/
+// This migartion creates the Users table in the db
+// For prod environments ( render ) the schema name must be set to use su-databases
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; // add schema in production
+  // set schema in prod for env varaibles
+  options.schema = process.env.SCHEMA;  
 }
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // Creates the Users table with defined columns and options 
     await queryInterface.createTable('Users', {
       id: {
+        // This column cannot be null
         allowNull: false,
+        // Automatically increments on each new entry 
         autoIncrement: true,
+        // This is the primary key
         primaryKey: true,
+        // Integer data type 
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true
-      },
-      email: {
-        type: Sequelize.STRING(256),
-        allowNull: false,
-        unique: true
-      },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
+      firstName: {
+        // Text field for first name
+        type: Sequelize.STRING,
+        // Cannot be null
         allowNull: false
       },
-      createdAt: {
+      lastName: {
+        // Text field for last name
+        type: Sequelize.STRING,
+        // Cannot be null
+        allowNull: false
+      },
+      username: {
+        // Strings max length of 30 characters
+        type: Sequelize.STRING(30),
+        // Required field
         allowNull: false,
+        // Value must be unigue across the Users table
+        unique: true,
+        // Cannot be an empty string
+        notEmpty: true
+      },
+      email: {
+        // Strings max length of 256 characters
+        type: Sequelize.STRING(256),
+        // Reduired field
+        allowNull: false,
+        // Value must be unique across the Users table
+        unique: true,
+        // value myst be a valid email address/format
+        isEmail: true,
+        // Cannot be an empty string
+        notEmpty: true
+      },
+      hashedPassword: {
+        // Binary string for securely Storing hashed password
+        type: Sequelize.STRING.BINARY,
+        // Required field
+        allowNull: false,
+        // Cannot be an empty string
+        notEmpty: true
+      },
+      createdAt: {
+        // Required field
+        allowNull: false,
+        // Date field
         type: Sequelize.DATE,
+        // Default to the current timestamp 
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
+        // Required field
         allowNull: false,
+        // Date field
         type: Sequelize.DATE,
+        // Default to the current timestamp
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
+    // options is an object that contains the schema name
     }, options);
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('User', options); // drop Users table on rollback
+    // this will drop the user table
+    // Sets table name explicitly in options object
+    options.tableName = "Users";
+    // Drops the Users table using options object
+    return queryInterface.dropTable(options);
   }
 };

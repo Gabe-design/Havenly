@@ -1,57 +1,62 @@
 // backend/db/models/spotimage.js
-// manni's code
+
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../../config/database.js')[env];
-const db = {};
-// const { Model, Validator } = require('sequelize');
+// This model file defines the SpotImage, which stores image URLs associated with a spot
+// Each image belongs to a single spot and can be marked as a preview image
 
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class SpotImage extends Model {
-    /*
-    - Helper method for defining associations.
-    - This method is not a part of Sequelize lifecycle.
-    - The `models/index` file will call this method automatically.
-    */
+    
+    // This method is called automatically by models/index.js
+
     static associate(models) {
-      // define association here
+      // Each image belongs to one spot
       SpotImage.belongsTo(models.Spot, {
+        // Link image to a spot
         foreignKey: 'spotId',
-        onDelete: 'CASCADE' // deletes image when spot is deleted
+        // Delete image if associated spot is deleted
+        onDelete: 'CASCADE' 
       });
     }
   }
+
+  // Initialize SpotImage model and define its attributes and validations
   SpotImage.init({
     spotId: {
+      // Foreign key to a spot
       type: DataTypes.INTEGER,
+      // Required field
       allowNull: false,
       validate: {
-        isInt: true // ensures spotid is an integer
+        // Must be an integer
+        isInt: true 
       }
     },
     url:{
-      type: DataTypes.STRING, // image url
+      // Image URL string
+      type: DataTypes.STRING,
+      // Required field
       allowNull: false,
       validate: {
-        isUrl: true // ensures url is valid
+        // Must be valid URL format
+        isUrl: true 
       }
     },
     preview: {
+      // Whether this image is the preview image for the spot
       type: DataTypes.BOOLEAN, 
+      // Required
       allowNull: false,
+      // Default is false
       defaultValue: false
     },
   }, {
+    // Sequelize instance
     sequelize,
+    // Model name
     modelName: 'SpotImage',
   });
   return SpotImage;

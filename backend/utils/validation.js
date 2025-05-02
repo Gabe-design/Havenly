@@ -1,37 +1,40 @@
-const { check, validationResult } = require('express-validator');
+// backend/utils/validation.js
 
-// Middleware for formatting errors from express-validator middleware
-// (to customize, see express-validator's documentation)
+// Import validationResult to gather any validation errors
+const { validationResult } = require('express-validator');
+
+// Middleware to handle validation errors from express-validator
+// Checks if request has validation errors
+// If errors exist, it formats and returns a structured 400 error response
+// If no errors, it continues to next middleware or route
+
 const handleValidationErrors = (req, _res, next) => {
-    const validationErrors = validationResult(req);
+  // Extract validation errors from request
+  const validationErrors = validationResult(req);
 
-    if (!validationErrors.isEmpty()) {
-        const errors = validationErrors
-            .array()
-            .map((error) => `${error.msg}`);
+  // If there are errors, convert them into an object with field as key and message as value
+  if (!validationErrors.isEmpty()) {
+    const errors = {};
+    validationErrors.array().forEach(error => {
+      errors[error.path] = error.msg;
+    });
 
-        const err = Error('Bad request.');
-        err.errors = errors;
-        err.status = 400;
-        err.title = 'Bad request.';
-        return next(err);
-    }
+    // Create error object and pass to error-handling middleware
+    const err = Error("Bad request.");
+     // Add errors object to error
+    err.errors = errors;
+     // Set status code to 400 (Bad Request)
+    err.status = 400;
+    err.title = "Bad request.";
+    // Pass error to Express error handler
+    return next(err);
+  }
 
-    next();
+  // If no validation errors, move to the next middleware/route handler
+  next();
 };
 
-// Validate review creation or update
-const validateReview = [
-    check('review')
-        .notEmpty()
-        .withMessage('Review text is required'),
-    check('stars')
-        .isInt({ min: 1, max: 5 })
-        .withMessage('Stars must be an integer from 1 to 5'),
-    handleValidationErrors
-];
-
+// Export middleware so it can be reused across routes
 module.exports = {
-    handleValidationErrors,
-    validateReview
+  handleValidationErrors
 };

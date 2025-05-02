@@ -1,52 +1,51 @@
 // backend/db/models/reviewimage.js
-// manni's code
+
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../../config/database.js')[env];
-const db = {};
-// const { Model, Validator } = require('sequelize');
+// This model file defines the ReviewImage model and its associations
 
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class ReviewImage extends Model {
-    /*
-    - Helper method for defining associations.
-    - This method is not a part of Sequelize lifecycle.
-    - The `models/index` file will call this method automatically.
-    */
+    
+    // This method is called automatically by models/index.js
+
     static associate(models) {
-      // define association here
-      ReviewImage.belongsTo(
-        models.Review,
-        {
+      // Each review image is linked to one review
+      ReviewImage.belongsTo( models.Review, {
+        // Foreign key to review
           foreignKey: 'reviewId',
-          onDelete: 'CASCADE' // Delete image when review is deleted
+          // Delete image if associated review is deleted
+          onDelete: 'CASCADE' 
         });
     }
   }
+
+  // Initialize ReviewImage model and define its attributes and validations
   ReviewImage.init({
     reviewId: {
-      type: DataTypes.INTEGER, // Image URL
+      // Links to Review model
+      type: DataTypes.INTEGER,
+      // Required field
       allowNull: false
     },
     url: {
+      // Image URL string
       type: DataTypes.STRING, 
+      // Required field
       allowNull: false,
       validate: {
-        notEmpty: true, // URL must not be empty
-        isUrl: true // Must be a valid URL
+        // URL must not be empty
+        notEmpty: true, 
+        // Must be a valid URL format
+        isUrl: true 
       }
     },
   }, {
+    // Sequelize instance
     sequelize,
+    // Model name
     modelName: 'ReviewImage',
   });
   return ReviewImage;

@@ -1,108 +1,104 @@
 // backend/db/models/user.js
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const bcrypt = require('bcryptjs');
-const Validator = require('validator');
 
+'use strict';
 
+// This model file define the User model which stiores user information including credentials
+// Includes validations and relationships with other models like spot and review
 
-module.exports = (sequelize) => {
+const { Model, Validator } = require('sequelize');
+
+module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+
+    // Called automatically by models/index.js
+
     static associate(models) {
-      // Define associations here
-    }
-    
-    toSafeObject() {
-      const { id, username, email } = this;
-      return { id, username, email };
-    }
-
-    validatePassword(password) {
-      console.log("bcrypt.compareSync typeof this.hashedPassword:", typeof this.hashedPassword);
-      return bcrypt.compareSync(password, this.hashedPassword.toString());
-    }
-
-    static getCurrentUserById(id) {
-      return User.scope('currentUser').findByPk(id);
-    }
-
-    static async login( credential, password ) {
-      console.log("LOGIN DEBUG:", credential, password); // debuggin line 
-      
-      const { Op } = require('sequelize');  
-      let user;
-
-      if (Validator.isEmail(credential)) {
-        user = await User.scope('loginUser').findOne({ where: { email: credential } });
-      } else {
-        user = await User.scope('loginUser').findOne({ where: { username: credential } });
-      }
-
-      if (user && user.validatePassword(password)) {
-        return await User.scope('currentUser').findByPk(user.id);
-      }
-
-      return null;
-    }
-
-    static async signup({ username, email, password }) {
-      const hashedPassword = bcrypt.hashSync(password, 10);
-      const user = await User.create({
-        username,
-        email,
-        hashedPassword,
+      // A user can own many spots 
+      User.hasMany(models.Spot, {
+        foreignKey: 'ownerId',
+        onDelete: 'CASCADE',
       });
 
-      return await User.scope('currentUser').findByPk(user.id);
+      // A user can lave many reviews
+      User.hasMany(models.Review, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      });
     }
   }
 
+  // Initialize User model and define its attributes and validations
   User.init(
     {
-      username: {
+      firstName: {
+        // Users first name
+        type: DataTypes.STRING,
+        // Required field
+        allowNull: false,
+        validate: {
+          // Cannot be empty
+          notEmpty: true
+        }
+      },
+      lastName: {
+        // Users last name
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
+      username: {
+        // Users unique username
+        type: DataTypes.STRING,
+        allowNull: false,
+        // Cannot be reused
         unique: true,
         validate: {
+          // Username must be a min of 4 and max of 30 characters
           len: [4, 30],
-          isNotEmail(value) {
+          isNotEmail(value) { // Username cannnot be an email
             if (Validator.isEmail(value)) {
-              throw new Error("Cannot be an email.");
+              throw new Error('Cannot be an email.');
             }
-          }
-        }
+          },
+        },
       },
       email: {
+        // Users email address
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
+          // Email must be a min of 3 and max of 256 characters
           len: [3, 256],
-          isEmail: true
-        }
+          // Email must be unique/valid
+          isEmail: true,
+        },
       },
       hashedPassword: {
-        type: DataTypes.STRING,
+        // Users stored hashed password
+        type: DataTypes.STRING.BINARY,
         allowNull: false,
         validate: {
-          len: [60, 60]
-        }
-      }
+          // Password must be 60 characters
+          len: [60, 60],
+        },
+      },
     },
     {
+      // Sequelize instance
       sequelize,
+      // Model name
       modelName: 'User',
       defaultScope: {
-        attributes: { exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'] }
-      },
-      scopes: {
-        currentUser: {
-          attributes: { exclude: ['hashedPassword'] }
+        attributes: {
+          // Hides sensitive info from the default query
+          exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
         },
-        loginUser: {
-          attributes: ['id', 'username', 'email', 'hashedPassword'] }
-      }
-    }
+      },
+    } 
   );
-
   return User;
 };
+
