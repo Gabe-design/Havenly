@@ -45,6 +45,24 @@ export const login = ({ credential, password }) => async(dispatch) => {
     return res;
 };
 
+// This is the signup thunk POST /api/users that the backend route uses to sign up a user.
+export const signup = ( user ) => async ( dispatch ) => {
+    // This gets the user details needed for signup
+    const { username, firstName, lastName, email, password } = user;
+    
+    // This sends the signup request to the backend /api/users
+    const res = await csrfFetch( "/api/users", {
+        method: "POST", 
+        body: JSON.stringify({ username, firstName, lastName, email, password })
+    });
+
+    // This gets the user data from the res body
+    const data = await res.json();
+    // This updates the redux store with the new session user
+    dispatch(setUser( data.user ));
+    return res;
+};
+
 // Thunk action to restore session user if logged in
 export const restoreUser = () => async (dispatch) => {
     const response = await csrfFetch("/api/session");
