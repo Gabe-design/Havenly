@@ -5,3 +5,5 @@ Backend processes it and sends back a response
 That response is then used to dispatch another action like receiveData(data)
 Redux updates the store
 React sees the store changed and re-renders */
+
+2 commits per day Required
