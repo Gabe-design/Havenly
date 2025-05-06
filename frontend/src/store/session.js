@@ -13,15 +13,19 @@ const REMOVE_USER = 'session/removeUser';
 
 // creates an action object that describe what happened
 // Takes a user object and returns a action to store a user
-const setUser = ( user ) => ({
-    type: SET_USER,
-    payload: user
-});
+const setUser = ( user ) => {
+    return {
+        type: SET_USER,
+        payload: user
+    }
+};
 
 // Will return a action taht removes a user
-const removeUser = () => ({
-    type: REMOVE_USER
-});
+const removeUser = () => {
+    return {
+        type: REMOVE_USER
+    }
+};
 
 // These are thunk actions 
 
@@ -29,7 +33,7 @@ const removeUser = () => ({
 // The login thunk to send POST request to /api/session with credentials
 export const login = ({ credential, password }) => async(dispatch) => {
     // Sends login credentials to backend by csrfFetch
-    const res = await csrfFetch( 'api/session', {
+    const res = await csrfFetch( "api/session", {
         method: 'POST',
         body: JSON.stringify({ credential, password })
     });
@@ -48,17 +52,21 @@ const initialState = { user: null };
 
 // These is the reducer function
 
-// This decides how the redux state should change based on the action dispatched
-export default function sessionReducer( state = initialState, action ) {
-    switch( action.type ) {
+// Reducer to handle the session state based on actions
+const sessionReducer = (state = initialState, action) => {
+    switch (action.type) {
         // Sets the user to the one from the action payload(logged in)
         case SET_USER:
-            return { user: action.payload };
+            return { ...state, user: action.payload };
         // This resets the user to null/undefined(logged out)
         case REMOVE_USER:
-            return { user: null };
+             return { ...state, user: null };
         // Now if the action is not known, it will return the current state unchanged
         default: return state;
-
     }
-}
+};
+
+
+export default sessionReducer;
+// Export actions for testing/debugging in dev
+export { setUser, removeUser };

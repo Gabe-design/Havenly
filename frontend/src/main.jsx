@@ -13,7 +13,7 @@ import configureStore from './store';
 // Handles the CSRF tokens
 import { restoreCSRF, csrfFetch } from './store/csrf';
 // Imports the session login and logout actions
-import * as sessionActions from './store/session'; 
+import * as sessionActions from './store/session'; // <-- ADD THIS LINE
 
 // This creates the redux store
 const store = configureStore();
@@ -27,7 +27,7 @@ if (import.meta.env.MODE !== 'production') {
   window.csrfFetch = csrfFetch;
   window.store = store;
   // For testing login
-  window.sessionActions = sessionActions;
+  window.sessionActions = sessionActions; // <-- ADD THIS LINE
 }
 
 // Starts the react app and gives it access to redux 
