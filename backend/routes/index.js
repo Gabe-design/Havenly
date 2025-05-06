@@ -33,8 +33,10 @@ if (process.env.NODE_ENV === 'production') {
 
 // CSRF endpoint to restore the CSRF token and send it as a cookie and in Json
 router.get("/api/csrf/restore", (req, res) => {
-  res.cookie("XSRF-TOKEN", req.csrfToken());
-  res.status(200).json({ "XSRF-Token": req.csrfToken() });
+  // So the token is called once and not twice
+  const csrfToken = req.csrfToken();
+  res.cookie("XSRF-TOKEN", csrfToken );
+  res.status(200).json({ "XSRF-Token": csrfToken });
 });
 
 //  Log all the routes
