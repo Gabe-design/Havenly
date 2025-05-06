@@ -27,3 +27,8 @@ export async function csrfFetch(url, options = {}) {
   // next promise chain
   return res;
 }
+
+// will call the custom csrfFetch function with /api/csrf/restore as the url parameter
+export function restoreCSRF() {
+    return csrfFetch('/api/csrf/restore');
+  }
