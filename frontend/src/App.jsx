@@ -1,6 +1,9 @@
 // frontend/src/App.jsx
 
 //import React from "react";
+
+// Importing the login form page component
+import LoginFormPage from './components/LoginFormPage';
 // Importing routign tools from the react router
 import {
   createBrowserRouter,
@@ -9,8 +12,6 @@ import {
 } 
 from "react-router-dom";
 
-// Importing the login form page component
-import LoginFormPage from "./components/LoginFormPage/LoginFormPage";
 // Creating a home component to show on the root path
 const Home = () => <h1>Welcome!</h1>;
 // Sets up the application routes

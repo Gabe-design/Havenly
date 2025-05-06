@@ -4,6 +4,7 @@ import /*React,*/ { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
+import './LoginForm.css';
 
 // This displays a login form and handles login logic
 function LoginFormPage() {
