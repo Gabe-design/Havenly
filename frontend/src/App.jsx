@@ -5,7 +5,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from './store/session';
-
+// Importing the signup form page component
+import SignupFormPage from './components/SignupFormPage';
 // Importing the login form page component
 import LoginFormPage from './components/LoginFormPage';
 // Importing routign tools from the react router
@@ -38,7 +39,7 @@ function Layout() {
   );
 }
 
-// Sets up the application routes
+// This sets up the application routes
 const router = createBrowserRouter([
   {
     // This is the root layout that handles user restoration
@@ -55,6 +56,12 @@ const router = createBrowserRouter([
         path: '/login',
         // This will show the login form
         element: <LoginFormPage />
+      },
+      {
+        // This is the signup route
+        path: '/signup',
+        // This will show the signup form
+        element: <SignupFormPage />
       }
     ]
   }
