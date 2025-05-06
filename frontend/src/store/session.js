@@ -45,6 +45,15 @@ export const login = ({ credential, password }) => async(dispatch) => {
     return res;
 };
 
+// Thunk action to restore session user if logged in
+export const restoreUser = () => async (dispatch) => {
+    const response = await csrfFetch("/api/session");
+    const data = await response.json();
+    // This adds the session user back to store after a refresh
+    dispatch(setUser(data.user));
+    return response;
+};
+
 // These is the intial state
 
 // The intial session state when a user is not logged in =
@@ -65,6 +74,8 @@ const sessionReducer = (state = initialState, action) => {
         default: return state;
     }
 };
+
+
 
 
 export default sessionReducer;
