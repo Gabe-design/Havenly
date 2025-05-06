@@ -1,102 +1,114 @@
-/* frontend/src/components/LoginFormPage/LoginForm.css*/
+/* frontend/src/components/LoginFormPage/LoginForm.css */
 
-/* Havenly login form design */
+/* The css styles for Havenly backrounds */
 
 body {
-    /* This removes default browser spacing */
+    /* Removes default spacing */
     margin: 0;
     padding: 0;
-    /* For a more soft gradient */
-    background: linear-gradient(to bottom right, #e0f2fe, #f0f9ff);
-    /* For a more modern clean font */
-    font-family: 'Segoe UI', sans-serif;
-    /* Deep blue text color */
-    color: #1e3a8a;
+    /* For a simple font */
+    font-family: Arial, sans-serif;
 }
 
+/* This is the styles for the main login form */
 section {
-    /* This keeps form narrow and centered */
-    max-width: 420px;
-     /* This pushes down from top and centers horizontally */
-    margin: 80px auto;
-     /* Adds internal space */
-    padding: 2.75rem;
-    /* This rounds all corners */
-    border-radius: 1.5rem;
-     /* This adds a white form background */
-    background-color: #ffffff;
-    /* For a more small shadow */
-    box-shadow: 0 20px 40px rgba( 0, 0, 0, 0.08 );
-     /* for a more soft blue border */
-    border: 1px solid #dbeafe;
-    /* Adds a nice animation when hovering */
-    transition: box-shadow 0.3s ease;
+    /* This sets a max width for a better readability */
+    max-width: 400px;
+    /* This is the center form on the page with spaceing */
+    margin: 60px auto;
+    /* This adds spacing inside the form */
+    padding: 24px;
+    /* This makes the form have rounded corners */
+    border-radius: 12px;
+    /* This gives the form a white backround */
+    background-color: white;
+    /* This adds a blue border around the form */
+    border: 1px solid blue;
+    /* This adds a shadow */
+    box-shadow: 0 4px 12px rgba( 0, 0, 0, 0.1 );
 }
 
-section:hover {
-    /* Adds larger shadow on hover */
-    box-shadow: 0 25px 60px rgba( 0, 0, 0, 0.1 );
-}
-
+/* This is the styles for the main heading */
 h1 {
+    /* This is to ecnter the title text */
     text-align: center;
-    /* This adds a bigger headline */
-    font-size: 1.8rem;
-     /* Adds a space below */
-    margin-bottom: 2rem;
-    /* Adds a darker blue */
-    color: #1e40af;
-    /* Adds bold */
-    font-weight: 700;
+    /* This uses a hopefully navy blue color */
+    color: navy;
+    /* This adds a spacing under the heading */
+    margin-bottom: 24px;
 }
 
+/* This styles the form structure */
 form {
+    /* This stacks the form fields vertically */
     display: flex;
     flex-direction: column;
-    /* Adds a space between each field */
-    gap: 1.25rem;
 }
 
+/* These are the label styles */
+label {
+    /* This is the below the label */
+    margin-bottom: 8px;
+    /* This makes the label text bold */
+    font-weight: bold;
+    /* This is a dark blue */
+    color: darkblue;
+}
+
+/* These are the field input styles */
 input {
-    /* This styles input fields to be a more modern and user friendly */
-    padding: 0.85rem;
-    font-size: 1rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 0.75rem;
-    background-color: #f8fbff;
-    transition: border 0.2s ease, box-shadow 0.2s ease;
+    /* This adds padding inside the inputs */
+    padding: 10px;
+    /* This adds space below each input */
+    margin-bottom: 16px;
+    /* This is a blueish grey border */
+    border: 1px solid #365882;
+    /* This rounds the corners a little */
+    border-radius: 8px;
+    /* This sets the font size */
+    font-size: 16px;
 }
 
+/* This is the style for input when selected */
 input:focus {
-    /* This adds a glowing blue ouline when the user clicks into a field */
+    /* This removes a default blue glow */
     outline: none;
-    border-color: #60a5fa;
-    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+    /* This highlights the border in a sky blue color */
+    border-color: skyblue; 
 }
 
+/* These are the button styles */
 button {
-    padding: 0.85rem;
-     /* Adds a bright blue color */
-    background-color: #3b82f6;
+    /* This adds padding inside the button */
+    padding: 10px;
+    /* This makes the color sky blue */
+    background-color: skyblue;
+    /* This makes text white */
     color: white;
+    /* This removes the default border */
     border: none;
-    font-size: 1.05rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
+    /* This rounds the corners a little */
+    border-radius: 8px;
+    /* This is the font size */
+    font-size: 8px;
+    /* This makes the mouse turn to a pointer finger */
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
+/* This adds a hover effect on button */
 button:hover {
-    /* Adds slightly darker color on hover */
-    background-color: #2563eb;
+    /* This adds a slight darker blue when hovered */
+    background-color: rgb(89, 188, 227); 
 }
 
+/* This is the error message styles */
 p {
-    /* A red color for errors */
-    color: #ef4444;
-    font-size: 0.9rem;
-    margin-top: -0.5rem;
-    margin-bottom: 0.5rem;
-    text-align: left;
+    /* Making the color red for more pop */
+    color: red;
+    /* This makes the font smaller for errrors */
+    font-size: 14px;
+    /* This pulls the text closer to input */
+    margin-bottom: -10px;
+    /* This adds a space before the next element */
+    margin-bottom: 10px;
 }
