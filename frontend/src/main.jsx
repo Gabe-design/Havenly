@@ -9,6 +9,8 @@ const store = configureStore();
 
 if (import.meta.env.MODE !== 'production') {
   window.store = store;
+  window.csrfFetch = csrfFetch;
+  restoreCSRF();
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
