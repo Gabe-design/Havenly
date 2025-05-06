@@ -13,7 +13,7 @@ const REMOVE_USER = 'session/removeUser';
 
 // creates an action object that describe what happened
 // Takes a user object and returns a action to store a user
-const setUser = (user) => ({
+const setUser = ( user ) => ({
     type: SET_USER,
     payload: user
 });
@@ -44,12 +44,12 @@ export const login = ({ credential, password }) => async(dispatch) => {
 // These is the intial state
 
 // The intial session state when a user is not logged in =
-const intialState = { user: null };
+const initialState = { user: null };
 
 // These is the reducer function
 
 // This decides how the redux state should change based on the action dispatched
-export default function sessionReducer( state = intialState, action ) {
+export default function sessionReducer( state = initialState, action ) {
     switch( action.type ) {
         // Sets the user to the one from the action payload(logged in)
         case SET_USER:
@@ -58,7 +58,7 @@ export default function sessionReducer( state = intialState, action ) {
         case REMOVE_USER:
             return { user: null };
         // Now if the action is not known, it will return the current state unchanged
-        return state;
+        default: return state;
 
-    };
-};
+    }
+}
