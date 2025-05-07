@@ -28,7 +28,7 @@ const Home = () => (
   <h1>Havenly.</h1>;
   <h2>Your Haven - Redefined - Heavenly.</h2>
   </>
-);
+)
 
 // The layout component ensures user is restored before rendering 
 function Layout() {
