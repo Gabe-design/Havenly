@@ -9,11 +9,11 @@ import { useSelector } from 'react-redux';
 // A profile button for logged in users
 import ProfileButton from './ProfileButton';
 // Modal button 
-import OpenModalButton from '../OpenModalButton';
+// import OpenModalButton from '../OpenModalButton';
 // The LoginFormModal
-import LoginFormModal from '../LoginFormModal';
+// import LoginFormModal from '../LoginFormModal';
 // The SignupFormModal
-import SignupFormModal from '../SignupFormModal/SignupFormModal';
+// import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './Navigation.css';
 
 // Takes in prop isloaded to make sure the session info is ready
@@ -35,6 +35,7 @@ function Navigation({ isLoaded }) {
   */
 
   // This decides what links to show (depends on if a person is logged in or not)
+  /*
   const sessionLinks = sessionUser ? (
     // If a person is logged in it will show the profile and logout button
     <>
@@ -59,13 +60,19 @@ function Navigation({ isLoaded }) {
       </li>
     </>
   );
-  // This is the layou of the nav bar
+  */
+
+  // This is the layout of the nav bar
   return (
     <ul>
       <li>
-        <NavLink to = "/" >Home</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
-      { isLoaded && sessionLinks }
+      {isLoaded && (
+        <li>
+          <ProfileButton user={sessionUser} />
+        </li>
+      )}
     </ul>
   );
 }

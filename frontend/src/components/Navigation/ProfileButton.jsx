@@ -10,6 +10,12 @@ import { FaUserCircle } from 'react-icons/fa';
 import * as sessionActions from '../../store/session';
 // This is to track the dropdown open and close
 import { useState, useEffect, useRef } from "react";
+// Imports OpenModalButton
+import OpenModalButton from "../OpenModalButton";
+// Imports LoginFormModal
+import LoginFormModal from "../LoginFormModal";
+// Imports SignupFormModal
+import SignupFormModal from "../SignupFormModal";
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -19,30 +25,29 @@ function ProfileButton({ user }) {
   
     // Toggles dropdown
     const toggleMenu = (e) => {
-        // Keep click from bubbling up to document and triggering closeMenu
         e.stopPropagation();
-        setShowMenu(!showMenu);
+        setShowMenu( !showMenu );
     };
 
     // Closes the dropdown
     useEffect(() => {
-        if (!showMenu) return;
+        if ( !showMenu ) return;
     
-        const closeMenu = (e) => {
-          if (ulRef.current && !ulRef.current.contains(e.target)) {
-            setShowMenu(false);
+        const closeMenu = ( e ) => {
+          if ( !ulRef.current.contains( e.target )) {
+            setShowMenu( false );
           }
         };
     
-        document.addEventListener('click', closeMenu);
+        document.addEventListener( 'click', closeMenu );
     
-        return () => document.removeEventListener('click', closeMenu);
-    }, [showMenu]);
+        return () => document.removeEventListener( 'click', closeMenu );
+    }, [ showMenu ]);
 
     // This is the logout button to logout a user
-    const logout = (e) => {
+    const logout = ( e ) => {
       e.preventDefault();
-      dispatch(sessionActions.logout());
+      dispatch( sessionActions.logout());
     };
 
     // This is the to toggel hidden menu
@@ -51,21 +56,39 @@ function ProfileButton({ user }) {
     (showMenu ? "" : " hidden");
   
     return (
-        // This is the profile button
-      <>
-        <button onClick={toggleMenu}>
-          <FaUserCircle />
-        </button>
-        <ul className = { ulClassName } ref = { ulRef }>
-          <li>{ user.username }</li>
-          <li>{ user.firstName } { user.lastName }</li>
-          <li>{ user.email }</li>
-          <li>
-            <button onClick = { logout }>Log Out</button>
-          </li>
-        </ul>
-      </>
-      );
+        <>
+          <button onClick = { toggleMenu }>
+            <FaUserCircle />
+          </button>
+          <ul className = { ulClassName } ref={ ulRef }>
+            {user ? (
+              <>
+                <li>{ user.username }</li>
+                <li>{ user.firstName } { user.lastName }</li>
+                <li>{ user.email }</li>
+                <li>
+                  <button onClick = { logout }>Log Out</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <OpenModalButton
+                    buttonText = "Log In"
+                    modalComponent = { <LoginFormModal />}
+                  />
+                </li>
+                <li>
+                  <OpenModalButton
+                    buttonText = "Sign Up"
+                    modalComponent={ <SignupFormModal />}
+                  />
+                </li>
+              </>
+            )}
+          </ul>
+        </>
+    );
 }
 
 // Exports Profile for nav
