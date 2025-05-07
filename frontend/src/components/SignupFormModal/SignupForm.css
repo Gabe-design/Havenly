@@ -41,6 +41,15 @@ h1 {
     margin-bottom: 24px;
 }
 
+h2 {
+    /* So the text is centered */
+    text-align: center;
+    /* To make the color navy */
+    color: navy;
+    /* Adds a space below the heading */
+    margin-bottom: 24px;
+}
+
 /* This is the form style */
 form {
     /* This stacks the form vertically */

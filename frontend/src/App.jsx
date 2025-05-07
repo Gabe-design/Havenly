@@ -23,7 +23,12 @@ import {
 from "react-router-dom";
 
 // Creating a home component to show on the root path
-const Home = () => <h1>Welcome!</h1>;
+const Home = () => (
+  <>
+  <h1>Havenly.</h1>;
+  <h2>Your Haven - Redefined - Heavenly.</h2>
+  </>
+);
 
 // The layout component ensures user is restored before rendering 
 function Layout() {
