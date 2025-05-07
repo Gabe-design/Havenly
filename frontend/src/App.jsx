@@ -5,12 +5,14 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from './store/session';
+// Importing modal button 
+// import OpenModalButton from './components/OpenModalButton';
 // Importing the Nav
 import Navigation from './components/Navigation';
 // Importing the signup form page component
 import SignupFormPage from './components/SignupFormPage';
 // Importing the login form page component
-import LoginFormPage from './components/LoginFormPage';
+// import LoginFormModal from './components/LoginFormModal';
 // Importing routign tools from the react router
 import {
   createBrowserRouter,
@@ -27,17 +29,17 @@ const Home = () => <h1>Welcome!</h1>;
 function Layout() {
   const dispatch = useDispatch();
   // This tracks if session restore is done
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [ isLoaded, setIsLoaded ] = useState( false );
 
   useEffect(() => {
     // This runs once on mount
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+    dispatch( sessionActions.restoreUser()).then(() => setIsLoaded(true));
+  }, [ dispatch ]);
 
   return (
     <>
       < Navigation isLoaded = { isLoaded } /> 
-      {isLoaded && <Outlet />} {/* Only show content when user is restored */}
+      { isLoaded && <Outlet /> } {/* Only show content when user is restored */}
     </>
   );
 }
@@ -53,12 +55,6 @@ const router = createBrowserRouter([
         path: '/',
         // This will show Welcome!
         element: <Home />
-      },
-      {
-        // This is the login route
-        path: '/login',
-        // This will show the login form
-        element: <LoginFormPage />
       },
       {
         // This is the signup route

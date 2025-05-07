@@ -8,12 +8,16 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // A profile button for logged in users
 import ProfileButton from './ProfileButton';
+// Modal button 
+import OpenModalButton from '../OpenModalButton';
+// The LoginFormModal
+import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
 
 // Takes in prop isloaded to make sure the session info is ready
 function Navigation({ isLoaded }) {
     // This gets the current user from the redux store
-  const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector( state => state.session.user );
   // sends actions to the redux store
 
   /* 
@@ -40,7 +44,10 @@ function Navigation({ isLoaded }) {
     // If theres nobody logged in it will show the lingks to log in or sign up
     <>
       <li>
-        <NavLink to = "/login" >Log In</NavLink>
+        <OpenModalButton
+          buttonText="Log In"
+          modalComponent={<LoginFormModal />}
+        />
       </li>
       <li>
         <NavLink to = "/signup" >Sign Up</NavLink>

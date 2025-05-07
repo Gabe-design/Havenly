@@ -13,7 +13,8 @@ import configureStore from './store';
 // Handles the CSRF tokens
 import { restoreCSRF, csrfFetch } from './store/csrf';
 // Imports the session login and logout actions
-import * as sessionActions from './store/session'; // <-- ADD THIS LINE
+import * as sessionActions from './store/session';
+import { ModalProvider, Modal } from './context/Modal';
 
 // This creates the redux store
 const store = configureStore();
@@ -30,11 +31,13 @@ if (import.meta.env.MODE !== 'production') {
   window.sessionActions = sessionActions; // <-- ADD THIS LINE
 }
 
-// Starts the react app and gives it access to redux 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ModalProvider>
+      <Provider store={store}>
+        <App />
+        <Modal />
+      </Provider>
+    </ModalProvider>
   </React.StrictMode>
 );
