@@ -71,7 +71,13 @@ a:hover {
     /* Adding space between the lines */
     padding: 6px 0;
     /* For darker text */
-    color: rgb(56, 56, 56)
+    color: rgb(56, 56, 56);
+    /* Adds a pointer cursor */
+    cursor: pointer;
+}
+
+.profile-dropdown li:hover {
+    background-color: rgb(245, 244, 244);
 }
 
 /* This is the styling for the logout button */

@@ -11,11 +11,13 @@ import * as sessionActions from '../../store/session';
 // This is to track the dropdown open and close
 import { useState, useEffect, useRef } from "react";
 // Imports OpenModalButton
-import OpenModalButton from "../OpenModalButton";
+// import OpenModalButton from "../OpenModalButton";
 // Imports LoginFormModal
 import LoginFormModal from "../LoginFormModal";
 // Imports SignupFormModal
 import SignupFormModal from "../SignupFormModal";
+// Imports OpenModalMenuItem
+import OpenModalMenuItem from "./OpenModalMenuItem";
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -44,10 +46,13 @@ function ProfileButton({ user }) {
         return () => document.removeEventListener( 'click', closeMenu );
     }, [ showMenu ]);
 
+    const closeMenu = () => setShowMenu( false );
+
     // This is the logout button to logout a user
     const logout = ( e ) => {
       e.preventDefault();
       dispatch( sessionActions.logout());
+      closeMenu();
     };
 
     // This is the to toggel hidden menu
@@ -73,15 +78,17 @@ function ProfileButton({ user }) {
             ) : (
               <>
                 <li>
-                  <OpenModalButton
-                    buttonText = "Log In"
+                  <OpenModalMenuItem
+                    itemText = "Log In"
                     modalComponent = { <LoginFormModal />}
+                    onItemClick = { closeMenu }
                   />
                 </li>
                 <li>
-                  <OpenModalButton
-                    buttonText = "Sign Up"
+                  <OpenModalMenuItem
+                    itemText = "Sign Up"
                     modalComponent={ <SignupFormModal />}
+                    onItemClick = { closeMenu }
                   />
                 </li>
               </>
