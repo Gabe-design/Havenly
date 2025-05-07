@@ -98,4 +98,4 @@ const sessionReducer = (state = initialState, action) => {
 
 export default sessionReducer;
 // Export actions for testing/debugging in dev
-export { setUser, removeUser };
+export { setUser, removeUser, logout };
