@@ -65,12 +65,26 @@ export const signup = ( user ) => async ( dispatch ) => {
 
 // Thunk action to restore session user if logged in
 export const restoreUser = () => async (dispatch) => {
-    const response = await csrfFetch("/api/session");
-    const data = await response.json();
+    // This asks the server if theres a user logged in
+    const res = await csrfFetch("/api/session");
+    const data = await res.json();
     // This adds the session user back to store after a refresh
     dispatch(setUser(data.user));
-    return response;
+    return res;
 };
+
+// This thunk handles the logging out of a user
+export const logout = () => async ( dispatch ) => {
+    // This sends a DELETE request to tell the server to log out
+    const res = await csrfFetch( '/api/session', {
+        method: 'DELETE'
+    });
+
+    // This removes the user
+    dispatch( removeUser());
+
+    return res;
+}
 
 // These is the intial state
 
