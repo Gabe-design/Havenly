@@ -12,6 +12,8 @@ import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
 // The LoginFormModal
 import LoginFormModal from '../LoginFormModal';
+// The SignupFormModal
+import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './Navigation.css';
 
 // Takes in prop isloaded to make sure the session info is ready
@@ -46,11 +48,14 @@ function Navigation({ isLoaded }) {
       <li>
         <OpenModalButton
           buttonText="Log In"
-          modalComponent={<LoginFormModal />}
+          modalComponent={< LoginFormModal />}
         />
       </li>
       <li>
-        <NavLink to = "/signup" >Sign Up</NavLink>
+        <OpenModalButton
+          buttonText="Sign Up"
+          modalComponent={< SignupFormModal />}
+        />
       </li>
     </>
   );

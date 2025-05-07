@@ -1,6 +1,6 @@
 // frontend/src/components/SignupFormPage/index.js
 
 // Index.js for cleaner imports :)
-import SignupFormPage from './SignupFormPage';
+import SignupFormModal from './SignupFormModal';
 
-export default SignupFormPage;
+export default SignupFormModal;

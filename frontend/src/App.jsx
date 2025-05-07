@@ -10,9 +10,9 @@ import * as sessionActions from './store/session';
 // Importing the Nav
 import Navigation from './components/Navigation';
 // Importing the signup form page component
-import SignupFormPage from './components/SignupFormPage';
+// import SignupFormPage from './components/SignupFormModal';
 // Importing the login form page component
-// import LoginFormModal from './components/LoginFormModal';
+// import LoginFormPage from './components/LoginFormModal';
 // Importing routign tools from the react router
 import {
   createBrowserRouter,
@@ -32,9 +32,10 @@ function Layout() {
   const [ isLoaded, setIsLoaded ] = useState( false );
 
   useEffect(() => {
-    // This runs once on mount
-    dispatch( sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [ dispatch ]);
+    dispatch(sessionActions.restoreUser()).then(() => {
+      setIsLoaded(true)
+    });
+  }, [dispatch]);
 
   return (
     <>
@@ -56,12 +57,6 @@ const router = createBrowserRouter([
         // This will show Welcome!
         element: <Home />
       },
-      {
-        // This is the signup route
-        path: '/signup',
-        // This will show the signup form
-        element: <SignupFormPage />
-      }
     ]
   }
 ]);

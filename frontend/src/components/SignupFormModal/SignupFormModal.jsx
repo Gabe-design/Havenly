@@ -1,16 +1,18 @@
-// frontend/src/components/SignupFormPage/SignupFormPage.jsx
+// frontend/src/components/SignupFormModal/SignupFormModal.jsx
 
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useDispatch /* useSelector*/ } from 'react-redux';
+// import { Navigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
+import { useModal } from '../../context/Modal';
 
-function SignupFormPage() {
+function SignupFormModal() {
     const dispatch = useDispatch();
 
     // This gets the current user from the redux store ( if the user is logged in, it will redirect )
-    const sessionUser = useSelector(( state ) => state.session.user );
+    // const sessionUser = useSelector(( state ) => state.session.user );
+    const { closeModal } = useModal();
 
     // To track the values typed into each input 
     const [ email, setEmail ] = useState( "" );
@@ -24,7 +26,7 @@ function SignupFormPage() {
     const [ errors, setErrors ] = useState({});
 
     // If the user is already logged in, it will redirect them to the home page
-    if ( sessionUser ) return <Navigate to = "/" replace = { true } />;
+    // if ( sessionUser ) return <Navigate to = "/" replace = { true } />;
 
     // When the form is submitted this will handle the logic
     const handleSubmit = (e) => {
@@ -39,7 +41,9 @@ function SignupFormPage() {
             // Dispatchs the signup action with the form data
             return dispatch(
                 sessionActions.signup({ email, username, firstName, lastName, password })
-            ).catch(async (res) => { 
+            )
+            .then( closeModal )
+            .catch(async ( res ) => { 
                 // If the signup fails it will try to get and show error messages
                 const data = await res.json();
                 if ( data?.errors ) setErrors( data.errors );
@@ -55,7 +59,7 @@ function SignupFormPage() {
     return (
         <>
       <h1>Sign Up</h1>
-      <form onSubmit = {handleSubmit }>
+      <form onSubmit = { handleSubmit }>
         { /* Email Input Field */ }
         <label>
           Email
@@ -63,6 +67,7 @@ function SignupFormPage() {
             type = "text"
             value = { email }
             onChange = {( e ) => setEmail( e.target.value )}
+            // A required field to fill before submitting
             required
           />
         </label>
@@ -75,6 +80,7 @@ function SignupFormPage() {
             type = "text"
             value = { username }
             onChange = {( e ) => setUsername( e.target.value )}
+            // A required field to fill before submitting
             required
           />
         </label>
@@ -87,6 +93,7 @@ function SignupFormPage() {
             type = "text"
             value = { firstName }
             onChange = {( e ) => setFirstName( e.target.value )}
+            // A required field to fill before submitting
             required
           />
         </label>
@@ -99,6 +106,7 @@ function SignupFormPage() {
             type = "text"
             value = { lastName }
             onChange = {( e ) => setLastName( e.target.value )}
+            // A required field to fill before submitting
             required
           />
         </label>
@@ -111,6 +119,7 @@ function SignupFormPage() {
             type = "password"
             value = { password }
             onChange = {( e ) => setPassword ( e.target.value )}
+          // A required field to fill before submitting
             required
           />
         </label>
@@ -123,6 +132,7 @@ function SignupFormPage() {
             type = "password"
             value = { confirmPassword }
             onChange = {( e ) => setConfirmPassword( e.target.value )}
+            // A required field to fill before submitting
             required
           />
         </label>
@@ -135,4 +145,4 @@ function SignupFormPage() {
     );
 }
 
-export default SignupFormPage;
+export default SignupFormModal;
