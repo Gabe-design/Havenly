@@ -5,6 +5,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from './store/session';
+// Importing the Nav
+import Navigation from './components/Navigation';
 // Importing the signup form page component
 import SignupFormPage from './components/SignupFormPage';
 // Importing the login form page component
@@ -34,6 +36,7 @@ function Layout() {
 
   return (
     <>
+      < Navigation isLoaded = { isLoaded } /> 
       {isLoaded && <Outlet />} {/* Only show content when user is restored */}
     </>
   );

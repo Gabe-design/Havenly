@@ -7,7 +7,7 @@ body {
     /* This removes default margin/padding from browser */
     margin: 0;
     padding: 0;
-    /* Ligh blue color */
+    /* Sky blue color */
     background-color: skyblue;
     /* Simple font */
     font-family: Arial, sans-serif;
@@ -25,7 +25,7 @@ section {
     background-color: white;
     /* Rounds the corners */
     border-radius: 12px;
-    /* Adds light blue color */
+    /* Adds sky blue color */
     border: 1px solid skyblue;
     /* A litte bit of shadow */
     box-shadow: 0 40px 12px black;
@@ -35,7 +35,7 @@ section {
 h1 {
     /* so the heading is centered */
     text-align: center;
-    /* Dark blue title */
+    /*Navy blue title */
     color: navy;
     /* Adds a space below the heading */
     margin-bottom: 24px;
@@ -54,7 +54,7 @@ label {
     margin-bottom: 8px;
     /* This makes the label text bold */
     font-weight: bold;
-    /* This is a dark blue */
+    /* Making is a navy blue */
     color: navy;
 }
 
@@ -70,7 +70,7 @@ input {
     border-radius: 8px;
     /* This sets the font size */
     font-size: 16px;
-    /* Light blue color */
+    /* Sky blue color */
     color: skyblue;
 }
 

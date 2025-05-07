@@ -1,0 +1,103 @@
+/* frontend/src/components/Navigation/Navigation.css */
+
+/* The css styles for Havenly backrounds */
+
+ul {
+    /* This removes the default bullets */
+    list-style: none;
+    /* This show sthe nav items in a row */
+    display: flex;
+    /* This adds space between items */
+    gap: 16px;
+    /* This centers items*/
+    align-items: center;
+    /* This adds a space inside the nav */
+    padding: 16px;
+    /* Adding a sky blue */
+    background-color: skyblue;
+    /* This adds a lighter bottom */
+    border-bottom: 1px solid rgb(165, 213, 233);
+    /* This removes the default margins */
+    margin: 0;
+}
+
+/* This is nav item styles */
+li {
+
+}
+
+/* This is the nav link styles */
+a {
+    /* This removes the underline */
+    text-decoration: none;
+    /* dark navy linnk */
+    color: navy;
+    /* Making the text bold */
+    font-weight: bold;
+    /* For a transition while hovering */
+    transition: color 0.3s;
+}
+
+/* For when you hover over a link */
+a:hover {
+    /* Making it become a brighterish blue */
+    color: white;
+}
+
+/* This is for the dropdown box */
+.profile-dropdown {
+    /* This positions the dropdown box */
+    position: absolute;
+    /* Adding a little space from profile image */
+    margin-top: 8px;
+    /* Making a light backround */
+    background-color: white;
+    /* Adding skyblue border */
+    border: 1px solid skyblue;
+    /* Rounding corners */
+    border-radius: 8px;
+    /* inner padding */
+    padding: 12px;
+    /* Removing the default bullets */
+    list-style: none;
+    /* For a lil drop shadow */
+    box-shadow: 0 40px 12px black;
+
+}
+
+/* Each item in the dropdown */
+.profile-dropdown li {
+    /* Adding space between the lines */
+    padding: 6px 0;
+    /* For darker text */
+    color: rgb(56, 56, 56)
+}
+
+/* This is the styling for the logout button */
+.profile-dropdown button {
+    /* sky blue color */
+    background-color: skyblue;
+    /* Adding white text */
+    color: white;
+    /* No borders */
+    border: none;
+    /* Rounding corners */
+    border-radius: 6px;
+    /* Adding spacing inside the button */
+    padding: 6px 12px;
+    /* for pointer cursor */
+    cursor: pointer;
+    /* The size of text */
+    font-size: 14px;
+}
+
+/* For when hovering over the logout button */
+.profile-dropdown button:hover {
+    /* Going to make a slight darker blue */
+    background-color: rgb(89, 187, 225); 
+}
+
+/* To hide the dropdown */
+.hidden {
+    display: none;
+}
