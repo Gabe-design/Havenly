@@ -11,7 +11,6 @@ const REMOVE_USER = 'session/removeUser';
 
 // These are action creators 
 
-// creates an action object that describe what happened
 // Takes a user object and returns a action to store a user
 const setUser = ( user ) => {
     return {
@@ -108,8 +107,5 @@ const sessionReducer = (state = initialState, action) => {
 };
 
 
-
-
 export default sessionReducer;
-// Export actions for testing/debugging in dev
 export { setUser, removeUser };

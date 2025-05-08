@@ -59,14 +59,14 @@ function SignupFormModal() {
     return (
         <>
       <h1>Sign Up</h1>
-      <form onSubmit = { handleSubmit }>
+      <form onSubmit={ handleSubmit }>
         { /* Email Input Field */ }
         <label>
           Email
           <input
-            type = "text"
-            value = { email }
-            onChange = {( e ) => setEmail( e.target.value )}
+            type="text"
+            value={ email }
+            onChange={( e ) => setEmail( e.target.value )}
             // A required field to fill before submitting
             required
           />
@@ -77,9 +77,9 @@ function SignupFormModal() {
         <label>
           Username
           <input
-            type = "text"
-            value = { username }
-            onChange = {( e ) => setUsername( e.target.value )}
+            type="text"
+            value={ username }
+            onChange={( e ) => setUsername( e.target.value )}
             // A required field to fill before submitting
             required
           />
@@ -90,9 +90,9 @@ function SignupFormModal() {
         <label>
           First Name
           <input
-            type = "text"
-            value = { firstName }
-            onChange = {( e ) => setFirstName( e.target.value )}
+            type="text"
+            value={ firstName }
+            onChange={( e ) => setFirstName( e.target.value )}
             // A required field to fill before submitting
             required
           />
@@ -103,9 +103,9 @@ function SignupFormModal() {
         <label>
           Last Name
           <input
-            type = "text"
-            value = { lastName }
-            onChange = {( e ) => setLastName( e.target.value )}
+            type="text"
+            value={ lastName }
+            onChange={( e ) => setLastName( e.target.value )}
             // A required field to fill before submitting
             required
           />
@@ -116,9 +116,9 @@ function SignupFormModal() {
         <label>
           Password
           <input
-            type = "password"
-            value = { password }
-            onChange = {( e ) => setPassword ( e.target.value )}
+            type="password"
+            value={ password }
+            onChange={( e ) => setPassword ( e.target.value )}
           // A required field to fill before submitting
             required
           />
@@ -129,9 +129,9 @@ function SignupFormModal() {
         <label>
           Confirm Password
           <input
-            type = "password"
-            value = { confirmPassword }
-            onChange = {( e ) => setConfirmPassword( e.target.value )}
+            type="password"
+            value={ confirmPassword }
+            onChange={( e ) => setConfirmPassword( e.target.value )}
             // A required field to fill before submitting
             required
           />

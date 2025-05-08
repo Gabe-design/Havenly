@@ -9,11 +9,23 @@ import * as sessionActions from './store/session';
 // import OpenModalButton from './components/OpenModalButton';
 // Importing the Nav
 import Navigation from './components/Navigation';
+// Importing the SpotList
+import SpotList from './components/SpotList';
+// Importing the SpotDetail
+import SpotDetail from './components/SpotDetail';
+//Importing SpotFormPage
+import SpotFormPage from './components/SpotFormPage';
+// Importing ManageSoptsPage
+import ManageSpotsPage from './components/ManageSpotsPage';
+// Importing UpdateSpotForm
+import UpdateSpotForm from './components/UpdateSpotForm'
 // Importing the signup form page component
 // import SignupFormPage from './components/SignupFormModal';
 // Importing the login form page component
 // import LoginFormPage from './components/LoginFormModal';
 // Importing routign tools from the react router
+
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -23,12 +35,15 @@ import {
 from "react-router-dom";
 
 // Creating a home component to show on the root path
+
+/*
 const Home = () => (
   <>
   <h1>Havenly.</h1>;
   <h2>Your Haven - Redefined - Heavenly.</h2>
   </>
 )
+*/
 
 // The layout component ensures user is restored before rendering 
 function Layout() {
@@ -57,11 +72,25 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        // This is the main homepage route
         path: '/',
-        // This will show Welcome!
-        element: <Home />
+        element: <SpotList/>
       },
+      {
+        path: '/spots/new',
+        element: <SpotFormPage/>
+      },
+      {
+        path: '/spots/:id',
+        element: <SpotDetail/>
+      },
+      {
+        path: '/spots/:id/edit',
+        element: <UpdateSpotForm/>
+      },
+      {
+        path: '/spots/manage',
+        element: <ManageSpotsPage/>
+      }
     ]
   }
 ]);

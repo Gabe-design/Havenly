@@ -50,14 +50,14 @@ function LoginFormModal() {
     return (
     <section>
         <h1>Log In</h1>
-        <form onSubmit = { handleSubmit }>
+        <form onSubmit={ handleSubmit }>
             <label>
                 Username or Email
                 <input
-                type = "text"
-                value = { credential }
+                type="text"
+                value={ credential }
                 // This updates credential state
-                onChange = {( e ) => setCredential( e.target.value )}
+                onChange={( e ) => setCredential( e.target.value )}
                 // A required field to fill before submitting
                 required
                 />
@@ -66,8 +66,8 @@ function LoginFormModal() {
             <label>
                 Password
                 <input
-                type = "password"
-                value = { password }
+                type="password"
+                value={ password }
                 // This updates credential state
                 onChange={( e ) => setPassword( e.target.value )}
                 // A required field to fill before submitting
@@ -79,7 +79,7 @@ function LoginFormModal() {
 
             { errors.credential && <p>{ errors.credential }</p> }
     
-            <button type = "submit">Log In</button>
+            <button type="submit">Log In</button>
 
           </form>
         </section>
