@@ -141,6 +141,8 @@ p.error {
 
 /* Now this is the main spot tile wrapper */
 .spot-tile {
+    /*For the tooltip positioning */
+    position: relative;
     /* For the white backround */
     background-color: white;
     /* This is to round the corners */
@@ -155,6 +157,8 @@ p.error {
     box-shadow: 0 2px 6px black;
     /* This is going to add a scale zoom effect */
     transition: transform 0.2s;
+    /* This is for the pointer cursor */
+    cursor: pointer;
 }
 
 /* This is going to make the tile zoom slight when hovered */
@@ -192,6 +196,31 @@ p.error {
 /* This will make the spot name in bold */
 .spot-name {
     font-weight: bold ;
+    /* This is for the tooltip */
+    position: relative;
+}
+
+/*This is for the tooltip text */
+.spot-tile::after {
+    /* the text */
+    content: attr( data-name );
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: black;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* So it shows the tooltip on hover */
+.spot-tile:hover::after {
+    display: block;
 }
 
 /* The colors of the star will be a blue, going with that havenly theme */

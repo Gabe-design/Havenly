@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/ModalContext.jsx"
 // Thunk action
 import { createSpot } from '../../store/spots.js';
 // Styles
@@ -13,6 +14,7 @@ import './SpotForm.css'
 function SpotFormPage() {
     const dispatch = useDispatch();
     const nav = useNavigate();
+    const { closeModal } = useModal();
 
     // These are to track whats typed
     const [ country, setCountry ] = useState( '' );
@@ -23,7 +25,6 @@ function SpotFormPage() {
     const [ name, setName ] = useState( '' );
     const [ price, setPrice ] = useState( '' );
     const [ previewImage, setPreviewImage ] = useState( '' );
-
     // This will have any errors from the backend
     const [ errors, setErrors ] = useState({});
     // This will run when create spot is clicked
@@ -63,7 +64,7 @@ function SpotFormPage() {
             if ( data?.errors ) {
                 setErrors( data.errors );
             } else {
-                
+                closeModal();
                 // This is if the create spot works, it will take the user to the new spots details
                 nav( `/spots/${ data.id }` );
 

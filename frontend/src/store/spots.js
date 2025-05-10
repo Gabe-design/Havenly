@@ -53,15 +53,17 @@ const removeSpot = ( spotId ) => {
 export const fetchSpots = () => async ( dispatch ) => {
     const res = await csrfFetch( "/api/spots" );
     const data = await res.json();
-    dispatch( setSpots( data.spots ));
+    console.log( "api response:", data );
+    console.log( "data.Spots:", data.Spots );
+    dispatch( setSpots( data.Spots ));
     return res;
 }
 
 // This thunk will get the current users spots
 export const fetchUserSpots = () => async ( dispatch ) => {
     const res = await csrfFetch( '/api/spots/current' );
-    const data = await res.json;
-    dispatch( setSpots( data.spots ));
+    const data = await res.json();
+    dispatch( setSpots( data.Spots ));
     return res;
 }
 
@@ -121,6 +123,14 @@ const spotsReducer = ( state = initialState, action ) => {
             })
 
             return spotsState;
+        }
+
+        // This adds spots
+        case ADD_SPOT: {
+            return {
+                ...state,
+                [ action.payload.id ]: action.payload
+            }
         }
         
         // To update a spot

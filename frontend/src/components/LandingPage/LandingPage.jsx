@@ -19,6 +19,7 @@ function LandingPage() {
     const spots = useSelector( state => state.spots );
     // This makes object to an array
     const spotArr = spots ? Object.values( spots ) : [];
+    console.log( "SPOT ARRAY:", spotArr);
 
     // load all spots
     useEffect(() => {
@@ -26,11 +27,13 @@ function LandingPage() {
 
     }, [ dispatch ]);
 
+    if ( !spotArr.length ) return <div>Loading Havens...Loading Havens...</div>;
+
     // This will render each spot as a tile
     return (
         <div className = "spot-list-container">
             { spotArr.map( spot => (
-                <Link key={ spot.id } to={ `/spots/${ spot.id }`} className="spot-tile">
+                <Link key={ spot.id } to={ `/spots/${ spot.id }`} className="spot-tile" data-name={ spot.name }>
                     <div className="spot-img-wrapper">
                         <img src={ spot.previewImage } alt={ spot.name }/>
                     </div>
