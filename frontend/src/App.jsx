@@ -10,7 +10,7 @@ import * as sessionActions from './store/session';
 // Importing the Nav
 import Navigation from './components/Navigation';
 // Importing the SpotList
-import SpotList from './components/SpotList';
+import LandingPage from './components/LandingPage';
 // Importing the SpotDetail
 import SpotDetail from './components/SpotDetail';
 //Importing SpotFormPage
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <SpotList/>
+        element: <LandingPage/>
       },
       {
         path: '/spots/new',

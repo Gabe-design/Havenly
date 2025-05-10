@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useDispatch /*useSelector*/ } from 'react-redux';
 // import { Navigate } from 'react-router-dom';
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../context/ModalContext";
 import * as sessionActions from '../../store/session';
 import './LoginForm.css';
 

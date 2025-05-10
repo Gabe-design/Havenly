@@ -5,7 +5,7 @@ import { useDispatch /* useSelector*/ } from 'react-redux';
 // import { Navigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
-import { useModal } from '../../context/Modal';
+import { useModal } from '../../context/ModalContext';
 
 function SignupFormModal() {
     const dispatch = useDispatch();

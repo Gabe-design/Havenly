@@ -14,7 +14,9 @@ import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 // Imports the session login and logout actions
 import * as sessionActions from './store/session';
-import { ModalProvider, Modal } from './context/Modal';
+import { ModalProvider } from './context/ModalContext';
+import { Modal } from './context/Modal';
+
 
 // This creates the redux store
 const store = configureStore();
@@ -28,16 +30,16 @@ if (import.meta.env.MODE !== 'production') {
   window.csrfFetch = csrfFetch;
   window.store = store;
   // For testing login
-  window.sessionActions = sessionActions; // <-- ADD THIS LINE
+  window.sessionActions = sessionActions;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ModalProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ModalProvider>
         <App />
         <Modal />
-      </Provider>
-    </ModalProvider>
+      </ModalProvider>
+    </Provider>
   </React.StrictMode>
 );

@@ -1,13 +1,8 @@
-// frontend/src/context/Modal.jsx
-
-//import { useRef, useState, useContext, createContext } from 'react';
-import ReactDOM from 'react-dom';
-import { useContext } from 'react';
-import { ModalContext } from './ModalContext';
-import './Modal.css';
+// frontend/src/context/ModalContext.js
 
 
-/*
+import { useRef, useState, useContext, createContext } from 'react';
+
 const ModalContext = createContext();
 
 export function ModalProvider({ children }) {
@@ -43,22 +38,6 @@ export function ModalProvider({ children }) {
     </>
   );
 }
-*/
 
-export function Modal() {
-  const { modalRef, modalContent, closeModal } = useContext(ModalContext);
-  // If there is no div referenced by the modalRef or modalContent is not a
-  // truthy value, render nothing:
-  if (!modalRef || !modalRef.current || !modalContent) return null;
-
-  // Render the following component to the div referenced by the modalRef
-  return ReactDOM.createPortal(
-    <div id="modal">
-      <div id="modal-background" onClick={ closeModal } />
-      <div id="modal-content">{ modalContent }</div>
-    </div>,
-    modalRef.current
-  );
-}
-
-// export const useModal = () => useContext( ModalContext );
+export const useModal = () => useContext( ModalContext );
+export { ModalContext };

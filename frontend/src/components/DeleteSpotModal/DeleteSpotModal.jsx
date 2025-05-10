@@ -2,7 +2,7 @@
 
 // The tools 
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../context/ModalContext";
 import { deleteSpot } from "../../store/spots";
 // Styles
 import "./DeleteSpot.css"

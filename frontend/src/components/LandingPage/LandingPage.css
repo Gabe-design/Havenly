@@ -1,4 +1,4 @@
-/* frontend/src/components/SpotList/SpotList.css */
+/* frontend/src/components/LandingPage/LandingPage.css */
 
 /* The css styles for Havenly backrounds */
 
@@ -126,4 +126,75 @@ p.error {
     margin-bottom: -10px;
     /* This adds a space before the next element */
     margin-bottom: 10px;
+}
+
+/* This if the landing page grid*/
+.spot-list-container {
+    /* This makes the grid layout */
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax( 250px, 1fr));
+    /* This is for space */
+    gap: 24px;
+    /* This is for padding around */
+    padding: 24px;
+}
+
+/* Now this is the main spot tile wrapper */
+.spot-tile {
+    /* For the white backround */
+    background-color: white;
+    /* This is to round the corners */
+    border-radius: 12px;
+    /* This stops the overflow */
+    overflow: hidden;
+    /* This stops underline from the text */
+    text-decoration: none;
+    /* This keeps the black color */
+    color: black;
+    /* This adds a small shadow */
+    box-shadow: 0 2px 6px black;
+    /* This is going to add a scale zoom effect */
+    transition: transform 0.2s;
+}
+
+/* This is going to make the tile zoom slight when hovered */
+.spot-tile:hover {
+    transform: scale( 1.02 );
+}
+
+/* This will wrap and size the preview img */
+.spot-img-wrapper img {
+    /* This will make the image stretch to its full width */
+    width: 100%;
+    /* This will set a consistent hieght for the tile */
+    height: 200px;
+    /* This is going to crop and fill image areas */
+    object-fit: cover;
+}
+
+/* This is the wrapper for all the spot text */
+.spot-tile-text {
+    /*This will add padding inside the text block */
+    padding: 12px;
+}
+
+/* This will be text blocks inside the tiles */
+.spot-location, 
+.spot-name,
+.spot-price, 
+.spot-rating {
+    /* this is going to add space below each text block */
+    margin-bottom: 6px;
+    /* This will set the text size */
+    font-size: 14px;
+}
+
+/* This will make the spot name in bold */
+.spot-name {
+    font-weight: bold ;
+}
+
+/* The colors of the star will be a blue, going with that havenly theme */
+.spot-rating i {
+    color: navy
 }

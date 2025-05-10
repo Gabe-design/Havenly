@@ -1,4 +1,4 @@
-// frontend/src/components/SpotList/SpotList.jsx
+// frontend/src/components/LandingPage/LandingPage.jsx
 
 // Tools from react
 import { useEffect } from 'react';
@@ -9,10 +9,10 @@ import {fetchSpots } from '../../store/spots';
 // To link the spot detail page
 import { Link } from 'react-router-dom';
 // Styles 
-import './SpotList.css'
+import './LandingPage.css'
 
 // This renders the homepage lsit
-function SpotList() {
+function LandingPage() {
     const dispatch = useDispatch();
     
     // Pulls all the spots
@@ -42,11 +42,11 @@ function SpotList() {
                              { spot.name }
                         </div>
                         <div className="spot-price">
-                             ${ spot.price }night
+                             ${ spot.price } <span>night</span>
                         </div>
                         <div className="spot-rating">
-                            <i className="fa fa-star" />
-                             { spot.avgRating ? spot.avgRating.toFixed(1) : 'New' }
+                            <i className="fa fa-star"/>
+                             { spot.avgRating ? ` ${spot.avgRating.toFixed(1)}` : ' New' }
                         </div>
                     </div>
 
@@ -57,4 +57,4 @@ function SpotList() {
 }
 
 // Export
-export default SpotList;
+export default LandingPage;
