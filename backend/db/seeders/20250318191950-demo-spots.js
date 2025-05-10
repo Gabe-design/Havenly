@@ -26,7 +26,7 @@ module.exports = {
         lat:  37.7645358,
         lng: -122.4730327,
         name: "App Academy",
-        description: "Place where web developers are created",
+        description: "Place where web developers are created.",
         price: 123.00,
       },
       {
@@ -38,7 +38,7 @@ module.exports = {
         lat: 32.7645358,
         lng: -150.4730327,
         name: "Mountain View",
-        description: "Great home to vacation close to the downtown denver area",
+        description: "Great home to vacation to and its close to the downtown denver area!",
         price: 200.00,
       },
       {
@@ -50,7 +50,7 @@ module.exports = {
         lat: 72.7645358,
         lng: 86.4730327,
         name: "Costal View",
-        description: "Small cottage close to new development near the collge",
+        description: "A scenic, beautiful costal view.",
         price: 145.00
       }
     ], 

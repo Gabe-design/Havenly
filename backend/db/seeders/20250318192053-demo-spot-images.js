@@ -18,32 +18,32 @@ module.exports = {
   await SpotImage.bulkCreate([
     {
       spotId: 1,
-      url: 'https://example.com/spot1-1.jpg',
+      url: 'https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       preview: true
     },
     {
       spotId: 1,
-      url: 'https://example.com/spot1-2.jpg',
+      url: 'http://example.com/spot1-2.jpg',
       preview: false
     },
     {
       spotId: 2,
-      url: 'https://example.com/spot2-1.jpg',
+      url: 'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       preview: true
     },
     {
       spotId: 2,
-      url: 'https://example.com/spot2-2.jpg',
+      url: 'https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       preview: false
     },
     {
       spotId: 3,
-      url: 'https://example.com/spot3-1.jpg',
+      url: 'https://images.pexels.com/photos/1488327/pexels-photo-1488327.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       preview: true
     },
     {
       spotId: 3,
-      url: 'https://example.com/spot3-2.jpg',
+      url: 'http://example.com/spot3-2.jpg',
       preview: false
     }
   ], 
