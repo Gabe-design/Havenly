@@ -68,6 +68,20 @@ function Navigation({ isLoaded }) {
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
+      
+      {/*This will only show if a user is loggin in*/}
+      { sessionUser && (
+        <div>
+            <li>
+            <NavLink to="/spots/new">Start Something Havenly</NavLink>
+        </li>
+        <li>
+            <NavLink to="/spots/manage">Manage Havens</NavLink>
+        </li>
+        </div>
+      )}
+
+      {/*Alwyas will show if a user is logged in*/}
       {isLoaded && (
         <li>
           <ProfileButton user={sessionUser} />

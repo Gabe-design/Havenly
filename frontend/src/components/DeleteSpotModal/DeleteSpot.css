@@ -1,0 +1,129 @@
+/* frontend/src/components/DeleteSpotModal/DeleteSpot.css */
+
+/* The css styles for Havenly backrounds */
+
+/* This is the basic page styling */
+body {
+    /* This removes default margin/padding from browser */
+    margin: 0;
+    padding: 0;
+    /* Sky blue color */
+    background-color: skyblue;
+    /* Simple font */
+    font-family: Arial, sans-serif;
+}
+
+/* This is the signup form container */
+section {
+    /* This sets the form to a resonable width */
+    max-width: 400px;
+    /* This centers the form page */
+    margin: 60px auto;
+    /* To add space inside the form box */
+    padding: 24px;
+    /* Make the backround white */
+    background-color: white;
+    /* Rounds the corners */
+    border-radius: 12px;
+    /* Adds sky blue color */
+    border: 1px solid skyblue;
+    /* A litte bit of shadow */
+    box-shadow: 0 40px 12px black;
+}
+
+/* This is the title style */
+h1 {
+    /* so the heading is centered */
+    text-align: center;
+    /*Navy blue title */
+    color: navy;
+    /* Adds a space below the heading */
+    margin-bottom: 24px;
+}
+
+h2 {
+    /* So the text is centered */
+    text-align: center;
+    /* To make the color navy */
+    color: navy;
+    /* Adds a space below the heading */
+    margin-bottom: 24px;
+}
+
+/* This is the form style */
+form {
+    /* This stacks the form vertically */
+    display: flex;
+    flex-direction: column;
+}
+
+/* These are the label styles */
+label {
+    /* This is the below the label */
+    margin-bottom: 8px;
+    /* This makes the label text bold */
+    font-weight: bold;
+    /* Making is a navy blue */
+    color: navy;
+}
+
+/* These are the field input styles */
+input {
+    /* This adds padding inside the inputs */
+    padding: 10px;
+    /* This adds space below each input */
+    margin-bottom: 16px;
+    /* This is a blueish grey border */
+    border: 1px solid #365882;
+    /* This rounds the corners a little */
+    border-radius: 8px;
+    /* This sets the font size */
+    font-size: 16px;
+    /* Sky blue color */
+    color: skyblue;
+}
+
+
+/* This highlights the input when clicked */
+input:focus {
+    /* This rmoves the default blue outline */
+    outline: none;
+    /* Adds a blue border */
+    border-color: blue;
+}
+
+/* This is the signup button style */
+button {
+    /* This adds padding inside the button */
+    padding: 10px;
+    /* This makes the color sky blue */
+    background-color: skyblue;
+    /* This makes text white */
+    color: white;
+    /* This removes the default border */
+    border: none;
+    /* This rounds the corners a little */
+    border-radius: 8px;
+    /* This is the font size */
+    font-size: 16px;
+    /* This makes the mouse turn to a pointer finger */
+    cursor: pointer;
+}
+
+/* This adds a hover effect on button */
+button:hover {
+    /* This adds a slight darker blue when hovered */
+    background-color: rgb(89, 188, 227); 
+}
+
+/* This is the error message styles */
+p.error {
+    /* Making the color red for more pop */
+    color: red;
+    /* This makes the font smaller for errrors */
+    font-size: 14px;
+    /* This pulls the text closer to input */
+    margin-bottom: -10px;
+    /* This adds a space before the next element */
+    margin-bottom: 10px;
+}

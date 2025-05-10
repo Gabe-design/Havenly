@@ -6,6 +6,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 // This deals with the login/logout session
 import sessionReducer from './session';
+// This will deal with the spots
+import spotsReducer from './spots';
 
 /* 
 Each key becomes a key in the redux store
@@ -13,7 +15,8 @@ This also puts all the reducers together in a single root reducer
 */
 const rootReducer = combineReducers({
   // ADD REDUCERS HERE
-  session: sessionReducer
+  session: sessionReducer,
+  spots: spotsReducer
 });
 
 // This sets up the middleware
