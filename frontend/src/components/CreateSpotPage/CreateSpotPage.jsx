@@ -1,4 +1,4 @@
-// frontend/src/componnets/SpotFormPage/SpotFormPage.jsx
+// frontend/src/componnets/CreateSpotPage/CreateSpotPage.jsx
 
 // React tools
 import { useState } from "react";
@@ -8,10 +8,10 @@ import { useModal } from "../../context/ModalContext.jsx"
 // Thunk action
 import { createSpot } from '../../store/spots.js';
 // Styles
-import './SpotForm.css'
+import './CreateSpot.css'
 
 // This will show the form to create a new spot 
-function SpotFormPage() {
+function CreateSpotPage() {
     const dispatch = useDispatch();
     const nav = useNavigate();
     const { closeModal } = useModal();
@@ -31,13 +31,37 @@ function SpotFormPage() {
     const handleSubmit = async ( e ) => {
         // Stops the page from reloading
         e.preventDefault();
-        // This resets errrors
-        setErrors({});
-
-        // Going to add validation errors for better design
+        // debbugging 
+        console.log( "Form submitted" );
+       // This is for the errors
         const validationErrors = {};
-        if ( description.length < 30 ) validationErrors.description = "Description must be at least 30 characters."
-        if ( isNaN( price ) || Number( price ) <= 0 ) validationErrors.price = "Price must be more than 0."
+        
+        // The required field checks in the form
+        if ( !country.trim()) validationErrors.country = "Country is required";
+        if ( !address.trim()) validationErrors.address = "Address is required";
+        if ( !city.trim()) validationErrors.city = "City is required";
+        if ( !state.trim()) validationErrors.state = "State is required";
+        if ( !name.trim()) validationErrors.name = "Title is required";
+        if ( !description.trim()) { 
+            validationErrors.description = "Description is required";
+
+        } else if ( description.length < 30 ) {
+            validationErrors.description = "Description must be at least 30 characters";
+
+        }
+        if ( !price || isNaN( price ) || Number( price ) <=0 ) {
+            validationErrors.price = "Price must be more than 0";
+        }
+
+        // Now this is the img url check
+        const validImageExtensions = /\.(png|jpg|jpeg)$/i;
+        if ( !previewImage.trim()) {
+            validationErrors.previewImage = "Preview Image URL is required";
+
+        } else if ( !validImageExtensions.test( previewImage )) {
+            validationErrors.previewImage = "Image URL needs to end in .png, .jpg, or .jpeg";
+        }
+
         // and if any errors exist, it will set them and stop the form from submitting
         if ( Object.keys( validationErrors ).length ) {
             setErrors( validationErrors );
@@ -53,8 +77,10 @@ function SpotFormPage() {
             state,
             description, 
             name, 
-            price, 
+            price,
             previewImage,
+            lat: 37.7749,
+            lng: -122.4194
         }
 
         try {
@@ -92,7 +118,7 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.country && <p> { errors.country }</p>}
+                { errors.country && <p className="error"> { errors.country }</p>}
 
                 {/*Address*/}
                 <label>
@@ -104,7 +130,7 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.address && <p> { errors.address }</p>}
+                { errors.address && <p className="error"> { errors.address }</p>}
 
                 {/*City*/}
                 <label>
@@ -116,7 +142,7 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.city && <p> { errors.city }</p>}
+                { errors.city && <p className="error"> { errors.city }</p>}
 
                 {/*State*/}
                 <label>
@@ -128,7 +154,7 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.state && <p> { errors.state }</p>}
+                { errors.state && <p className="error"> { errors.state }</p>}
 
                 {/*Preview img*/}
                 <label>
@@ -141,7 +167,7 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.previewImage && <p> { errors.previewImage }</p>}
+                { errors.previewImage && <p className="error"> { errors.previewImage }</p>}
 
                 {/*Title*/}
                 <label>
@@ -154,7 +180,7 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.name && <p> { errors.name }</p>}
+                { errors.name && <p className="error"> { errors.name }</p>}
 
                 {/*Description*/}
                 <label>
@@ -166,7 +192,7 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.description && <p> { errors.description }</p>}
+                { errors.description && <p className="error"> { errors.description }</p>}
 
                 {/*Price*/}
                 <label>
@@ -179,12 +205,12 @@ function SpotFormPage() {
                     required
                     />
                 </label>
-                { errors.price && <p> { errors.price }</p>}
+                { errors.price && <p className="error"> { errors.price }</p>}
 
                 {/*Submit button*/}
                 <button type="submit">Make It Havenly</button>
-                </form>
-                </section>
+            </form>
+        </section>
 
 
     )
@@ -192,4 +218,4 @@ function SpotFormPage() {
 
 
 // Export
-export default SpotFormPage;
+export default CreateSpotPage;

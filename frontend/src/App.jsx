@@ -12,11 +12,11 @@ import Navigation from './components/Navigation';
 // Importing the SpotList
 import LandingPage from './components/LandingPage';
 // Importing the SpotDetail
-import SpotDetail from './components/SpotDetail';
+import SpotDetailPage from './components/SpotDetailPage';
 //Importing SpotFormPage
-import SpotFormPage from './components/SpotFormPage';
+import CreateSpotPage from './components/CreateSpotPage';
 // Importing ManageSoptsPage
-import ManageSpotsPage from './components/ManageSpotsPage';
+import ManageSpotsForm from './components/ManageSpotsForm';
 // Importing UpdateSpotForm
 import UpdateSpotForm from './components/UpdateSpotForm'
 // Importing the signup form page component
@@ -77,11 +77,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/new',
-        element: <SpotFormPage/>
+        element: <CreateSpotPage/>
       },
       {
         path: '/spots/:id',
-        element: <SpotDetail/>
+        element: <SpotDetailPage/>
       },
       {
         path: '/spots/:id/edit',
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/manage',
-        element: <ManageSpotsPage/>
+        element: <ManageSpotsForm/>
       }
     ]
   }

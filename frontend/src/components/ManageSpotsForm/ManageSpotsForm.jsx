@@ -1,4 +1,4 @@
-// frontend/src/compenents/ManageSpotsPage/ManageSpotsPage.jsx
+// frontend/src/compenents/ManageSpotsForm/ManageSpotsForm.jsx
 
 //Tools
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
 
 // To show the spots owned by the current user
-function ManageSpotsPage() {
+function ManageSpotsForm() {
     const dispatch = useDispatch();
     const nav = useNavigate();
     // Pulls the spots from the store
@@ -73,4 +73,4 @@ function ManageSpotsPage() {
 }
 
 // Export
-export default ManageSpotsPage;
+export default ManageSpotsForm;

@@ -1,4 +1,4 @@
-// frontend/src/compenents/SpotDetail/SpotDetail.jsx
+// frontend/src/compenents/SpotDetailPage/SpotDetailPage.jsx
 
 // tools 
 import { useEffect } from "react";
@@ -10,7 +10,7 @@ import { fetchSpotById } from "../../store/spots";
 import './SpotDetail.css'
 
 // This shows the detials for a spot
-function SpotDetail() {
+function SpotDetailPage() {
     const dispatch = useDispatch();
     // gets the spot id
     const { id } = useParams();
@@ -98,4 +98,4 @@ function SpotDetail() {
 }
 
 // export
-export default SpotDetail;
+export default SpotDetailPage;

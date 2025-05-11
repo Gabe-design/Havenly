@@ -29,10 +29,10 @@ function DeleteSpotModal({ spotId }) {
             {/*The cancel and confirm buttons*/}
             <div className="delete-buttons">
                 <button onClick={ handleDelete } className="confirm-delete">
-                    Yes ( Delete Spot )
+                    Yes ( Delete Haven )
                 </button>
                 <button onClick={ handleCancel } className="cancel-delete">
-                    No ( Keep Spot )
+                    No ( Keep Haven )
                 </button>
             </div>
         </section>

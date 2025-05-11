@@ -71,21 +71,55 @@ export const fetchUserSpots = () => async ( dispatch ) => {
 export const fetchSpotById = ( id ) => async ( dispatch ) => {
     const res = await csrfFetch( `/api/spots/${ id }` );
     const data = await res.json();
-    dispatch( addSpot( data ));
+
+    // gets the image when creating new spot
+    const spotData = {
+    ...data.Spots,
+    previewImage: data.Spots.SpotImages?.find(img => img.preview)?.url || null
+    }
+
+    dispatch( addSpot( spotData ));
     return res;
 };
 
 // This thunk creates a new spot 
 export const createSpot = ( spot ) => async ( dispatch ) => {
-    const res = await csrfFetch( "/api/spots", {
-        method: "POST",
-        body: JSON.stringify( spot )
-    })
+    try {
+        const { previewImage, ...spotData } = spot;
 
-    const data = await res.json();
-    dispatch( addSpot( data ));
-    return res;
+        const res = await csrfFetch( "/api/spots", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify( spotData )
+        })
+
+        const createdSpot = await res.json();
+        if ( !res.ok ) return createSpot;
+
+        const imageRes = await csrfFetch( `/api/spots/${createdSpot.id}/images`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                url: previewImage,
+                preview: true,
+            }),
+        })
+
+        const imageData = await imageRes.json();
+
+        const fullSpot = {
+            ...createSpot,
+            previewImage: imageData.url,
+        }
+
+        dispatch( addSpot( fullSpot ));
+        return fullSpot;
+    } catch ( err ) {
+        console.error( "Create new spot error:", err );
+        throw err;
+    }
 };
+
 
 // This thunk updates the spot
 export const updateSpot = ( spot ) => async ( dispatch ) => {
