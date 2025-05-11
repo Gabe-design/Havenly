@@ -200,7 +200,7 @@ p.error {
     position: relative;
 }
 
-/*This is for the tooltip text */
+/*This is for the tooltip text in the corner */
 .spot-tile::after {
     /* the text */
     content: attr( data-name );
@@ -216,6 +216,35 @@ p.error {
     white-space: nowrap;
     pointer-events: none;
     z-index: 10;
+}
+
+
+
+/* For the tooltip text below the cursor */
+.floating-tooltip {
+    position: fixed;
+    background-color: black;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+    transform: translate( -46%, 27px );
+    text-align: center;
+}
+
+/* For the tooltip text below the cursor */
+.floating-tooltip::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX( -50% );
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid gray;
 }
 
 /* So it shows the tooltip on hover */

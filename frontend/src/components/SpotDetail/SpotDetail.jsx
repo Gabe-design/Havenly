@@ -16,6 +16,8 @@ function SpotDetail() {
     const { id } = useParams();
     // Gets the spot data
     const spot = useSelector( state => state.spots[ id ]);
+    const user = useSelector( state => state.session.user );
+    const reviews = spot?.reviews || [];
     // fetches spot details 
     useEffect(() => {
         dispatch( fetchSpotById( id ));
@@ -33,6 +35,12 @@ function SpotDetail() {
             <p className="spot-location">
                 location: { spot.city }, { spot.state }, { spot.country }
             </p>
+
+            {/* The rating and reviews count */}
+            <div className="spot-rating-summary">
+                <i className="fa fa-star" />
+                { spot.avgRating ? spot.avgRating.toFixed( 1 ) : 'New' } Star Rating - { reviews.length } review{ reviews.length !== 1 ? 's' : '' }
+            </div>
 
             {/*The spot image*/}
             <div className="spot-images">
@@ -62,6 +70,28 @@ function SpotDetail() {
                 <button onClick={() => alert( "Feature coming soon" )}>
                     Reserve
                 </button>
+            </div>
+
+            {/* The review button for logged in people*/}
+            { user && (
+                <button className="post-review-button">
+                    Post Your Review
+                </button>
+            )}
+
+            {/*This will be for the luist of reviews*/}
+            <div className="spot-reviews">
+                { reviews.map( review => (
+                    <div key={ review.id } className="review-item">
+                        <div className="review-header">
+                            <strong>{ review.User?.firstName }</strong>
+                            <span className="review-date">
+                                { new Date( review.createdAt ).toLocaleDateString( undefined, { month: 'long', year: 'numeric' })}
+                            </span>
+                        </div>
+                        <p className="review-text">{ review.review }</p>
+                    </div>
+                ))}
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {fetchSpots } from '../../store/spots';
 // To link the spot detail page
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 // Styles 
 import './LandingPage.css'
 
@@ -21,6 +22,13 @@ function LandingPage() {
     const spotArr = spots ? Object.values( spots ) : [];
     console.log( "SPOT ARRAY:", spotArr);
 
+    const [ tooltip, setTooltip ] = useState({
+        text: '',
+        x: 0,
+        y: 0,
+        visible: false
+    });
+
     // load all spots
     useEffect(() => {
         dispatch( fetchSpots());
@@ -31,24 +39,45 @@ function LandingPage() {
 
     // This will render each spot as a tile
     return (
+        <>
         <div className = "spot-list-container">
             { spotArr.map( spot => (
-                <Link key={ spot.id } to={ `/spots/${ spot.id }`} className="spot-tile" data-name={ spot.name }>
-                    <div className="spot-img-wrapper">
+               // <Link key={ spot.id } to={ `/spots/${ spot.id }`} className="spot-tile" data-name={ spot.name }> */
+                <Link
+                key={ spot.id }
+                to={ `/spots/${ spot.id }` }
+                className='spot-tile'
+                data-name={ spot.name }
+                onMouseEnter={ ( e ) => setTooltip({
+                    text: spot.name,
+                    x: e.clientX,
+                    y: e.clientY,
+                    visible: true
+                })}
+                onMouseMove={ ( e ) => setTooltip( prev =>({
+                    ...prev,
+                    x: e.clientX,
+                    y: e.clientY,
+                    
+                }))}
+                onMouseLeave={ () => setTooltip( prev => ({...prev, visible: false }))}
+                >
+                    <div className='spot-img-wrapper'>
                         <img src={ spot.previewImage } alt={ spot.name }/>
+                        <div className='spot-name-label'>{ spot.name }</div>
                     </div>
-                    <div className="spot-tile-text">
-                        <div className="spot-location"> 
+                    <div className='spot-tile-text'>
+                        <div className='spot-location'> 
                             {spot.city}, { spot.state }
                         </div>
-                        <div className="spot-name" title={ spot.name }>
+                        <div className='spot-name' title={ spot.name }>
                              { spot.name }
                         </div>
-                        <div className="spot-price">
+                        <div className='spot-price'>
                              ${ spot.price } <span>night</span>
                         </div>
-                        <div className="spot-rating">
-                            <i className="fa fa-star"/>
+                        <div className='spot-rating'>
+                            <i className='fa fa-star'/>
                              { spot.avgRating ? ` ${spot.avgRating.toFixed(1)}` : ' New' }
                         </div>
                     </div>
@@ -56,6 +85,15 @@ function LandingPage() {
                 </Link>
             ))}
         </div>
+        { tooltip.visible && (
+            <div 
+            className='floating-tooltip'
+            style={{ top: tooltip.y, left: tooltip.x }}
+            >
+            { tooltip.text }
+            </div>
+        )}
+        </>
     )
 }
 

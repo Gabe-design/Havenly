@@ -9,6 +9,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* Main reason so it sits above everything like tooltips */
+    z-index: 2000;
 }
   
 #modal-background {
@@ -21,6 +23,8 @@
 }
   
 #modal-content {
-    position: absolute;
+    position: relative;
     background-color: white;
+    z-index: 2000;
 }
+

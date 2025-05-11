@@ -127,3 +127,156 @@ p.error {
     /* This adds a space before the next element */
     margin-bottom: 10px;
 }
+
+/* The main spot detail wrapper */
+.spot-detail-container {
+    /* So the max width of the page is 1000px*/
+    max-width: 1000px;
+    /* to center the container*/
+    margin: 0 auto;
+    /* to add spacing */
+    padding: 24px;
+    /* So the backround is white*/
+    background-color: white;
+    /* to round the corners */
+    border-radius: 12px;
+    /* Makes the border sky blue to match my havenly theme*/
+    border: 1px solid skyblue;
+    /* Adds a shadow */
+    box-shadow: 0 8px 12px black;
+}
+
+/* This is for the rating and reviews count */
+.spot-rating-summary {
+    /* For a larger font */
+    font-size: 16px;
+    /* To make it bold */
+    font-weight: bold;
+    /* For the spacing below */
+    margin-bottom: 12px;
+    /* Navy color fo the theme */
+    color: navy;
+}
+
+/* This is for the spot images wrapper */
+.spot-images {
+    /* The space aboive and below the imgs */
+    margin: 16px 0;
+    /* so the image is centered */
+    text-align: center;
+}
+
+/* This is for the main spot image style */
+.preview-img {
+    /* The container width */
+    max-width: 100%;
+    /* So the corners are rounded */
+    border-radius: 12px;
+    /* To keep the hieght consistent */
+    height: auto;
+}
+
+/* Now this is for the description text */
+.spot-description {
+    /* For space above the description */
+    margin-top: 12px;
+    /* The font size */
+    font-size: 12px;
+    /* For readablility */
+    line-height: 1.5;
+}
+
+/* This is for the box for the reserve and price buttons */
+.spot-callout-box {
+    /* For space above */
+    margin-top: 20px;
+    /* to add padding inside */
+    padding: 16px;
+    /* for a little border */
+    border: 1px solid white;
+    /* To round the borders */
+    border-radius: 8px;
+    /* diplsay in a row */
+    display: flex;
+    /* The space between button and price/reserve */
+    justify-content: space-between;
+    /* So the button/reserve/price all align */
+    align-items: center;
+}
+
+/* Now this button inside of callout */
+.spot-callout-box button {
+    /* For havenly theme */
+    background-color: skyblue;
+    /*white text */
+    color: white;
+    /* Padding inside */
+    padding: 10px 16px;
+    /* font size */
+    font-size: 14px;
+    /* To remove the default border */
+    border: none;
+    /* To round the corners */
+    border-radius: 8px;
+    /* This is to change the cursor to pointer */
+    cursor: pointer;
+}
+
+/* For the hover */
+.spot-callout-box button:hover {
+    /* For a little bit of a darker blue on the hover */
+    background-color: rgb(87, 188, 231);
+}
+
+/* For the Review button */
+.post-review-button {
+    /* This is to add space above */
+    margin-top: 24px;
+    /* Navy color */
+    background-color: navy;
+    /* White text color */
+    color: white;
+    /* No border */
+    border: none;
+    /* To round the corners */
+    border-radius: 8px;
+    /* The font size */
+    font-size: 14px;
+    /* The pointer cursor */
+    cursor: pointer;
+}
+
+/* This is for the review list */
+.spot-reviews {
+    /* Space above reviews */
+    margin-top: 32px;
+
+}
+
+/* This is for each review */
+.review-item {
+    /* Adds a bottom border */
+    border-bottom: 1px solid white;
+    /* padding around the review */
+    padding: 12px 0;
+}
+
+/* So the name and date in reviews */
+.review-header {
+    /* The layout to seperate name and date */
+    display: flex;
+    /* To add space between name and date */
+    justify-content: space-between;
+    /* The usual font size */
+    font-size: 14px;
+    /* navy color */
+    color: navy;
+}
+
+/* Finally this is for the comment text inside a review */
+.review-text {
+    /* To add space above the text */
+    margin-top: 8px;
+    /* close to usaual font size */
+    font-size: 15px;
+}

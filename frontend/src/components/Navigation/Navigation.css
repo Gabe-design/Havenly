@@ -63,6 +63,8 @@ a:hover {
     list-style: none;
     /* For a lil drop shadow */
     box-shadow: 0 40px 12px black;
+    /* So things to overlap the dropdown */
+    z-index: 9999;
 
 }
 
