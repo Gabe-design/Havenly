@@ -24,7 +24,10 @@ function SpotDetailPage() {
     }, [ dispatch, id ]);
 
     // This will show a lodaing message when a spot is fetched
-    if (!spot) return <p>Loading...Loading...</p>;
+    if (!spot) return <p>Loading Havens...Loading Havens...</p>;
+
+    // Checks if the current user is the owner of the haven
+    const isOwner = user && spot.Owner && user.id === spot.Owner.id;
 
     return (
         <div className="spot-detail-container">
@@ -39,6 +42,7 @@ function SpotDetailPage() {
             {/* The rating and reviews count */}
             <div className="spot-rating-summary">
                 <i className="fa fa-star" />
+                {/* Adding this so itll show "New" if theres no reviews*/}
                 { spot.avgRating ? spot.avgRating.toFixed( 1 ) : 'New' } Star Rating - { reviews.length } review{ reviews.length !== 1 ? 's' : '' }
             </div>
 
@@ -72,11 +76,18 @@ function SpotDetailPage() {
                 </button>
             </div>
 
-            {/* The review button for logged in people*/}
-            { user && (
+            {/*Adding the review button for logged in people that are not the owner*/}
+            { user && !isOwner && (
                 <button className="post-review-button">
                     Post Your Review
                 </button>
+            )}
+
+            {/*Adding this is for the review button "Be the first to post a review!" if theres no reviews and not the owner*/}
+            {reviews.length === 0 && user && !isOwner && (
+                <p className="no-reviews-text">
+                    Be the first to post a review!
+                </p>
             )}
 
             {/*This will be for the luist of reviews*/}
@@ -86,7 +97,10 @@ function SpotDetailPage() {
                         <div className="review-header">
                             <strong>{ review.User?.firstName }</strong>
                             <span className="review-date">
-                                { new Date( review.createdAt ).toLocaleDateString( undefined, { month: 'long', year: 'numeric' })}
+                                { new Date( review.createdAt ).toLocaleDateString( undefined, { 
+                                    month: 'long', 
+                                    year: 'numeric' 
+                                })}
                             </span>
                         </div>
                         <p className="review-text">{ review.review }</p>
