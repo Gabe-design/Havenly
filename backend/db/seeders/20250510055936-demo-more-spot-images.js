@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       spotId: 6,
-      url: 'https://t.ly/_P23s',
+      url: 'https://cdn.pixabay.com/photo/2014/08/06/10/38/tunisia-411438_1280.jpg',
       preview: true
     },
     {
