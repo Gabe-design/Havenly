@@ -18,7 +18,7 @@ module.exports = {
   await SpotImage.bulkCreate([
     {
       spotId: 4,
-      url: 'https://shorturl.at/tz5Fg',
+      url: 'https://images.pexels.com/photos/16792627/pexels-photo-16792627/free-photo-of-facade-of-traditional-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       preview: true
     },
     {
@@ -28,7 +28,7 @@ module.exports = {
     },
     {
       spotId: 5,
-      url: 'https://shorturl.at/3dZ2R',
+      url: 'https://cdn.pixabay.com/photo/2019/12/16/05/08/opera-house-4698516_1280.jpg',
       preview: true
     },
     {
@@ -43,7 +43,7 @@ module.exports = {
     },
     {
       spotId: 6,
-      url: 'https://example.com/spot2-2.jpg',
+      url: 'https://cdn.pixabay.com/photo/2014/08/06/10/38/tunisia-411438_1280.jpg',
       preview: false
     },
     {
@@ -58,7 +58,7 @@ module.exports = {
     },
     {
       spotId: 8,
-      url: 'https://t.ly/3wlCQ',
+      url: 'https://cdn.pixabay.com/photo/2020/04/02/18/51/italy-4996326_1280.jpg',
       preview: true
     },
     {
