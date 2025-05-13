@@ -1,6 +1,6 @@
 // frontend/src/components/SpotFormPage/index.js
 
 // Index.js for cleaner imports :)
-import UpdateSpotForm from './UpdateSpotForm';
+import UpdateSpotPage from './UpdateSpotPage';
 
-export default UpdateSpotForm;
+export default UpdateSpotPage;

@@ -1,4 +1,4 @@
-// frontend/src/components/UpdateSpotForm/UpdateSpotForm.jsx
+// frontend/src/components/UpdateSpotPage/UpdateSpotPage.jsx
 
 // Tools
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import { updateSpot, fetchSpotById } from "../../store/spots.js"
 // Styles 
 import "./UpdateSpot.css";
 
-function UpdateSpotForm() {
+function UpdateSpotPage() {
     const dispatch = useDispatch();
     const nav = useNavigate();
     const { id } = useParams();
@@ -59,8 +59,34 @@ function UpdateSpotForm() {
 
         // Going to add validation errors for better design
         const validationErrors = {};
-        if ( description.length < 30 ) validationErrors.description = "Description must be at least 30 characters."
-        if ( isNaN( price ) || Number( price ) <= 0 ) validationErrors.price = "Price must be more than 0."
+        
+        // Code used in CreateSpotPage
+        // The required field checks in the form
+        if ( !country.trim()) validationErrors.country = "Country is required";
+        if ( !address.trim()) validationErrors.address = "Address is required";
+        if ( !city.trim()) validationErrors.city = "City is required";
+        if ( !state.trim()) validationErrors.state = "State is required";
+        if ( !name.trim()) validationErrors.name = "Title is required";
+        if ( !description.trim()) { 
+            validationErrors.description = "Description is required";
+
+        } else if ( description.length < 30 ) {
+            validationErrors.description = "Description must be at least 30 characters";
+
+        }
+        if ( !price || isNaN( price ) || Number( price ) <=0 ) {
+            validationErrors.price = "Price must be more than 0";
+        }
+
+        // Now this is the img url check
+        const validImageExtensions = /\.(png|jpg|jpeg)$/i;
+        if ( !previewImage.trim()) {
+            validationErrors.previewImage = "Preview Image URL is required";
+
+        } else if ( !validImageExtensions.test( previewImage )) {
+            validationErrors.previewImage = "Image URL needs to end in .png, .jpg, or .jpeg";
+        }
+
         // and if any errors exist, it will set them and stop the form from submitting
         if ( Object.keys( validationErrors ).length ) {
             setErrors( validationErrors );
@@ -77,13 +103,15 @@ function UpdateSpotForm() {
             previewImage,
             name,
             description,  
-            price
+            price,
+            lat: 37.7749,
+            lng: -122.4194
         }
 
         try {
             // Creates a new spot
-            const res = await dispatch( updateSpot( ...newSpot, id ));
-            const data = await res.json();
+            const res = await dispatch( updateSpot({ ...newSpot, id }));
+            const data = res;
             // This is if there is any validation errros it will show them
             if ( data?.errors ) {
                 setErrors( data.errors );
@@ -100,7 +128,7 @@ function UpdateSpotForm() {
     }
 
     // While the spot is loading, want it to say Loading Haven
-    if ( !spot ) return <p>Loading Haven...</p>;
+    if ( !spot ) return <p>Loading Haven...Please Wait...</p>;
 
     return (
         <section>
@@ -119,7 +147,7 @@ function UpdateSpotForm() {
                     required
                     />
                 </label>
-                { errors.country && <p> { errors.country }</p>}
+                { errors.country && <p className="error"> { errors.country }</p>}
 
                 {/*Address*/}
                 <label>
@@ -131,7 +159,7 @@ function UpdateSpotForm() {
                     required
                     />
                 </label>
-                { errors.address && <p> { errors.address }</p>}
+                { errors.address && <p className="error"> { errors.address }</p>}
 
                 {/*City*/}
                 <label>
@@ -143,7 +171,7 @@ function UpdateSpotForm() {
                     required
                     />
                 </label>
-                { errors.city && <p> { errors.city }</p>}
+                { errors.city && <p className="error"> { errors.city }</p>}
 
                 {/*State*/}
                 <label>
@@ -155,7 +183,7 @@ function UpdateSpotForm() {
                     required
                     />
                 </label>
-                { errors.state && <p> { errors.state }</p>}
+                { errors.state && <p className="error"> { errors.state }</p>}
 
                 {/*Preview img*/}
                 <label>
@@ -168,7 +196,7 @@ function UpdateSpotForm() {
                     required
                     />
                 </label>
-                { errors.previewImage && <p> { errors.previewImage }</p>}
+                { errors.previewImage && <p className="error"> { errors.previewImage }</p>}
 
                 {/*Title*/}
                 <label>
@@ -181,7 +209,7 @@ function UpdateSpotForm() {
                     required
                     />
                 </label>
-                { errors.name && <p> { errors.name }</p>}
+                { errors.name && <p className="error"> { errors.name }</p>}
 
                 {/*Description*/}
                 <label>
@@ -193,7 +221,7 @@ function UpdateSpotForm() {
                     required
                     />
                 </label>
-                { errors.description && <p> { errors.description }</p>}
+                { errors.description && <p className="error"> { errors.description }</p>}
 
                 {/*Price*/}
                 <label>
@@ -201,17 +229,19 @@ function UpdateSpotForm() {
                     <input
                     type="text"
                     value={ price }
-                    onChange={( e) => setPrice( e.target.value )}
+                    onChange={( e ) => setPrice( e.target.value )}
                     placeholder = "Set Your Price"
                     required
                     />
                 </label>
-                { errors.price && <p> { errors.price }</p>}
+                { errors.price && <p className="error"> { errors.price }</p>}
 
                 {/*Submit button*/}
-                <button type="submit">Make It Havenly</button>
-                </form>
-                </section>
+                <button type="submit">
+                    Make It Havenly
+                </button>
+            </form>
+        </section>
 
 
     )
@@ -219,4 +249,4 @@ function UpdateSpotForm() {
 
 
 // Export
-export default UpdateSpotForm;
+export default UpdateSpotPage;

@@ -82,6 +82,7 @@ export const fetchSpotById = ( id ) => async ( dispatch ) => {
     return res;
 };
 
+
 // This thunk creates a new spot 
 export const createSpot = ( spot ) => async ( dispatch ) => {
     try {
@@ -130,7 +131,7 @@ export const updateSpot = ( spot ) => async ( dispatch ) => {
 
     const data = await res.json();
     dispatch( updateSpotAction( data ));
-    return res;
+    return data;
 };
 
 // And this thunk deletes/removes the spot 
