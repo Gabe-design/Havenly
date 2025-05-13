@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       spotId: 6,
-      url: 'https://cdn.pixabay.com/photo/2014/08/06/10/38/tunisia-411438_1280.jpg',
+      url: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       preview: true
     },
     {
@@ -48,7 +48,7 @@ module.exports = {
     },
     {
       spotId: 7,
-      url: 'https://shorturl.at/flu6n',
+      url: 'https://cdn.pixabay.com/photo/2014/08/06/10/38/tunisia-411438_1280.jpg',
       preview: true
     },
     {
