@@ -1,29 +1,29 @@
 // backend/routes/api/session.js
 
-const express = require('express');
+const express = require( 'express' );
 // Sequelize for matching username/email
-const { Op } = require('sequelize');
+const { Op } = require( 'sequelize' );
 // For password comparison
-const bcrypt = require('bcryptjs');
+const bcrypt = require( 'bcryptjs' );
 // For request validation
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { check } = require( 'express-validator' );
+const { handleValidationErrors } = require( '../../utils/validation' );
 // Auth helpers
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser } = require( '../../utils/auth' );
 // User model
-const { User } = require('../../db/models');
+const { User } = require( '../../db/models' );
 
 const router = express.Router();
 
 // Middleware to validate login credentials in request body
 const validateLogin = [
-  check('credential')
+  check( 'credential' )
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Email or username is required"),
+    .withMessage( "Email or username is required" ),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage("Password is required"),
+    .withMessage( "Password is required" ),
     // Forwards errors to error-handling middleware
   handleValidationErrors
 ];
@@ -31,14 +31,14 @@ const validateLogin = [
 
 // Log in a User
 router.post(
-    '/', validateLogin, async (req, res, next) => {
+    '/', validateLogin, async ( req, res, next ) => {
         // credentials username or password
       const { credential, password } = req.body;
 
       // Find user by either username or email
       const user = await User.unscoped().findOne({
         where: {
-          [Op.or]: {
+          [ Op.or ]: {
             username: credential,
             email: credential
           }
@@ -47,13 +47,13 @@ router.post(
 
 
       // Validate user exists and password matches hash
-      if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
-        const err = new Error('Login failed');
+      if ( !user || !bcrypt.compareSync( password, user.hashedPassword.toString())) {
+        const err = new Error( 'Login failed' );
         err.status = 401;
         err.title = 'Login failed';
         err.errors = { credential:  "Invalid credentials" };
         // Sends error to error handler
-        return next(err);
+        return next( err );
       }
 
       // Remove sensitive data from response
@@ -66,7 +66,7 @@ router.post(
       };
 
       // Set the JWT cookkie
-      await setTokenCookie(res, safeUser);
+      await setTokenCookie( res, safeUser );
       // Send the user info to client
       return res.json({
         user: safeUser
@@ -79,7 +79,7 @@ router.post(
     '/',
     (_req, res) => {
       // Remove token cookie
-      res.clearCookie('token');
+      res.clearCookie( 'token' );
      return res.json({ message: 'success' });
     }
   );
@@ -87,10 +87,10 @@ router.post(
   // Restore session user from token
   router.get(
     '/',
-    (req, res) => {
+    ( req, res ) => {
       // check for user req
       const { user } = req;
-      if (user) {
+      if ( user ) {
         // User found on cookie
         const safeUser = {
           id: user.id,

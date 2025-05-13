@@ -4,14 +4,14 @@
 
 // This model file defines the ReviewImage model and its associations
 
-const { Model } = require('sequelize');
+const { Model } = require( 'sequelize' );
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = ( sequelize, DataTypes ) => {
   class ReviewImage extends Model {
     
     // This method is called automatically by models/index.js
 
-    static associate(models) {
+    static associate( models ) {
       // Each review image is linked to one review
       ReviewImage.belongsTo( models.Review, {
         // Foreign key to review

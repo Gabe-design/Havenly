@@ -2,20 +2,20 @@
 
 'use strict';
 
-const { Model } = require('sequelize');
+const { Model } = require( 'sequelize' );
 
 // define and export the booking model
-module.exports = (sequelize, DataTypes) => {
+module.exports = ( sequelize, DataTypes ) => {
   class Booking extends Model {
    
     // Define relationships between models
     // called automactically by sequelize\
 
-    static associate(models) {
+    static associate( models ) {
       // A booking belongs to one user
-      Booking.belongsTo(models.User, { foreignKey: 'userId' });
+      Booking.belongsTo( models.User, { foreignKey: 'userId' });
       // A booking belongs to one spot
-      Booking.belongsTo(models.Spot, { foreignKey: 'spotId' });
+      Booking.belongsTo( models.Spot, { foreignKey: 'spotId' });
     }
   }
 
@@ -49,9 +49,9 @@ module.exports = (sequelize, DataTypes) => {
           // Ensures valid date
           isDate: true, 
           // Custom validation to ensure end date is after start date
-          isAfterStart(value) {
-            if (value <= this.startDate) {
-              throw new Error('endDate must be after startDate');
+          isAfterStart( value ) {
+            if ( value <= this.startDate ) {
+              throw new Error( 'endDate must be after startDate' );
             }
           },
         },

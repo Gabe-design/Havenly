@@ -3,16 +3,16 @@
 'use strict';
 
 // Seeder to populate Spote table with sample data
-const { Spot, SpotImage } = require('../models'); 
+const { Spot, SpotImage } = require( '../models' ); 
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
+if ( process.env.NODE_ENV === 'production' ) {
   options.schema = process.env.SCHEMA;  // Set the schema in prod
 }
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up ( queryInterface, Sequelize ) {
    
     // Insert demo spot listings into the spots table
 
@@ -83,11 +83,11 @@ module.exports = {
   }); 
 },
 
-  async down (queryInterface, Sequelize) {
+  async down ( queryInterface, Sequelize ) {
 
     // Remove all entries from the Spots table
 
     options.tableName = 'Spots';
-    await queryInterface.bulkDelete(options, null, {});
+    await queryInterface.bulkDelete( options, null, {});
   }
 };

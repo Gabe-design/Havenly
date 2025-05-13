@@ -1,7 +1,7 @@
 //backend/config/database.js
 
 // Imports configuration settings from index.js in the same folder
-const config = require('./index');
+const config = require( './index' );
 
 // Exports the configuration object for different eviroments (dev and prod)
 module.exports = {

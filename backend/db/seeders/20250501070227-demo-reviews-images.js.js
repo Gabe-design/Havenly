@@ -3,17 +3,17 @@
 'use strict';
 
 // Seeder to populate the ReviewImages table with image URLs linked to reviews
-const { User, Spot, SpotImage, Review, ReviewImage } = require('../models'); 
+const { User, Spot, SpotImage, Review, ReviewImage } = require( '../models' ); 
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
+if ( process.env.NODE_ENV === 'production' ) {
   options.schema = process.env.SCHEMA;  // Set the schema in prod
 }
 
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up ( queryInterface, Sequelize ) {
     
     // Insert demo review images associated with seeded reviews into reviewImages table
     
@@ -48,11 +48,11 @@ module.exports = {
     });
   },
 
-    async down (queryInterface, Sequelize) {
+    async down ( queryInterface, Sequelize ) {
      
       // Remove all entries from ReviewImages table
 
       options.tableName = 'ReviewImages';
-      await queryInterface.bulkDelete(options, null, {});
+      await queryInterface.bulkDelete( options, null, {});
     }
   };

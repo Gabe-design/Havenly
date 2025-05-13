@@ -38,7 +38,7 @@ module.exports = {
         lat: 32.7645358,
         lng: -150.4730327,
         name: "Mountain View",
-        description: "Great home to vacation to and its close to the downtown denver area!",
+        description: "Great home to vacation near the mountains!",
         price: 200.00,
       },
       {

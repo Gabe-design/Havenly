@@ -5,16 +5,16 @@
 // This model file defines the SpotImage, which stores image URLs associated with a spot
 // Each image belongs to a single spot and can be marked as a preview image
 
-const { Model } = require('sequelize');
+const { Model } = require( 'sequelize' );
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = ( sequelize, DataTypes ) => {
   class SpotImage extends Model {
     
     // This method is called automatically by models/index.js
 
-    static associate(models) {
+    static associate( models ) {
       // Each image belongs to one spot
-      SpotImage.belongsTo(models.Spot, {
+      SpotImage.belongsTo( models.Spot, {
         // Link image to a spot
         foreignKey: 'spotId',
         // Delete image if associated spot is deleted

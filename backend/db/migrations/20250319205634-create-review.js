@@ -6,15 +6,15 @@
 // Includes text, star rating, and forgien keys linking spots and users
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
+if ( process.env.NODE_ENV === 'production' ) {
   options.schema = process.env.SCHEMA;  // Set the schema in prod
 }
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up( queryInterface, Sequelize ) {
     // Create the reviews table
-    await queryInterface.createTable('Reviews', {
+    await queryInterface.createTable( 'Reviews', {
       id: {
         // Cannot be null
         allowNull: false,
@@ -62,22 +62,22 @@ module.exports = {
         // Timestamp of creation
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal( 'CURRENT_TIMESTAMP' )
       },
       updatedAt: {
         // Timestamp of last update
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal( 'CURRENT_TIMESTAMP' )
       }
       // options is an object that contains the schema name
     }, options);
   },
-  async down(queryInterface, Sequelize) {
+  async down( queryInterface, Sequelize ) {
     // this will drop the Review table
     // Sets table name explicitly in options object
     options.tableName = 'Reviews';
     // Drops the reviews table using options object
-  return queryInterface.dropTable(options);
+  return queryInterface.dropTable( options );
   }
 };

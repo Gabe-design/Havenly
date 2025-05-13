@@ -5,15 +5,15 @@
 // This migration creates the SpotImages table in the db
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
+if ( process.env.NODE_ENV === 'production' ) {
   options.schema = process.env.SCHEMA;  // Set the schema in prod
 }
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up( queryInterface, Sequelize ) {
     // Table SpotImages
-    await queryInterface.createTable('SpotImages', {
+    await queryInterface.createTable( 'SpotImages', {
       id: {
         // Cannot be null
         allowNull: false, 
@@ -55,21 +55,21 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal( 'CURRENT_TIMESTAMP' )
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal( 'CURRENT_TIMESTAMP' )
       }
       // options is an object that contains the schema name
-  }, options);
+  }, options );
 },
-  async down(queryInterface, Sequelize) {
+  async down( queryInterface, Sequelize ) {
     // this will drop the SpotImages table
     // Sets table name explicitly in options object
     options.tableName = 'SpotImages';
-    return queryInterface.dropTable(options);
+    return queryInterface.dropTable( options );
     // Drops the SpotImages table using options object
   }
 };

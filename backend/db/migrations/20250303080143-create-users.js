@@ -6,15 +6,15 @@
 // For prod environments ( render ) the schema name must be set to use su-databases
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
+if ( process.env.NODE_ENV === 'production' ) {
   // set schema in prod for env varaibles
   options.schema = process.env.SCHEMA;  
 }
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up( queryInterface, Sequelize ) {
     // Creates the Users table with defined columns and options 
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable( 'Users', {
       id: {
         // This column cannot be null
         allowNull: false,
@@ -39,7 +39,7 @@ module.exports = {
       },
       username: {
         // Strings max length of 30 characters
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING( 30 ),
         // Required field
         allowNull: false,
         // Value must be unigue across the Users table
@@ -49,7 +49,7 @@ module.exports = {
       },
       email: {
         // Strings max length of 256 characters
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING( 256 ),
         // Reduired field
         allowNull: false,
         // Value must be unique across the Users table
@@ -73,7 +73,7 @@ module.exports = {
         // Date field
         type: Sequelize.DATE,
         // Default to the current timestamp 
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal( 'CURRENT_TIMESTAMP' )
       },
       updatedAt: {
         // Required field
@@ -81,17 +81,17 @@ module.exports = {
         // Date field
         type: Sequelize.DATE,
         // Default to the current timestamp
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal( 'CURRENT_TIMESTAMP' )
       }
     // options is an object that contains the schema name
-    }, options);
+    }, options );
   },
 
-  async down(queryInterface, Sequelize) {
+  async down( queryInterface, Sequelize ) {
     // this will drop the user table
     // Sets table name explicitly in options object
     options.tableName = "Users";
     // Drops the Users table using options object
-    return queryInterface.dropTable(options);
+    return queryInterface.dropTable( options );
   }
 };

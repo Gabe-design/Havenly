@@ -5,22 +5,22 @@
 // This model file define the User model which stiores user information including credentials
 // Includes validations and relationships with other models like spot and review
 
-const { Model, Validator } = require('sequelize');
+const { Model, Validator } = require( 'sequelize' );
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = ( sequelize, DataTypes ) => {
   class User extends Model {
 
     // Called automatically by models/index.js
 
-    static associate(models) {
+    static associate( models ) {
       // A user can own many spots 
-      User.hasMany(models.Spot, {
+      User.hasMany( models.Spot, {
         foreignKey: 'ownerId',
         onDelete: 'CASCADE',
       });
 
       // A user can lave many reviews
-      User.hasMany(models.Review, {
+      User.hasMany( models.Review, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
@@ -56,10 +56,10 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         validate: {
           // Username must be a min of 4 and max of 30 characters
-          len: [4, 30],
-          isNotEmail(value) { // Username cannnot be an email
-            if (Validator.isEmail(value)) {
-              throw new Error('Cannot be an email.');
+          len: [ 4, 30 ],
+          isNotEmail( value ) { // Username cannnot be an email
+            if ( Validator.isEmail( value )) {
+              throw new Error( 'Cannot be an email.' );
             }
           },
         },
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         validate: {
           // Email must be a min of 3 and max of 256 characters
-          len: [3, 256],
+          len: [ 3, 256 ],
           // Email must be unique/valid
           isEmail: true,
         },
@@ -82,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           // Password must be 60 characters
-          len: [60, 60],
+          len: [ 60, 60 ],
         },
       },
     },
@@ -94,7 +94,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultScope: {
         attributes: {
           // Hides sensitive info from the default query
-          exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+          exclude: [ 'hashedPassword', 'email', 'createdAt', 'updatedAt' ],
         },
       },
     } 

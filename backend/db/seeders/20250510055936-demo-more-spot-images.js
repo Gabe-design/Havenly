@@ -2,16 +2,16 @@
 'use strict';
 
 // Seeder to populate SpotImages table with demo inmages for each spot
-const { Spot, SpotImage, User } = require('../models'); 
+const { Spot, SpotImage, User } = require( '../models' ); 
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
+if ( process.env.NODE_ENV === 'production' ) {
   options.schema = process.env.SCHEMA; // Set the schema in prod
 }
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up ( queryInterface, Sequelize ) {
  
   // Insert demo images associated with specific spots into SpotImages table
 
@@ -43,7 +43,7 @@ module.exports = {
     },
     {
       spotId: 6,
-      url: 'https://cdn.pixabay.com/photo/2014/08/06/10/38/tunisia-411438_1280.jpg',
+      url: 'https://example.com/spot3-2.jpg',
       preview: false
     },
     {
@@ -53,7 +53,7 @@ module.exports = {
     },
     {
       spotId: 7,
-      url: 'https://example.com/spot2-2.jpg',
+      url: 'https://example.com/spot4-2.jpg',
       preview: false
     },
     {
@@ -63,7 +63,7 @@ module.exports = {
     },
     {
       spotId: 8,
-      url: 'https://example.com/spot3-2.jpg',
+      url: 'https://example.com/spot5-2.jpg',
       preview: false
     }
   ], 
@@ -72,11 +72,11 @@ module.exports = {
   });
 },
 
-  async down (queryInterface, Sequelize) {
+  async down ( queryInterface, Sequelize ) {
     
     // Remove all entries from SpotImages table
 
     options.tableName = 'SpotImages';
-    await queryInterface.bulkDelete(options, null, {});
+    await queryInterface.bulkDelete( options, null, {});
   }
 };

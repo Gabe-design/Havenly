@@ -4,16 +4,16 @@
 
 // This model file defines the Spot model and its associations
 
-const { Model } = require('sequelize');
+const { Model } = require( 'sequelize' );
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = ( sequelize, DataTypes ) => {
   class Spot extends Model {
     
     // Called automatically by models/index.js
 
-    static associate(models) {
+    static associate( models ) {
       // A sopt belongs to a specific user
-        Spot.belongsTo(models.User, {
+        Spot.belongsTo( models.User, {
           foreignKey: 'ownerId',
           onDelete: 'CASCADE'
         });
@@ -48,47 +48,47 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       // Address of the spot
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING( 255 ),
       allowNull: false,
       validate:
       {
         notEmpty: true,
-        len: [1, 255],
+        len: [ 1, 255 ],
       }
     },
     city: {
       // City where the spot is located
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING( 100 ),
       allowNull: false,
       validate:
       {
         notEmpty: true,
-        len: [1, 100],
+        len: [ 1, 100 ],
       }
     },
     state: {
       // State where the spot is located
-     type: DataTypes.STRING(50),
+     type: DataTypes.STRING( 50 ),
      allowNull: false,
      validate:
      {
        notEmpty: true,
-       len: [1, 50],
+       len: [ 1, 50 ],
      }
     },
     country: {
       // Country where the spot is located
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING( 50 ),
       allowNull: false,
       validate:
       {
         notEmpty: true,
-        len: [1, 50],
+        len: [ 1, 50 ],
       }
      },
     lat: {
       // Latitude of the spot
-    type: DataTypes.FLOAT,  // (10,7),
+    type: DataTypes.FLOAT,  // ( 10,7 ),
     allowNull: false,
     validate: {
       isFloat: true,
@@ -98,7 +98,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lng: {
       // Longitude of the spot 
-      type: DataTypes.FLOAT, // (10,7),
+      type: DataTypes.FLOAT, // ( 10,7 ),
       allowNull: false,
       validate: {
         isFloat: true,
@@ -108,12 +108,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       // Name of the spot
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING( 50 ),
       allowNull: false,
       validate:
       {
         notEmpty: true,
-        len: [1, 50]
+        len: [ 1, 50 ]
       }
     },
     description: {
@@ -127,7 +127,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
       // Price per night of the spot
-      type: DataTypes.DECIMAL(10,2),
+      type: DataTypes.DECIMAL( 10,2 ),
       allowNull: false,
       validate: {
       isDecimal: true,

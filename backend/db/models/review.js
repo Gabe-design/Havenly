@@ -4,14 +4,14 @@
 
 // This model file defines the Review model and its associations
 
-const { Model } = require('sequelize');
+const { Model } = require( 'sequelize' );
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = ( sequelize, DataTypes ) => {
   class Review extends Model {
 
     // This method is called automatically by models/index.js
 
-    static associate(models) {
+    static associate( models ) {
       // A review belongs to a specific spot 
       Review.belongsTo(
         models.Spot,

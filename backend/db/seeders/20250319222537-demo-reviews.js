@@ -3,16 +3,16 @@
 'use strict';
 
 // Seeder to populate the Reviews table with user reviews for seeded spots
-const { User, Spot, SpotImage, Review, ReviewImage } = require('../models'); // If you're using the Spot model
+const { User, Spot, SpotImage, Review, ReviewImage } = require( '../models' ); // If you're using the Spot model
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
+if ( process.env.NODE_ENV === 'production' ) {
   options.schema = process.env.SCHEMA;  // Set the schema in prod
 }
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up ( queryInterface, Sequelize ) {
 
     // Fetch existing users ny usernames
    const user1 = await User.findOne({ where: { username: 'Demo-lition' } });
@@ -72,11 +72,11 @@ module.exports = {
   });
 },
 
-async down (queryInterface, Sequelize) {
+async down ( queryInterface, Sequelize ) {
 
   // Remove all entries from Reviews table
 
   options.tableName = 'Reviews';
-  await queryInterface.bulkDelete(options, null, {});
+  await queryInterface.bulkDelete( options, null, {});
 }
 };
