@@ -75,9 +75,6 @@ function Navigation({ isLoaded }) {
             <li>
             <NavLink to="/spots/new">Start Something Havenly</NavLink>
         </li>
-        <li>
-            <NavLink to="/spots/manage">Manage Havens</NavLink>
-        </li>
         </div>
       )}
 

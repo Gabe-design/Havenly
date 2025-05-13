@@ -1,6 +1,6 @@
 // frontend/src/components/ManageSpotsForm/index.js
 
 // Index.js for cleaner imports :)
-import ManageSpotsForm from './ManageSpotsForm';
+import ManageSpotsPage from './ManageSpotsPage';
 
-export default ManageSpotsForm;
+export default ManageSpotsPage;

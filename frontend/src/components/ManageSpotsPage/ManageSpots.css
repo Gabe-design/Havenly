@@ -1,0 +1,350 @@
+/* frontend/src/components/ManageSpotsForm/ManageSpots.css */
+
+/* The css styles for Havenly backrounds */
+
+/* This is the basic page styling */
+body {
+    /* This removes default margin/padding from browser */
+    margin: 0;
+    padding: 0;
+    /* Sky blue color */
+    background-color: skyblue;
+    /* Simple font */
+    font-family: Arial, sans-serif;
+}
+
+/* This is the signup form container */
+section {
+    /* This sets the form to a resonable width */
+    max-width: 400px;
+    /* This centers the form page */
+    margin: 60px auto;
+    /* To add space inside the form box */
+    padding: 24px;
+    /* Make the backround white */
+    background-color: white;
+    /* Rounds the corners */
+    border-radius: 12px;
+    /* Adds sky blue color */
+    border: 1px solid skyblue;
+    /* A litte bit of shadow */
+    box-shadow: 0 40px 12px black;
+}
+
+/* This is the title style */
+h1 {
+    /* so the heading is centered */
+    text-align: center;
+    /*Navy blue title */
+    color: navy;
+    /* Adds a space below the heading */
+    margin-bottom: 24px;
+}
+
+h2 {
+    /* So the text is centered */
+    text-align: center;
+    /* To make the color navy */
+    color: navy;
+    /* Adds a space below the heading */
+    margin-bottom: 24px;
+}
+
+/* This is the form style */
+form {
+    /* This stacks the form vertically */
+    display: flex;
+    flex-direction: column;
+}
+
+/* These are the label styles */
+label {
+    /* This is the below the label */
+    margin-bottom: 8px;
+    /* This makes the label text bold */
+    font-weight: bold;
+    /* Making is a navy blue */
+    color: navy;
+}
+
+/* These are the field input styles */
+input {
+    /* This adds padding inside the inputs */
+    padding: 10px;
+    /* This adds space below each input */
+    margin-bottom: 16px;
+    /* This is a blueish grey border */
+    border: 1px solid #365882;
+    /* This rounds the corners a little */
+    border-radius: 8px;
+    /* This sets the font size */
+    font-size: 16px;
+    /* Sky blue color */
+    color: skyblue;
+}
+
+
+/* This highlights the input when clicked */
+input:focus {
+    /* This rmoves the default blue outline */
+    outline: none;
+    /* Adds a blue border */
+    border-color: blue;
+}
+
+/* This is the signup button style */
+button {
+    /* This adds padding inside the button */
+    padding: 10px;
+    /* This makes the color sky blue */
+    background-color: skyblue;
+    /* This makes text white */
+    color: white;
+    /* This removes the default border */
+    border: none;
+    /* This rounds the corners a little */
+    border-radius: 8px;
+    /* This is the font size */
+    font-size: 16px;
+    /* This makes the mouse turn to a pointer finger */
+    cursor: pointer;
+}
+
+/* This adds a hover effect on button */
+button:hover {
+    /* This adds a slight darker blue when hovered */
+    background-color: rgb(89, 188, 227); 
+}
+
+/* This is the error message styles */
+p.error {
+    /* Making the color red for more pop */
+    color: red;
+    /* This makes the font smaller for errrors */
+    font-size: 14px;
+    /* This pulls the text closer to input */
+    margin-bottom: -10px;
+    /* This adds a space before the next element */
+    margin-bottom: 10px;
+}
+
+/*The manage spots container*/
+.manage-spots-container {
+    /* To make the page wider*/
+    max-width: 900px;
+    /* This adds space around the section */
+    padding: 40px;
+    /* To center the container */
+    margin: 40px auto;
+    /* This makes the backround white */
+    background-color: white;
+    /* To round the edges */
+    border-radius: 16px; 
+    /* Box shadow */
+    box-shadow: 0 0 20px black;
+
+}
+
+/* This is styles for the no haven messege */
+.no-spots-messege {
+    /* To center the messge */
+    text-align: center;
+    /* To space it out */
+    margin: 40px 0;
+    /* For white text */
+    color: white;
+}
+
+/* This is the styles for the spot tile */
+.spot-tile {
+    /* This stacks the elements */
+    display: flex;
+    flex-direction: column;
+    /* White backround */
+    background-color: white;
+    /* To round the corners */
+    border-radius: 12px;
+    /* For padding */
+    padding: 16px;
+    /* To add space between tiles */
+    margin-bottom: 24px;
+    /* Box shadow */
+    box-shadow: 0 4px 10px black;
+}
+
+/* This is for the spot link */
+.spot-link {
+    /* To remove underline */
+    text-decoration: none;
+    /* Black color */
+    color: black;
+    /* For a horizontal layout */
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* This is for the preview image */
+.spot-link img {
+    /* For a fixed width/hieght */
+    width: 120px;
+    height: 100px;
+    /* To crop and cover */
+    object-fit: cover;
+    /* To round the corners */
+    border-radius: 8px;
+    /* For a white biorder */
+    border: 1px solid white
+}
+
+/* For The info spot text */
+.spot-info {
+    /* stacking the text */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 4px;
+    /* font text size */
+    font-size: 14px;
+    /* White color text */
+    color: white;
+}
+
+/* And finally this is for the delete/update buttons */ 
+.spot-actions {
+    /* This will add space between the buttons */
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    /* To add space above actions */
+    margin-top: 12px;
+}
+
+/* This if the landing page grid*/
+.spot-list-container {
+    /* This makes the grid layout */
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax( 250px, 1fr));
+    /* This is for space */
+    gap: 24px;
+    /* This is for padding around */
+    padding: 24px;
+}
+
+/* Now this is the main spot tile wrapper */
+.spot-tile {
+    /*For the tooltip positioning */
+    position: relative;
+    /* For the white backround */
+    background-color: white;
+    /* This is to round the corners */
+    border-radius: 12px;
+    /* This stops the overflow */
+    overflow: hidden;
+    /* This stops underline from the text */
+    text-decoration: none;
+    /* This keeps the black color */
+    color: black;
+    /* This adds a small shadow */
+    box-shadow: 0 2px 6px black;
+    /* This is going to add a scale zoom effect */
+    transition: transform 0.2s;
+    /* This is for the pointer cursor */
+    cursor: pointer;
+}
+
+/* This is going to make the tile zoom slight when hovered */
+.spot-tile:hover {
+    transform: scale( 1.02 );
+}
+
+/* This will wrap and size the preview img */
+.spot-img-wrapper img {
+    /* This will make the image stretch to its full width */
+    width: 100%;
+    /* This will set a consistent hieght for the tile */
+    height: 200px;
+    /* This is going to crop and fill image areas */
+    object-fit: cover;
+}
+
+/* This is the wrapper for all the spot text */
+.spot-tile-text {
+    /*This will add padding inside the text block */
+    padding: 12px;
+}
+
+/* This will be text blocks inside the tiles */
+.spot-location, 
+.spot-name,
+.spot-price, 
+.spot-rating {
+    /* this is going to add space below each text block */
+    margin-bottom: 6px;
+    /* This will set the text size */
+    font-size: 14px;
+}
+
+/* This will make the spot name in bold */
+.spot-name {
+    font-weight: bold ;
+    /* This is for the tooltip */
+    position: relative;
+}
+
+/*This is for the tooltip text in the corner */
+.spot-tile::after {
+    /* the text */
+    content: attr( data-name );
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: black;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+
+
+/* For the tooltip text below the cursor */
+.floating-tooltip {
+    position: fixed;
+    background-color: black;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+    transform: translate( -46%, 27px );
+    text-align: center;
+}
+
+/* For the tooltip text below the cursor */
+.floating-tooltip::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX( -50% );
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid gray;
+}
+
+/* So it shows the tooltip on hover */
+.spot-tile:hover::after {
+    display: block;
+}
+
+/* The colors of the star will be a blue, going with that havenly theme */
+.spot-rating i {
+    color: navy
+}

@@ -1,6 +1,7 @@
 // frontend/src/components/Navigation/ProfileButton.jsx
 
 // This is what displays the profile image and user info
+// Adding manage spots to the profile button
 
 // This allows sending actions to rdux
 import { useDispatch } from "react-redux";
@@ -10,6 +11,8 @@ import { FaUserCircle } from 'react-icons/fa';
 import * as sessionActions from '../../store/session';
 // This is to track the dropdown open and close
 import { useState, useEffect, useRef } from "react";
+// The link import
+import { Link } from 'react-router-dom';
 // Imports OpenModalButton
 // import OpenModalButton from "../OpenModalButton";
 // Imports LoginFormModal
@@ -62,7 +65,7 @@ function ProfileButton({ user }) {
   
     return (
         <>
-          <button onClick={ toggleMenu }>
+          <button type="button" onClick={ toggleMenu }>
             <FaUserCircle />
           </button>
           <ul className={ ulClassName } ref={ ulRef }>
@@ -72,12 +75,20 @@ function ProfileButton({ user }) {
                 <li>{ user.firstName } { user.lastName }</li>
                 <li>{ user.email }</li>
                 <li>
+                  {/*The manage spots button*/}
+                  <Link to={ "/spots/manage" } onClick={ closeMenu }>
+                  Manage Havens
+                  </Link>
+                </li>
+                <li>
+                  {/*The logout button*/}
                   <button onClick={ logout }>Log Out</button>
                 </li>
               </>
             ) : (
               <>
                 <li>
+                  {/*The login button*/}
                   <OpenModalMenuItem
                     buttonText="Log In"
                     modalComponent={ <LoginFormModal />}
@@ -85,6 +96,7 @@ function ProfileButton({ user }) {
                   />
                 </li>
                 <li>
+                  {/*The signup button*/}
                   <OpenModalMenuItem
                     buttonText="Sign Up"
                     modalComponent={ <SignupFormModal />}

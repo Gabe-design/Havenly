@@ -35,7 +35,7 @@ function LandingPage() {
 
     }, [ dispatch ]);
 
-    if ( !spotArr.length ) return <div>Loading Havens...Loading Havens...</div>;
+    if ( !spotArr.length ) return <div>Loading Havens...Please Wait...</div>;
 
     // This will render each spot as a tile
     return (

@@ -21,12 +21,6 @@ ul {
     margin: 0;
 }
 
-/* This is nav item styles
-li {
-
-}
-*/
-
 /* This is the nav link styles */
 a {
     /* This removes the underline */
@@ -63,7 +57,7 @@ a:hover {
     list-style: none;
     /* For a lil drop shadow */
     box-shadow: 0 40px 12px black;
-    /* So things to overlap the dropdown */
+    /* So nothing overlaps the dropdown */
     z-index: 9999;
 
 }
@@ -72,14 +66,38 @@ a:hover {
 .profile-dropdown li {
     /* Adding space between the lines */
     padding: 6px 0;
-    /* For darker text */
-    color: rgb(56, 56, 56);
+    /* Sky blue for a better looking look design*/
+    color: skyblue;
     /* Adds a pointer cursor */
     cursor: pointer;
+    /* This is for the font */
+    font-weight: bold;
 }
 
+/* Making changes because i did not like the look of the backround on hover */
 .profile-dropdown li:hover {
-    background-color: rgb(245, 244, 244);
+    /* text turns navy on hover */
+    color: navy;
+    /* background-color: rgb(245, 244, 244); */
+}
+
+/* This is for the manage havens in the dropown */
+.profile-dropdown a {
+    /* Adding space between the lines */
+    padding: 6px 0;
+    /* Sky blue for a better looking look design*/
+    color: skyblue;
+    /* Adds a pointer cursor */
+    cursor: pointer;
+    /* This is for the font */
+    font-weight: bold;
+}
+
+/* Making changes because i did not like the look of the backround on hover */
+.profile-dropdown a:hover {
+    /* text turns skyblue on hover */
+    color: navy;
+    /* background-color: rgb(245, 244, 244); */
 }
 
 /* This is the styling for the logout button */
