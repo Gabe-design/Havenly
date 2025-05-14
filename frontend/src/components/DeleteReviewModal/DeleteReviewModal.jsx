@@ -1,24 +1,25 @@
-// frontend/src/components/DeleteSpotModals/DeleteSpotModals.jsx
+// frontend/src/components/DeleteReviewModals/DeleteReviewModals.jsx
 
 // import { useState } from "react";
 import { useDispatch /*useSelector*/ } from 'react-redux';
 // import { Navigate } from 'react-router-dom';
 import { useModal } from "../../context/ModalContext";
 // import * as sessionActions from '../../store/session';
-import { deleteSpot } from "../../store/spots";
+import { deleteReview } from "../../store/reviews";
 // Styles
-import "./DeleteSpot.css"
+import "./DeleteReview.css"
 
-// This displays a delete spot form and handles delet spot logic
-function DeleteSpotModal({ spotId }) {
+// This displays a delete review form and handles delete review logic
+function DeleteReviewModal({ reviewId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
    
-    // This will run when the user does delete
-    const handleDelete = ( e ) => {
-        e.preventDefault();
 
-        return dispatch( deleteSpot( spotId))
+
+    // This will run when the user does delete
+    const handleDelete = async ( e ) => {
+        e.preventDefault();
+        return dispatch( deleteReview( reviewId ))
         .then( closeModal );
     };
 
@@ -32,7 +33,6 @@ function DeleteSpotModal({ spotId }) {
     const [ errors, setErrors ] = useState({});
     const { closeModal } = useModal();
     */
-
 
     /*
     // If the user is already logged in it will redirect to the home page
@@ -100,22 +100,18 @@ function DeleteSpotModal({ spotId }) {
     */
 
     return (
-        <section className="delete-spot-modal">
+        <section>
             <h1>Confirm Delete</h1>
-            <p> Are you sure you want to remove this spot from Havenly?</p>
-
-            {/*The cancel and confirm buttons*/}
-            <div className="delete-buttons">
-                <button onClick={ handleDelete } className="confirm-delete">
-                    Yes ( Delete Haven )
-                </button>
-                <button onClick={ closeModal } className="cancel-delete">
-                    No ( Keep Haven )
-                </button>
-            </div>
+            <p> Are you sure you want to remove review?</p>
+             <button onClick={ handleDelete } className="confirm-delete">
+                Yes ( Delete Review )
+            </button>
+            <button onClick={ closeModal } className="cancel-delete">
+                No ( Keep Review )
+            </button>
         </section>
     )
 }
 
 // Exporting the component so it can be used in other files
-export default DeleteSpotModal;
+export default DeleteReviewModal;

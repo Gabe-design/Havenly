@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 // The spot fetching thunk
 import { fetchSpotById } from "../../store/spots";
+// The review fetching thunk
+import { loadReviewsForSpot } from "../../store/reviews";
+// The reviews component
+import ReviewSection from "../ReviewSection";
 //styles 
 import './SpotDetail.css'
 
@@ -16,18 +20,19 @@ function SpotDetailPage() {
     const { id } = useParams();
     // Gets the spot data
     const spot = useSelector( state => state.spots[ id ]);
-    const user = useSelector( state => state.session.user );
-    const reviews = spot?.reviews || [];
+    // const user = useSelector( state => state.session.user );
+
     // fetches spot details 
     useEffect(() => {
         dispatch( fetchSpotById( id ));
+        dispatch( loadReviewsForSpot( id ));
     }, [ dispatch, id ]);
 
     // This will show a lodaing message when a spot is fetched
-    if (!spot) return <p>Loading Havens...Loading Havens...</p>;
+    if (!spot) return <p>Loading Havens Please Wait...</p>;
 
     // Checks if the current user is the owner of the haven
-    const isOwner = user && spot.Owner && user.id === spot.Owner.id;
+    // const isOwner = user && spot.Owner && user.id === spot.Owner.id;
 
     return (
         <div className="spot-detail-container">
@@ -38,13 +43,6 @@ function SpotDetailPage() {
             <p className="spot-location">
                 location: { spot.city }, { spot.state }, { spot.country }
             </p>
-
-            {/* The rating and reviews count */}
-            <div className="spot-rating-summary">
-                <i className="fa fa-star" />
-                {/* Adding this so itll show "New" if theres no reviews*/}
-                { spot.avgRating ? spot.avgRating.toFixed( 1 ) : 'New' } Star Rating - { reviews.length } review{ reviews.length !== 1 ? 's' : '' }
-            </div>
 
             {/*The spot image*/}
             <div className="spot-images">
@@ -75,38 +73,9 @@ function SpotDetailPage() {
                     Reserve
                 </button>
             </div>
-
-            {/*Adding the review button for logged in people that are not the owner*/}
-            { user && !isOwner && (
-                <button className="post-review-button">
-                    Post Your Review
-                </button>
-            )}
-
-            {/*Adding this is for the review button "Be the first to post a review!" if theres no reviews and not the owner*/}
-            {reviews.length === 0 && user && !isOwner && (
-                <p className="no-reviews-text">
-                    Be the first to post a review!
-                </p>
-            )}
-
-            {/*This will be for the luist of reviews*/}
-            <div className="spot-reviews">
-                { reviews.map( review => (
-                    <div key={ review.id } className="review-item">
-                        <div className="review-header">
-                            <strong>{ review.User?.firstName }</strong>
-                            <span className="review-date">
-                                { new Date( review.createdAt ).toLocaleDateString( undefined, { 
-                                    month: 'long', 
-                                    year: 'numeric' 
-                                })}
-                            </span>
-                        </div>
-                        <p className="review-text">{ review.review }</p>
-                    </div>
-                ))}
-            </div>
+            
+            {/*This will show the review section*/}
+            <ReviewSection spot={ spot }/>
         </div>
     )
 }

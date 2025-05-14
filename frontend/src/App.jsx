@@ -18,7 +18,7 @@ import CreateSpotPage from './components/CreateSpotPage';
 // Importing ManageSoptsPage
 import ManageSpotsPage from './components/ManageSpotsPage';
 // Importing UpdateSpotForm
-import UpdateSpotForm from './components/UpdateSpotForm'
+// import UpdateSpotPage from './components/UpdateSpotPage'
 // Importing the signup form page component
 // import SignupFormPage from './components/SignupFormModal';
 // Importing the login form page component
@@ -33,6 +33,7 @@ import {
   //Route,
 } 
 from "react-router-dom";
+import UpdateSpotPage from './components/UpdateSpotPage';
 
 // Creating a home component to show on the root path
 
@@ -85,7 +86,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/:id/edit',
-        element: <UpdateSpotForm/>
+        element: <UpdateSpotPage/>
       },
       {
         path: '/spots/manage',
