@@ -1,4 +1,4 @@
-// frontend/src/components/SpotFormPage/index.js
+// frontend/src/components/UpdateSpotPage/index.js
 
 // Index.js for cleaner imports :)
 import UpdateSpotPage from './UpdateSpotPage';

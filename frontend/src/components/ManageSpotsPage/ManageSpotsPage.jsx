@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchUserSpots } from "../../store/spots";
 import './ManageSpots.css'
 import OpenModalButton from "../OpenModalButton";
-import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
+import DeleteSpotModal from "../DeleteSpotModal";
 
 // To show the spots owned by the current user
 function ManageSpotsForm() {
@@ -33,7 +33,7 @@ function ManageSpotsForm() {
     }, [ dispatch ]);
 
     // I also wnat it to show this loading state if nothing loaded yet
-    if ( !spots ) return <div>Loaing Havens...Please Wait...</div>;
+    if ( !spots ) return <div>Loaing Havens Please Wait...</div>;
 
     return (
         <section className="manage-spots-container">

@@ -8,6 +8,8 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 // This will deal with the spots
 import spotsReducer from './spots';
+// Importing reviews 
+import reviewReducer from './reviews';
 
 /* 
 Each key becomes a key in the redux store
@@ -16,7 +18,8 @@ This also puts all the reducers together in a single root reducer
 const rootReducer = combineReducers({
   // ADD REDUCERS HERE
   session: sessionReducer,
-  spots: spotsReducer
+  spots: spotsReducer,
+  reviews: reviewReducer
 });
 
 // This sets up the middleware
