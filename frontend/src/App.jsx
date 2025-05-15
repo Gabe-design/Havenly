@@ -17,6 +17,8 @@ import SpotDetailPage from './components/SpotDetailPage';
 import CreateSpotPage from './components/CreateSpotPage';
 // Importing ManageSoptsPage
 import ManageSpotsPage from './components/ManageSpotsPage';
+//Importing ManageReviewsPage
+import ManageReviewsPage from './components/ManageReviewsPage';
 // Importing UpdateSpotForm
 // import UpdateSpotPage from './components/UpdateSpotPage'
 // Importing the signup form page component
@@ -91,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/manage',
         element: <ManageSpotsPage/>
+      },
+      {
+        path: '/reviews/manage',
+        element: <ManageReviewsPage/>
       }
     ]
   }

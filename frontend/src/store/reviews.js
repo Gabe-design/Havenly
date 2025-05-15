@@ -41,12 +41,25 @@ const removeReview = ( reviewId ) => {
 
 // Creating the thunk actions
 
+// This thunk will get the current users reviews
+export const loadCurrentUserReviews = () => async ( dispatch ) => {
+    const res = await csrfFetch( '/api/reviews/current' );
+    const data = await res.json();
+
+    const reviews = {};
+    data.Reviews.forEach(( review ) => {
+        reviews[ review.id ] = review;
+    })
+
+    dispatch( setReviews( reviews ));
+    return res;
+}
+
 // This thunk fetches a review by the spot ID
 export const loadReviewsForSpot = ( spotId ) => async ( dispatch ) => {
     const res = await csrfFetch( `/api/spots/${ spotId }/reviews` );
     const data = await res.json();
 
-    // gets the image when creating new spot
     const reviews = {};
     data.Reviews.forEach( review => {
         reviews[ review.id ] = review;
@@ -60,6 +73,19 @@ export const loadReviewsForSpot = ( spotId ) => async ( dispatch ) => {
 export const createReview = ( spotId, reviewData ) => async ( dispatch ) => {
     const res = await csrfFetch( `/api/spots/${ spotId }/reviews`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify( reviewData )
+    })
+
+    const data = await res.json();
+    dispatch( addReview( data ));
+    return data;
+};
+
+// This thunk updates the review
+export const updateReview = ( reviewId, reviewData ) => async ( dispatch ) => {
+    const res = await csrfFetch( `/api/reviews/${ reviewId }`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify( reviewData )
     })

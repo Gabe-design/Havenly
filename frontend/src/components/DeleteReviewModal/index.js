@@ -1,6 +1,6 @@
 // frontend/src/components/DeleteReviewModal/index.js
 
 // Index.js for cleaner imports :)
-import DeleteSpotModal from './DeleteSpotModal';
+import DeleteReviewModal from './DeleteReviewModal';
 
-export default DeleteSpotModal;
+export default DeleteReviewModal;

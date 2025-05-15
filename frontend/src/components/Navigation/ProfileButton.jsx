@@ -81,6 +81,12 @@ function ProfileButton({ user }) {
                   </Link>
                 </li>
                 <li>
+                  {/*The manage reviews button*/}
+                  <Link to={ "/reviews/manage" } onClick={ closeMenu }>
+                  Manage Reviews
+                  </Link>
+                </li>
+                <li>
                   {/*The logout button*/}
                   <button onClick={ logout }>Log Out</button>
                 </li>
