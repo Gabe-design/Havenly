@@ -51,7 +51,7 @@ const removeSpot = ( spotId ) => {
 
 // This thunk is to fetch all spots from the backend
 export const fetchSpots = () => async ( dispatch ) => {
-    // This fetches all the spots
+    // This is the GET request that fetches all the spots
     const res = await csrfFetch( "/api/spots" );
     const data = await res.json();
 
@@ -66,7 +66,7 @@ export const fetchSpots = () => async ( dispatch ) => {
 
 // This thunk will get the current users spots
 export const fetchUserSpots = () => async ( dispatch ) => {
-    // This fetches the current users spots
+    // This is the GET request that fetches the current users spots
     const res = await csrfFetch( '/api/spots/current' );
     const data = await res.json();
 
@@ -77,7 +77,7 @@ export const fetchUserSpots = () => async ( dispatch ) => {
 
 // This thunk fetches a spot by the ID
 export const fetchSpotById = ( id ) => async ( dispatch ) => {
-    // This fetches the spot by its id
+    // This is the GET request that fetches the spot by its id
     const res = await csrfFetch( `/api/spots/${ id }` );
     const data = await res.json();
 

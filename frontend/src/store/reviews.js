@@ -43,34 +43,41 @@ const removeReview = ( reviewId ) => {
 
 // This thunk will get the current users reviews
 export const loadCurrentUserReviews = () => async ( dispatch ) => {
+    // This is the GET request that fetches the current user reveiws
     const res = await csrfFetch( '/api/reviews/current' );
     const data = await res.json();
 
+    // This is to normalize reviews into an object keyed by id
     const reviews = {};
     data.Reviews.forEach(( review ) => {
         reviews[ review.id ] = review;
     })
 
+    // This is the dispatch to store the reviews
     dispatch( setReviews( reviews ));
     return res;
 }
 
 // This thunk fetches a review by the spot ID
 export const loadReviewsForSpot = ( spotId ) => async ( dispatch ) => {
+    // This is the GET that fetches the reviews for a specefic spot
     const res = await csrfFetch( `/api/spots/${ spotId }/reviews` );
     const data = await res.json();
 
+    // This is to normalize the reviews
     const reviews = {};
     data.Reviews.forEach( review => {
         reviews[ review.id ] = review;
     })
 
+    // This is the dispatch to store
     dispatch( setReviews( reviews ));
 
 };
 
 // This thunk creates a new review 
 export const createReview = ( spotId, reviewData ) => async ( dispatch ) => {
+    // This is the POST request that creates a review
     const res = await csrfFetch( `/api/spots/${ spotId }/reviews`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,12 +85,14 @@ export const createReview = ( spotId, reviewData ) => async ( dispatch ) => {
     })
 
     const data = await res.json();
+    // This is dispatch adds to the store
     dispatch( addReview( data ));
     return data;
 };
 
 // This thunk updates the review
 export const updateReview = ( reviewId, reviewData ) => async ( dispatch ) => {
+    // This is the PUT request that updates the review
     const res = await csrfFetch( `/api/reviews/${ reviewId }`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -91,16 +100,19 @@ export const updateReview = ( reviewId, reviewData ) => async ( dispatch ) => {
     })
 
     const data = await res.json();
+    // This is the dispatch that updates the store
     dispatch( addReview( data ));
     return data;
 };
 
 // And this thunk deletes/removes the review 
 export const deleteReview = ( reviewId ) => async ( dispatch ) => {
+    // This is the DELETE request that removes a review
     const res = await csrfFetch( `/api/reviews/${ reviewId }`, {
         method: "DELETE"
     })
 
+    // This dispatch removes the review from the store
     dispatch( removeReview( reviewId ));
     return res;
 }
