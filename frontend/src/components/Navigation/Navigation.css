@@ -185,3 +185,13 @@ a:hover {
     background-color: transparent;
     box-shadow: none;
 }
+
+/* This is for the logo icon */
+.logo-img {
+    /* This sets the hight of the logo */
+    height: 32px;
+    /* This will set the width of the logo so its square */
+    width: 32px;
+    /* And this adds pace to the right of the logo for the text */
+    margin-right: 8px;
+}

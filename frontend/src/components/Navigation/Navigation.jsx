@@ -84,8 +84,8 @@ function Navigation({ isLoaded }) {
       <div className='nav-left'>
         
             <NavLink to={ "/" }>
-            <img src='/favicon.ico' alt='Logo' className='logo-img'/>
-             Havenly
+            <img src='/house-solid.svg' alt='Logo' className='logo-img'/>
+            🕊️ HAVENLY 🪽
             </NavLink>
       
       </div>
