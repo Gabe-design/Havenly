@@ -71,8 +71,9 @@ function ProfileButton({ user }) {
           <ul className={ ulClassName } ref={ ulRef }>
             {user ? (
               <>
-                <li>{ user.username }</li>
-                <li>{ user.firstName } { user.lastName }</li>
+              {/*This is to add the Hello, Demo firtsname in the nav bar ( rmoved the username and lastname for a better deisgn that I liked )*/}
+                {/*<li>{ user.username }</li>*/}
+                <li> Hello, { user.firstName } </li> {/*{ user.lastName }</li>*/}
                 <li>{ user.email }</li>
                 <li>
                   {/*The manage spots button*/}
