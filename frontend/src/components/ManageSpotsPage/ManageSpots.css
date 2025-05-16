@@ -122,9 +122,7 @@ p.error {
     color: red;
     /* This makes the font smaller for errrors */
     font-size: 14px;
-    /* This pulls the text closer to input */
-    margin-bottom: -10px;
-    /* This adds a space before the next element */
+    /* This adds a space */
     margin-bottom: 10px;
 }
 
@@ -229,28 +227,6 @@ p.error {
     gap: 24px;
     /* This is for padding around */
     padding: 24px;
-}
-
-/* Now this is the main spot tile wrapper */
-.spot-tile {
-    /*For the tooltip positioning */
-    position: relative;
-    /* For the white backround */
-    background-color: white;
-    /* This is to round the corners */
-    border-radius: 12px;
-    /* This stops the overflow */
-    overflow: hidden;
-    /* This stops underline from the text */
-    text-decoration: none;
-    /* This keeps the black color */
-    color: black;
-    /* This adds a small shadow */
-    box-shadow: 0 2px 6px black;
-    /* This is going to add a scale zoom effect */
-    transition: transform 0.2s;
-    /* This is for the pointer cursor */
-    cursor: pointer;
 }
 
 /* This is going to make the tile zoom slight when hovered */

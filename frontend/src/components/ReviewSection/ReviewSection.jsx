@@ -4,8 +4,12 @@
 import { useSelector } from "react-redux";
 // IMporting modal the triggers and components
 import OpenModalButton from "../OpenModalButton";
-import PostReviewModal from "../PostReviewModal/PostReviewModal";
-import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
+// Importing post a review
+import PostReviewModal from "../PostReviewModal";
+// Importing delete review
+import DeleteReviewModal from "../DeleteReviewModal";
+// Importing update review
+import UpdateReviewModal from "../UpdateReviewModal";
 // The styles import
 import "./ReviewSection.css"
 
@@ -73,12 +77,19 @@ function ReviewSection({ spot }) {
                         </div>
                         <p> { review.review } </p>
 
-                        {/*This will only show the delete button for users own review */}
+                        {/*This will only show the delete and update button for users reviews */}
                         {( user?.id === review.userId || user?.id === review.User?.id ) && (
+                            <>
+                            <OpenModalButton
+                            buttonText={ "Update" }
+                            modalComponent={ <UpdateReviewModal review={ review } /> }
+                            />
+
                             <OpenModalButton
                             buttonText={ "Delete" }
                             modalComponent={ <DeleteReviewModal reviewId={ review.id } /> }
                             />
+                            </>
                         )}
                     </div>
                 ))}

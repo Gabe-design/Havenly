@@ -122,8 +122,6 @@ p.error {
     color: red;
     /* This makes the font smaller for errrors */
     font-size: 14px;
-    /* This pulls the text closer to input */
-    margin-bottom: -10px;
-    /* This adds a space before the next element */
+    /* This adds a space */
     margin-bottom: 10px;
 }

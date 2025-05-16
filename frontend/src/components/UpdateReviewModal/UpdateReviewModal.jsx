@@ -1,21 +1,21 @@
-// frontend/src/components/PostReviewModal/PostReviewModal.jsx
+// frontend/src/components/UpdateReviewModal/UpdateReviewModal.jsx
 
 import { useState } from "react";
 import { useDispatch /*useSelector*/ } from 'react-redux';
 // import { Navigate } from 'react-router-dom';
 import { useModal } from "../../context/ModalContext";
 // import * as sessionActions from '../../store/session';
-import { createReview } from "../../store/reviews";
-import './PostReview.css';
+import { updateReview } from "../../store/reviews";
+import './UpdateReview.css';
 
 // This displays a post review form and handles post review logic
-function PostReviewModal({ spotId }) {
+function UpdateReviewModal({ review }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
     // For the form inputs
-    const [ review, setReview ] = useState( "" );
-    const [ stars, setStars ] = useState( 0 );
+    const [ reviewText , setReviewText ] = useState( review.review || "" );
+    const [ stars, setStars ] = useState( review.stars || 0 );
     const [ errors, setErrors ] = useState({});
 
     const handleSubmit = async (e) => {
@@ -25,7 +25,7 @@ function PostReviewModal({ spotId }) {
         const validationErrors = {};
 
         // This is so errors like to little characters or stars show
-        if ( review.length < 10 ) validationErrors.review = "Review must be at least 10 characters.";
+        if ( reviewText.length < 10 ) validationErrors.review = "Review must be at least 10 characters.";
         if ( !stars || stars < 1 || stars > 5 ) validationErrors.stars = "Stars must be between 1 and 5";
 
         if ( Object.keys( validationErrors ).length ) {
@@ -35,11 +35,11 @@ function PostReviewModal({ spotId }) {
 
         // The review payload
         const payload = {
-            review, 
+            review: reviewText, 
             stars,
         }
 
-        return dispatch( createReview( spotId, payload ))
+        return dispatch( updateReview( review.id, payload ))
         // closes on successful login
       .then( closeModal )
       .catch( async ( res ) => {
@@ -131,8 +131,8 @@ function PostReviewModal({ spotId }) {
 
     // This is the review form
     return (
-        <section>
-            <h1>How was your stay?</h1>
+        <section className="update-review-modal">
+            <h1>Update Your Review for { review.Spot?.name }</h1>
             <form onSubmit={ handleSubmit }>
                 {/*This will show any server errors*/}
                 { Object.values( errors ).length > 0 && (
@@ -146,9 +146,9 @@ function PostReviewModal({ spotId }) {
                 <label>
                     {/*This is for the review text*/}
                     <textarea
-                    placeholder="Leave your review here..."
-                    value={ review }
-                    onChange={( e ) => setReview( e.target.value )}
+                    placeholder="Update your review here..."
+                    value={ reviewText }
+                    onChange={( e ) => setReviewText( e.target.value )}
                     required
                     />
                 </label>
@@ -169,9 +169,9 @@ function PostReviewModal({ spotId }) {
                 {/*Finally this is for the submit button and its not going to work unless review is more than 10 characters and has stars selected*/}
                 <button
                 type="submit"
-                disabled={ review.length < 10 || stars === 0 }
+                disabled={ reviewText.length < 10 || stars === 0 }
                 >
-                    Submit Your Review
+                    Update Your Review
                 </button>
             </form>
         </section>
@@ -180,4 +180,4 @@ function PostReviewModal({ spotId }) {
 }
 
 // Exporting the component so it can be used in other files
-export default PostReviewModal;
+export default UpdateReviewModal;

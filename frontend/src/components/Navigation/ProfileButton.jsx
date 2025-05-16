@@ -64,7 +64,7 @@ function ProfileButton({ user }) {
     (showMenu ? "" : " hidden");
   
     return (
-        <>
+        <div className="profile-wrapper">
           <button type="button" onClick={ toggleMenu }>
             <FaUserCircle />
           </button>
@@ -78,6 +78,12 @@ function ProfileButton({ user }) {
                   {/*The manage spots button*/}
                   <Link to={ "/spots/manage" } onClick={ closeMenu }>
                   Manage Havens
+                  </Link>
+                </li>
+                <li>
+                  {/*The manage reviews button*/}
+                  <Link to={ "/reviews/manage" } onClick={ closeMenu }>
+                  Manage Reviews
                   </Link>
                 </li>
                 <li>
@@ -106,7 +112,7 @@ function ProfileButton({ user }) {
               </>
             )}
           </ul>
-        </>
+        </div>
     );
 }
 
