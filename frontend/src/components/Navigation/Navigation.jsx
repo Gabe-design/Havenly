@@ -64,28 +64,38 @@ function Navigation({ isLoaded }) {
 
   // This is the layout of the nav bar
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+    <nav className='nav-container'>
+    
+      {/*This is so the logo is on the left side*/}
+      <div className='nav-left'>
+        
+            <NavLink to={ "/" }>
+            <img src='/favicon.ico' alt='Logo' className='logo-img'/>
+             Havenly
+            </NavLink>
       
-      {/*This will only show if a user is loggin in*/}
-      { sessionUser && (
-        <div>
-            <li>
-            <NavLink to="/spots/new">Start Something Havenly</NavLink>
-        </li>
-        </div>
-      )}
+      </div>
+      
+      {/*This is so the user actions is on the right side*/}
+      <div className='nav-right'>
+          {/*This will only show if a user is loggin in*/}
+            { sessionUser && (
+                <NavLink to={ "/spots/new" }>
+                Start Something Havenly
+                </NavLink>
+            )}
 
-      {/*Alwyas will show if a user is logged in*/}
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
-    </ul>
+          {/*Alwyas will show if a user is logged in*/}
+          {isLoaded && (
+          
+              <ProfileButton user={sessionUser} />
+          
+          )}
+      </div>
+  
+    </nav>
   );
 }
+
  // Exporting the Nav
 export default Navigation;

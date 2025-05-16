@@ -64,7 +64,7 @@ function ProfileButton({ user }) {
     (showMenu ? "" : " hidden");
   
     return (
-        <>
+        <div className="profile-wrapper">
           <button type="button" onClick={ toggleMenu }>
             <FaUserCircle />
           </button>
@@ -112,7 +112,7 @@ function ProfileButton({ user }) {
               </>
             )}
           </ul>
-        </>
+        </div>
     );
 }
 
