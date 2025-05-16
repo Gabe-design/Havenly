@@ -146,8 +146,11 @@ a:hover {
 
 .nav-left,
 .nav-right {
+    /* This shows the nav sections in a row */
     display: flex;
+    /* And this is so the the items are centered */
     align-items: center;
+    /* This is to add space between the items */
     gap: 16px;
 }
 
