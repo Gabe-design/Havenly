@@ -5,7 +5,9 @@
 // To create the nav links
 import { NavLink } from 'react-router-dom';
 // To access and update redux 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+// This is to import actions
+import * as sessionActions from '../../store/session'
 // A profile button for logged in users
 import ProfileButton from './ProfileButton';
 // Modal button 
@@ -20,11 +22,12 @@ import './Navigation.css';
 function Navigation({ isLoaded }) {
     // This gets the current user from the redux store
   const sessionUser = useSelector( state => state.session.user );
+  
   // sends actions to the redux store
 
-  /* 
+  
   const dispatch = useDispatch();
-
+/*
   // This runs when the logout button is clicked
   const logout = (e) => {
     // This prevents a page reload
@@ -62,6 +65,17 @@ function Navigation({ isLoaded }) {
   );
   */
 
+  // This is the demo user login handler
+  const handleDemoLogin = ( e ) => {
+    // This stops the page from reloading
+    e.preventDefault();
+    // This dispatches the demo user credentials 
+    return dispatch( sessionActions.login({
+      credential: 'Demo-lition',
+      password: 'password'
+    }))
+  }
+
   // This is the layout of the nav bar
   return (
     <nav className='nav-container'>
@@ -90,6 +104,13 @@ function Navigation({ isLoaded }) {
           
               <ProfileButton user={sessionUser} />
           
+          )}
+
+          {/*This is for the log in demo user and itll only show if nobodys logged in*/}
+          {isLoaded && !sessionUser && (
+            <button className='demo-login' onClick={ handleDemoLogin }>
+              Log In As Demo User
+            </button>
           )}
       </div>
   

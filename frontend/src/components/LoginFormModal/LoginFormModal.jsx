@@ -43,8 +43,28 @@ function LoginFormModal() {
         if (data && data.errors) {
           setErrors(data.errors);
         }
-      });
-  };
+      })
+    };
+
+    // This is for logging in the demo user with the button
+    const handleDemoLogin = async ( e ) => {
+      // This stops the page from reloading
+      e.preventDefault();
+      // This is so the login uses the demo user credentials
+      return dispatch( sessionActions.login({ 
+        credential: 'Demo-lition', 
+        password: 'password' 
+      }))
+      // This will close the modal on a login
+      .then( closeModal )
+      .catch( async ( res ) => {
+        // So if the login fails itll show the errors
+        const data = await res.json();
+        if ( data && data.errors ) {
+          setErrors( data.errors );
+        }
+      })
+    };
 
     // This renders the login form with any errors
     return (
@@ -79,7 +99,12 @@ function LoginFormModal() {
 
             { errors.credential && <p>{ errors.credential }</p> }
     
-            <button type="submit">Log In</button>
+            <button type="submit">
+              Log In
+              </button>
+            <button onClick={ handleDemoLogin }>
+              Log In As Demo User
+            </button>
 
           </form>
         </section>

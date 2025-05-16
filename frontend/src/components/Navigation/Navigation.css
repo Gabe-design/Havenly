@@ -158,3 +158,30 @@ a:hover {
     /* So the dropdown is positioned correctly*/
     position: relative;
 }
+
+/*This is the styles so demo user login matches the rest*/
+.demo-login {
+    /* To match the Havenly color */
+    color: navy;
+    /* To match the title and other nav texts */
+    font-weight: bold;
+    /* To remove default styles */
+    background-color: transparent;
+    /* This removes the border */
+    border: none;
+    /* To match spacing */
+    padding: 0;
+    margin-right: 8px;
+    /* The pointer cursor */
+    cursor: pointer;
+    /* For hover effect */
+    transition: color 0.3s;
+}
+
+/* This is so when you hover the text turns white */
+.demo-login:hover {
+    color: white;
+    /* Adding this so it removes that grey box-shadow on hover for better design */
+    background-color: transparent;
+    box-shadow: none;
+}
