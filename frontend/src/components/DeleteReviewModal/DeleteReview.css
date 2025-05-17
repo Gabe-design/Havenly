@@ -125,3 +125,11 @@ p.error {
     /* This adds a space */
     margin-bottom: 10px;
 }
+
+.cancel-delete:hover {
+    background-color: navy;
+}
+
+.confirm-delete:hover {
+    background-color: red;
+}
