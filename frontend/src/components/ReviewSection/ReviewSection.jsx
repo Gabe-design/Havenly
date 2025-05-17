@@ -34,11 +34,12 @@ function ReviewSection({ spot }) {
         <div className="review-section">
             {/*This is to display the star rating and review count*/}
             <div className="review-summary">
-                <i className="fa fa-star"/>
+                <i className="fa-solid fa-star"/>
                 { avgRating ? avgRating.toFixed( 1 ) : "New" } 
                 { reviewCount > 0 && (
                     <>
-                    <span className="dot"> - </span>
+                    {/*Im changing the - to a · to match the checklist scorecard requirments*/}
+                    <span className="dot"> · </span>
                     <span>
                         { reviewCount } { reviewCount === 1 ? "Review" : "Reviews" }
                     </span>

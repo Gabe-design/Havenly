@@ -80,5 +80,5 @@ function SpotDetailPage() {
     )
 }
 
-// export
+// Export
 export default SpotDetailPage;
