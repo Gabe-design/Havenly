@@ -22,7 +22,7 @@ function LandingPage() {
     const spotArr = spots ? Object.values( spots ) : [];
     console.log( "SPOT ARRAY:", spotArr);
 
-    const [ tooltip, setTooltip ] = useState({
+    const [ tooltip, setToolTip ] = useState({
         text: '',
         x: 0,
         y: 0,
@@ -48,19 +48,21 @@ function LandingPage() {
                 to={ `/spots/${ spot.id }` }
                 className='spot-tile'
                 data-name={ spot.name }
-                onMouseEnter={ ( e ) => setTooltip({
+                onMouseEnter={ ( e ) => setToolTip({
                     text: spot.name,
                     x: e.clientX,
                     y: e.clientY,
                     visible: true
                 })}
-                onMouseMove={ ( e ) => setTooltip( prev =>({
+                onMouseMove={ (e ) => setToolTip( prev => ({
                     ...prev,
                     x: e.clientX,
                     y: e.clientY,
-                    
                 }))}
-                onMouseLeave={ () => setTooltip( prev => ({...prev, visible: false }))}
+                onMouseLeave={ () => setToolTip( prev => ({
+                    ...prev,
+                    visible: false
+                }))}
                 >
                     <div className='spot-img-wrapper'>
                         <img src={ spot.previewImage } alt={ spot.name }/>
