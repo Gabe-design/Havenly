@@ -125,3 +125,13 @@ p.error {
     /* This adds a space */
     margin-bottom: 10px;
 }
+
+/* This is for the new sections I added inside of the CreateSpotPage */
+h3 {
+    color: skyblue;
+}
+
+/* This is for the new sections I added inside of the CreateSpotPage */
+p {
+    color: rgb(128, 128, 128);
+}
