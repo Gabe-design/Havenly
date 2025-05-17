@@ -126,3 +126,17 @@ p.error {
     margin-bottom: 10px;
 }
 
+/* The colors of the star will be a blue, going with that havenly theme */
+.spot-rating i {
+    color: navy;
+    /* This is so theres good spacing between the star and rating */
+    margin-right: 4px;
+}
+
+/* This is so the star in inside the review section summary matches with the rest of my company theme */
+.review-summary i.fa-star {
+    /* The colors of the star will be a blue, going with that havenly theme */
+    color: navy;
+    /* This is so theres good spacing between the star and rating */
+    margin-right: 4px;
+}

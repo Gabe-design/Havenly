@@ -106,8 +106,11 @@ function CreateSpotPage() {
             <h1>List Your Haven</h1>
 
             {/*This is the form users fill for a new spot*/}
+            {/*I made it in the order of listing a loction like the actual AirBnB app does*/}
             <form onSubmit = { handleSubmit }>
-
+                {/*Im adding this first section to match the scorecard*/}
+                <h3>1. Wheres your place located?</h3>
+                <p>disclaimer: Guests will only get your exact address once they have booked a reservation.</p>
                 {/*Country*/}
                 <label>
                     Country
@@ -115,6 +118,7 @@ function CreateSpotPage() {
                     type="text"
                     value={ country }
                     onChange={( e ) => setCountry( e.target.value )}
+                    placeholder="Country"
                     required
                     />
                 </label>
@@ -127,6 +131,7 @@ function CreateSpotPage() {
                     type="text"
                     value={ address }
                     onChange={( e ) => setAddress( e.target.value )}
+                    placeholder="Street Address"
                     required
                     />
                 </label>
@@ -139,6 +144,7 @@ function CreateSpotPage() {
                     type="text"
                     value={ city }
                     onChange={( e ) => setCity( e.target.value )}
+                    placeholder="City"
                     required
                     />
                 </label>
@@ -151,10 +157,15 @@ function CreateSpotPage() {
                     type="text"
                     value={ state }
                     onChange={( e ) => setState( e.target.value )}
+                    placeholder="State"
                     required
                     />
                 </label>
                 { errors.state && <p className="error"> { errors.state }</p>}
+
+                {/*Im adding this second section to match the scorecard*/}
+                <h3>2. Liven up your haven with photos!</h3>
+                <p>Submit a link to at least one photo to publish your haven.</p>
 
                 {/*Preview img*/}
                 <label>
@@ -169,6 +180,10 @@ function CreateSpotPage() {
                 </label>
                 { errors.previewImage && <p className="error"> { errors.previewImage }</p>}
 
+                {/*Im adding this third section to match the scorecard*/}
+                <h3>3. Create a title for your Haven!</h3>
+                <p>Catch guests attention with a spot title that highlights what makes your place special.</p>
+
                 {/*Title*/}
                 <label>
                     Title
@@ -182,6 +197,10 @@ function CreateSpotPage() {
                 </label>
                 { errors.name && <p className="error"> { errors.name }</p>}
 
+                {/*Im adding this fourth section to match the scorecard*/}
+                <h3>4. Describe your place to guests!</h3>
+                <p>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the nieghborhood.</p>
+
                 {/*Description*/}
                 <label>
                     Description
@@ -193,6 +212,10 @@ function CreateSpotPage() {
                     />
                 </label>
                 { errors.description && <p className="error"> { errors.description }</p>}
+
+                {/*Im adding this fifth and final section to match the scorecard*/}
+                <h3>5. Set a base price for your haven!</h3>
+                <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
 
                 {/*Price*/}
                 <label>

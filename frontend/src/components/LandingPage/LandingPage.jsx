@@ -77,7 +77,7 @@ function LandingPage() {
                              ${ spot.price } <span>night</span>
                         </div>
                         <div className='spot-rating'>
-                            <i className='fa fa-star'/>
+                            <i className='fa-solid fa-star'/>
                              { spot.avgRating ? ` ${spot.avgRating.toFixed(1)}` : ' New' }
                         </div>
                     </div>
