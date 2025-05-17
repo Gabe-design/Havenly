@@ -252,5 +252,7 @@ p.error {
 
 /* The colors of the star will be a blue, going with that havenly theme */
 .spot-rating i {
-    color: navy
+    color: navy;
+    /* This is so theres good spacing between the star and rating */
+    margin-right: 4px;
 }
