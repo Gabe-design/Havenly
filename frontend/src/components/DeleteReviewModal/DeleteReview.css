@@ -126,10 +126,12 @@ p.error {
     margin-bottom: 10px;
 }
 
+/* This is for the cancel delete button being a darker color for the scorecard requirments and im so its navy on hover for better disgn */
 .cancel-delete:hover {
     background-color: navy;
 }
 
+/* This is for the delete button being red for the scorecard requirments and im so its red on hover for better disgn */
 .confirm-delete:hover {
     background-color: red;
 }

@@ -268,48 +268,39 @@ p.error {
     position: relative;
 }
 
-/*This is for the tooltip text in the corner */
-.spot-tile::after {
-    /* the text */
-    content: attr( data-name );
-    display: block;
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background-color: black;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 12px;
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: 10;
-}
-
-
-
 /* For the tooltip text below the cursor */
 .floating-tooltip {
+    /* This will position the viewport */
     position: fixed;
+    /* This is for the tooltip styling */
     background-color: black;
     color: white;
     padding: 6px 12px;
     border-radius: 6px;
     font-size: 13px;
+    /* This will prevent interactions */
     pointer-events: none;
+    /* This is to make sure that the tooltip is always on the top layer */
     z-index: 999;
+    /* This is to prevent wrapping */
     white-space: nowrap;
+    /* This will position from the cursor */
     transform: translate( -46%, 27px );
+    /* This is to senter aligh the tooltip text */
     text-align: center;
 }
 
-/* For the tooltip text below the cursor */
+/* For the tooltip arrow text the cursor */
 .floating-tooltip::before {
+    /* This is the empty content for arrow */
     content: "";
+    /* This is the positioning for the arrow */
     position: absolute;
     top: -6px;
     left: 50%;
+    /* This is to center the arrow horizontally */
     transform: translateX( -50% );
+    /* And this is to create the downward arrow using border */
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-bottom: 6px solid gray;
@@ -319,6 +310,34 @@ p.error {
 .spot-tile:hover::after {
     display: block;
 }
+
+/*This is for the tooltip text in the corner */
+.spot-tile::after {
+    /* This will get the text from the data-name */
+    content: attr( data-name );
+    /* This will display the tooltip box */
+    display: block;
+    /* This will position to the spot tile */
+    position: absolute;
+    /* This is for positioning in the top left corner */
+    top: 8px;
+    left: 8px;
+    /* This is for the bakcround colors and text */
+    background-color: black;
+    color: white;
+    /* This is for the spacing an shape */
+    padding: 4px 8px;
+    border-radius: 6px;
+    /* This is for better readability */
+    font-size: 12px;
+    /* This will prevent the text from wrapping */
+    white-space: nowrap;
+    /* This wont allow interaction */
+    pointer-events: none;
+    /* And this will layer it above the other elements */
+    z-index: 10;
+}
+
 
 /* The colors of the star will be a blue, going with that havenly theme */
 .spot-rating i {
