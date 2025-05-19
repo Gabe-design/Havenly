@@ -169,12 +169,12 @@ function CreateSpotPage() {
 
                 {/*Preview img*/}
                 <label>
-                    Preview Image URL
+                    {/*Preview Image URL*/}
                     <input
                     type="text"
                     value={ previewImage }
                     onChange={( e ) => setPreviewImage( e.target.value )}
-                    placeholder="Preview Image URL"
+                    placeholder="preview image URL"
                     required
                     />
                 </label>
@@ -186,12 +186,12 @@ function CreateSpotPage() {
 
                 {/*Title*/}
                 <label>
-                    Title
+                    {/*Title*/}
                     <input
                     type="text"
                     value={ name }
                     onChange={( e ) => setName( e.target.value )}
-                    placeholder="Name Your Haven"
+                    placeholder="name your haven"
                     required
                     />
                 </label>
@@ -203,11 +203,11 @@ function CreateSpotPage() {
 
                 {/*Description*/}
                 <label>
-                    Description
+                   {/*Description*/}
                     <textarea
                     value={ description }
                     onChange={( e ) => setDescription( e.target.value )}
-                    placeholder="Describe Your Heaven"
+                    placeholder="please write at least 30 characters"
                     required
                     />
                 </label>
@@ -219,12 +219,12 @@ function CreateSpotPage() {
 
                 {/*Price*/}
                 <label>
-                    Price Per Night - USD
+                    {/*Price Per Night - USD*/}
                     <input
                     type="text"
                     value={ price }
                     onChange={( e) => setPrice( e.target.value )}
-                    placeholder = "Set Your Price"
+                    placeholder = "set your price (USD)"
                     required
                     />
                 </label>

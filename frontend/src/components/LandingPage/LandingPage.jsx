@@ -63,27 +63,46 @@ function LandingPage() {
                     ...prev,
                     visible: false
                 }))}
+
                 >
+                    {/*Changing the layout so it matches the wireframes checklist on the scorecard*/}
+
                     <div className='spot-img-wrapper'>
                         <img src={ spot.previewImage } alt={ spot.name }/>
                         <div className='spot-name-label'>{ spot.name }</div>
                     </div>
                     <div className='spot-tile-text'>
-                        <div className='spot-location'> 
+                        {/* Im keeping the spot name for personal design */}
+                        <div className='spot-name' title={ spot.name }>
+                             { spot.name }
+                        </div>
+                        {/*<div className='spot-location'> 
                             {spot.city}, { spot.state }
                         </div>
                         <div className='spot-name' title={ spot.name }>
                              { spot.name }
-                        </div>
-                        <div className='spot-price'>
-                             ${ spot.price } <span>night</span>
-                        </div>
-                        <div className='spot-rating'>
-                            <i className='fa-solid fa-star'/>
-                             { spot.avgRating ? ` ${spot.avgRating.toFixed(1)}` : ' New' }
+                        </div>*/}
+                        <div className='spot-tile-bottom'>
+                            <div className='left'>
+                                <div className='spot-location'> 
+                                    {spot.city}, { spot.state }
+                                </div>
+                                <div className='spot-price'>
+                                    ${ spot.price } <span>night</span>
+                                </div>
+                            </div>
+                            <div className='right'>
+                                <div className='spot-rating'>
+                                    <i className='fa-solid fa-star'/>
+                                    { spot.avgRating ? ` ${spot.avgRating.toFixed(1)}` : ' New' }
+                                </div>
+                            </div>
+                            {/*<div className='spot-rating'>
+                                <i className='fa-solid fa-star'/>
+                                { spot.avgRating ? ` ${spot.avgRating.toFixed(1)}` : ' New' }
+                            </div>*/}
                         </div>
                     </div>
-
                 </Link>
             ))}
         </div>

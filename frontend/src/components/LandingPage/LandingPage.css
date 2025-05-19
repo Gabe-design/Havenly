@@ -148,5 +148,13 @@ p.error {
     cursor: pointer;
 }
 
+/* This is for the left section text with location and price */
+.left {
+    text-align: left;
+}
 
+/* And this is for the right section with the ratings and star */
+.right {
+    text-align: right;
+}
 
