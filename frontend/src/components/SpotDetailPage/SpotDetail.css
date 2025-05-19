@@ -188,18 +188,24 @@ p.error {
 .spot-callout-box {
     /* For space above */
     margin-top: 20px;
-    /* to add padding inside */
+    /* This is to add padding inside */
     padding: 16px;
-    /* for a little border */
+    /* This is to make the backround white */
+    background-color: white;
+    /* For a little border */
     border: 1px solid white;
+    /* This is for a slight box shadow for better design */
+    box-shadow: 0 2px 6px black;
     /* To round the borders */
     border-radius: 8px;
-    /* diplsay in a row */
+    /* Now this is to align the box on the right with the reserve button */
+    max-width: 250px;
+    margin-left: auto;
+    /* This is so the info is shown in a column/vertically */
     display: flex;
-    /* The space between button and price/reserve */
-    justify-content: space-between;
-    /* So the button/reserve/price all align */
-    align-items: center;
+    flex-direction: column;
+    /* For better spacing */
+    gap: 12px;
 }
 
 /* Now this button inside of callout */
@@ -271,10 +277,18 @@ p.error {
     color: navy;
 }
 
-/* Finally this is for the comment text inside a review */
-.review-text {
-    /* To add space above the text */
-    margin-top: 8px;
-    /* close to usaual font size */
-    font-size: 15px;
+/* This is for the callout box price text */
+.spot-price {
+    /* This is for the font size */
+    font-size: 14px;
+    /* This is to make the price bold and more noticbable */
+    font-weight: bold;
+    /* So the price is on the left side */
+    text-align: left;
+}
+
+/* This is for the review summary in the callout box */
+.spot-callout-review-summary {
+    /* This is for the font size */
+    font-size: 12px;
 }

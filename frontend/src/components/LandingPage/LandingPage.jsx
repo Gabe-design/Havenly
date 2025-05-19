@@ -94,7 +94,7 @@ function LandingPage() {
                             <div className='right'>
                                 <div className='spot-rating'>
                                     <i className='fa-solid fa-star'/>
-                                    { spot.avgRating ? ` ${spot.avgRating.toFixed(1)}` : ' New' }
+                                    { spot.avgRating ? ` ${spot.avgRating.toFixed( 1 )}` : ' New' }
                                 </div>
                             </div>
                             {/*<div className='spot-rating'>

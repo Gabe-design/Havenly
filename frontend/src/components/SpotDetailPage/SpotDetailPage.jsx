@@ -22,6 +22,10 @@ function SpotDetailPage() {
     const spot = useSelector( state => state.spots[ id ]);
     // const user = useSelector( state => state.session.user );
 
+    // These are going to be for the review values that are pulled from the spot object
+    const avgRating = spot?.avgRating;
+    const numReviews = spot?.numReviews || 0;
+
     // fetches spot details 
     useEffect(() => {
         dispatch( fetchSpotById( id ));
@@ -64,11 +68,28 @@ function SpotDetailPage() {
                 { spot.description }
             </p>
 
+            {/* Making changes so theres a callout box and it matches the wireframes visually */}
+
             {/*The callout section with price and acxtion*/}
             <div className="spot-callout-box">
-                <div className="spot-price">
-                    ${ spot.price } night 
+                <div className="price-and-rating">
+                    <div className="spot-price">
+                        ${ spot.price } night 
+                    </div>
+                    
+                {/* This will be for the review summary */}
+                <div className="spot-callout-review-summary">
+                    <i className="fa-solid fa-star"/> 
+                    { avgRating ? ` ${ avgRating.toFixed( 2 )}` : ' New' }
+                    { numReviews > 0 && (
+                        <>
+                        <span className="dot"> · </span>
+                        <span> { numReviews } { numReviews === 1 ? 'Review' : 'Reviews' }</span>
+                        </>
+                    )}
                 </div>
+                </div>
+
                 <button onClick={() => alert( "Feature coming soon" )}>
                     Reserve
                 </button>
