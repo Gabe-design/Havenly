@@ -33,6 +33,9 @@ function CreateSpotPage() {
 
     // This will have any errors from the backend
     const [ errors, setErrors ] = useState({});
+
+    // Adding a disabled button feature for better design 
+    const isDisabled = !country || !address || !city || !state || !description || !name || !price || !previewImage;
     // This will run when create spot is clicked
     const handleSubmit = async ( e ) => {
         // Stops the page from reloading
@@ -269,7 +272,9 @@ function CreateSpotPage() {
                 { errors.price && <p className="error"> { errors.price }</p>}
 
                 {/*Submit button*/}
-                <button type="submit">Make It Havenly</button>
+                <button type="submit" disabled={ isDisabled }>
+                    Make It Havenly
+                </button>
             </form>
         </section>
 
