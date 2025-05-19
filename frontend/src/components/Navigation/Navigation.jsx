@@ -80,7 +80,7 @@ function Navigation({ isLoaded }) {
   return (
     <nav className='nav-container'>
     
-      {/*This is so the logo is on the left side*/}
+      {/* This is so the logo is on the left side*/}
       <div className='nav-left'>
         
             <NavLink to={ "/" }>
@@ -90,7 +90,7 @@ function Navigation({ isLoaded }) {
       
       </div>
       
-      {/*This is so the user actions is on the right side*/}
+      {/* This is so the user actions is on the right side*/}
       <div className='nav-right'>
           {/*This will only show if a user is loggin in*/}
             { sessionUser && (
@@ -99,14 +99,14 @@ function Navigation({ isLoaded }) {
                 </NavLink>
             )}
 
-          {/*Alwyas will show if a user is logged in*/}
+          {/* Alwyas will show if a user is logged in*/}
           {isLoaded && (
           
               <ProfileButton user={sessionUser} />
           
           )}
 
-          {/*This is for the log in demo user and itll only show if nobodys logged in*/}
+          {/* This is for the log in demo user and itll only show if nobodys logged in*/}
           {isLoaded && !sessionUser && (
             <button className='demo-login' onClick={ handleDemoLogin }>
               Log In As Demo User

@@ -24,6 +24,9 @@ function LoginFormModal() {
     const [ errors, setErrors ] = useState({});
     const { closeModal } = useModal();
 
+    // This is so the login button is disabled anytime theres not enough characters
+    const isDisabled = credential.length < 4 || password.length < 6;
+
     // If the user is already logged in it will redirect to the home page
     // if ( sessionUser ) return <Navigate to="/" replace={ true } />;
 
@@ -32,7 +35,7 @@ function LoginFormModal() {
         // Prevents the page reload on a form submit
         e.preventDefault();
         // Clears any previous errors
-        setErrors([]);
+        setErrors({});
 
         return dispatch(sessionActions.login({ credential, password }))
         // closes on successful login
@@ -42,6 +45,8 @@ function LoginFormModal() {
         const data = await res.json();
         if (data && data.errors) {
           setErrors(data.errors);
+        } else {
+          setErrors({ credential: "The provided credentials were invalid" });
         }
       })
     };
@@ -55,6 +60,7 @@ function LoginFormModal() {
         credential: 'Demo-lition', 
         password: 'password' 
       }))
+
       // This will close the modal on a login
       .then( closeModal )
       .catch( async ( res ) => {
@@ -62,6 +68,8 @@ function LoginFormModal() {
         const data = await res.json();
         if ( data && data.errors ) {
           setErrors( data.errors );
+        } else {
+          setErrors({ credential: "The provided credentials were invalid" });
         }
       })
     };
@@ -78,6 +86,8 @@ function LoginFormModal() {
                 value={ credential }
                 // This updates credential state
                 onChange={( e ) => setCredential( e.target.value )}
+                // Adding placeholders for better design
+                placeholder="username or email"
                 // A required field to fill before submitting
                 required
                 />
@@ -90,6 +100,8 @@ function LoginFormModal() {
                 value={ password }
                 // This updates credential state
                 onChange={( e ) => setPassword( e.target.value )}
+                // Adding placeholders for better design
+                placeholder="password"
                 // A required field to fill before submitting
                 required
                 />
@@ -99,7 +111,7 @@ function LoginFormModal() {
 
             { errors.credential && <p>{ errors.credential }</p> }
     
-            <button type="submit">
+            <button type="submit" disabled={ isDisabled }>
               Log In
               </button>
             <button onClick={ handleDemoLogin }>

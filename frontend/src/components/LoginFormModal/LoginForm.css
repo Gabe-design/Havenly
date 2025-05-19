@@ -125,4 +125,23 @@ p.error {
     /* This adds a space */
     margin-bottom: 10px;
 }
+/* This is for the login button appearing disabled if theres not enough characters */
+button:disabled {
+    /* This will make it lightgray */
+    background-color: lightgray;
+    /* This is for the text color so its a darkgray */
+    color: darkgray;
+}
+
+/* This is for the login button appearing disabled if theres not enough characters */
+button:disabled {
+    /* This will remove the cursor */
+    cursor: not-allowed;
+}
+
+/* This is for the login button appearing disabled if theres not enough characters */
+button:disabled:hover {
+    /* This is so the default blue on hover is changed to lightgray to match the disabled look */
+    background-color: lightgray;
+}
 
