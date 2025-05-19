@@ -25,6 +25,12 @@ function CreateSpotPage() {
     const [ name, setName ] = useState( '' );
     const [ price, setPrice ] = useState( '' );
     const [ previewImage, setPreviewImage ] = useState( '' );
+    // This is for the four extra image url text inputs that arent required that im adding following the scorecard 
+    const [ image1, setImage1 ] = useState( '' );
+    const [ image2, setImage2 ] = useState( '' );
+    const [ image3, setImage3 ] = useState( '' );
+    const [ image4, setImage4 ] = useState( '' );
+
     // This will have any errors from the backend
     const [ errors, setErrors ] = useState({});
     // This will run when create spot is clicked
@@ -178,8 +184,40 @@ function CreateSpotPage() {
                     required
                     />
                 </label>
+                {/* This is for the four extra image url text inputs that arent required that im adding following the scorecard */ }
                 { errors.previewImage && <p className="error"> { errors.previewImage }</p>}
-
+                <label>
+                    <input
+                    type="text"
+                    value={ image1 } 
+                    onChange={( e ) => setImage1( e.target.value )} 
+                    placeholder="image URL"
+                    />
+                </label>
+                <label>
+                    <input
+                    type="text"
+                    value={ image2 } 
+                    onChange={( e ) => setImage2( e.target.value )} 
+                    placeholder="image URL"
+                    />
+                </label>
+                <label>
+                    <input
+                    type="text"
+                    value={ image3 } 
+                    onChange={( e ) => setImage3( e.target.value )} 
+                    placeholder="image URL"
+                    />
+                </label>
+                <label>
+                    <input
+                    type="text"
+                    value={ image4 } 
+                    onChange={( e ) => setImage4( e.target.value )} 
+                    placeholder="image URL"
+                    />
+                </label>
                 {/*Im adding this third section to match the scorecard*/}
                 <h3>3. Create a title for your Haven!</h3>
                 <p>Catch guests attention with a spot title that highlights what makes your place special.</p>
